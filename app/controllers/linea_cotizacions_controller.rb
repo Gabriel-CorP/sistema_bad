@@ -1,0 +1,2 @@
+class LineaCotizacionsController < ApplicationController
+end

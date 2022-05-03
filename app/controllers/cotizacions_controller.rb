@@ -1,0 +1,2 @@
+class CotizacionsController < ApplicationController
+end

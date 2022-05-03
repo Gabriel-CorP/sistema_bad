@@ -1,0 +1,2 @@
+class LineaRequesicionsController < ApplicationController
+end
