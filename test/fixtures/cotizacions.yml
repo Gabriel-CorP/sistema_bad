@@ -1,0 +1,29 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  proveedor: one
+  descuento_efectivo: 1.5
+  descuento_pronto_pago: 1.5
+  descuento_volumen: 1.5
+  descuento_forma_pago: 1.5
+  envases_embalage: 1.5
+  pago_transporte: 1.5
+  recargo_aplazamiento: 1.5
+  estado: MyString
+  total: 1.5
+  fecha_realizacion: 2022-05-03
+  fecha_entrega: 2022-05-03
+
+two:
+  proveedor: two
+  descuento_efectivo: 1.5
+  descuento_pronto_pago: 1.5
+  descuento_volumen: 1.5
+  descuento_forma_pago: 1.5
+  envases_embalage: 1.5
+  pago_transporte: 1.5
+  recargo_aplazamiento: 1.5
+  estado: MyString
+  total: 1.5
+  fecha_realizacion: 2022-05-03
+  fecha_entrega: 2022-05-03
