@@ -10,14 +10,42 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_03_181550) do
-  create_table "cargos", charset: "armscii8", collation: "armscii8_bin", force: :cascade do |t|
+ActiveRecord::Schema[7.0].define(version: 2022_05_11_173745) do
+  create_table "active_storage_attachments", charset: "utf8mb4", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", charset: "utf8mb4", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.string "service_name", null: false
+    t.bigint "byte_size", null: false
+    t.string "checksum"
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "active_storage_variant_records", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "blob_id", null: false
+    t.string "variation_digest", null: false
+    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "cargos", charset: "utf8mb4", force: :cascade do |t|
     t.string "nombre"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "cotizacions", charset: "armscii8", collation: "armscii8_bin", force: :cascade do |t|
+  create_table "cotizacions", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "proveedor_id", null: false
     t.float "descuento_efectivo"
     t.float "descuento_pronto_pago"
@@ -35,7 +63,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_03_181550) do
     t.index ["proveedor_id"], name: "index_cotizacions_on_proveedor_id"
   end
 
-  create_table "divisions", charset: "armscii8", collation: "armscii8_bin", force: :cascade do |t|
+  create_table "divisions", charset: "utf8mb4", force: :cascade do |t|
     t.string "nombre_empleado"
     t.bigint "proveedor_id", null: false
     t.bigint "cargo_id", null: false
@@ -45,7 +73,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_03_181550) do
     t.index ["proveedor_id"], name: "index_divisions_on_proveedor_id"
   end
 
-  create_table "evaluacions", charset: "armscii8", collation: "armscii8_bin", force: :cascade do |t|
+  create_table "evaluacions", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "proveedor_id", null: false
     t.string "pregunta"
     t.float "calificacion"
@@ -54,7 +82,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_03_181550) do
     t.index ["proveedor_id"], name: "index_evaluacions_on_proveedor_id"
   end
 
-  create_table "linea_cotizacions", charset: "armscii8", collation: "armscii8_bin", force: :cascade do |t|
+  create_table "linea_cotizacions", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "linea_requesicion_id", null: false
     t.bigint "cotizacion_id", null: false
     t.float "precio_unitario"
@@ -65,7 +93,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_03_181550) do
     t.index ["linea_requesicion_id"], name: "index_linea_cotizacions_on_linea_requesicion_id"
   end
 
-  create_table "linea_requesicions", charset: "armscii8", collation: "armscii8_bin", force: :cascade do |t|
+  create_table "linea_requesicions", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "producto_id", null: false
     t.bigint "requesicion_id", null: false
     t.string "cantidad"
@@ -75,7 +103,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_03_181550) do
     t.index ["requesicion_id"], name: "index_linea_requesicions_on_requesicion_id"
   end
 
-  create_table "permisos", charset: "armscii8", collation: "armscii8_bin", force: :cascade do |t|
+  create_table "permisos", charset: "utf8mb4", force: :cascade do |t|
     t.string "permiso"
     t.bigint "rol_id", null: false
     t.datetime "created_at", null: false
@@ -83,7 +111,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_03_181550) do
     t.index ["rol_id"], name: "index_permisos_on_rol_id"
   end
 
-  create_table "productos", charset: "armscii8", collation: "armscii8_bin", force: :cascade do |t|
+  create_table "productos", charset: "utf8mb4", force: :cascade do |t|
     t.string "nombre"
     t.string "descripcion"
     t.string "presentacion"
@@ -94,7 +122,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_03_181550) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "proveedors", charset: "armscii8", collation: "armscii8_bin", force: :cascade do |t|
+  create_table "proveedors", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "usuario_id", null: false
     t.string "compania"
     t.string "representante_legal"
@@ -115,7 +143,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_03_181550) do
     t.index ["usuario_id"], name: "index_proveedors_on_usuario_id"
   end
 
-  create_table "references", charset: "armscii8", collation: "armscii8_bin", force: :cascade do |t|
+  create_table "references", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "proveedor_id", null: false
     t.string "nombre_entidad"
     t.string "nombre_contacto"
@@ -125,7 +153,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_03_181550) do
     t.index ["proveedor_id"], name: "index_references_on_proveedor_id"
   end
 
-  create_table "requesicions", charset: "armscii8", collation: "armscii8_bin", force: :cascade do |t|
+  create_table "requesicions", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "usuario_id", null: false
     t.date "fecha_solicitud"
     t.date "fecha_entrega"
@@ -137,19 +165,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_03_181550) do
     t.index ["usuario_id"], name: "index_requesicions_on_usuario_id"
   end
 
-  create_table "rols", charset: "armscii8", collation: "armscii8_bin", force: :cascade do |t|
+  create_table "rols", charset: "utf8mb4", force: :cascade do |t|
     t.string "rol"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "tipo_productos", charset: "armscii8", collation: "armscii8_bin", force: :cascade do |t|
+  create_table "tipo_productos", charset: "utf8mb4", force: :cascade do |t|
     t.string "nombre"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "users", charset: "armscii8", collation: "armscii8_bin", force: :cascade do |t|
+  create_table "users", charset: "utf8mb4", force: :cascade do |t|
     t.string "user"
     t.string "password_digest"
     t.string "intentos"
@@ -157,7 +185,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_03_181550) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "usuarios", charset: "armscii8", collation: "armscii8_bin", force: :cascade do |t|
+  create_table "usuarios", charset: "utf8mb4", force: :cascade do |t|
     t.string "nombre"
     t.string "apellido"
     t.integer "edad"
@@ -172,6 +200,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_03_181550) do
     t.index ["user_id"], name: "index_usuarios_on_user_id"
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "cotizacions", "proveedors"
   add_foreign_key "divisions", "cargos"
   add_foreign_key "divisions", "proveedors"

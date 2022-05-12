@@ -1,0 +1,75 @@
+<div id="<%= dom_id proveedor %>">
+
+  <table class=" table table-responsive table-bordered">
+
+    <tr>
+      <th>Usuario</th>
+      <td><%=usuario.nombre%></td>
+    </tr>
+    <tr>
+      <th>Nombre compañia</th>
+      <td><%=proveedor.compania%></td>
+    </tr>
+    <tr>
+      <th>Representante legal</th>
+      <td><%=proveedor.representante_legal%></td>
+    </tr>
+    <tr>
+      <th> Direccion </th>
+      <td><%=proveedor.direccion%></td>
+    </tr>
+    <tr>
+      <th>Telefono </th>
+      <td><%=proveedor.telefono%></td>
+    </tr>
+    <tr>
+      <th>Fax</th>
+      <td><%=proveedor.fax%></td>
+    </tr>
+    <tr>
+      <th>Celular</th>
+      <td><%=proveedor.celular%></td>
+    </tr>
+    <tr>
+      <th>Nombre de contacto</th>
+      <td><%=proveedor.nombre_contacto%></td>
+    </tr>
+    <tr>
+      <th>Web site</th>
+      <td><%=proveedor.web_site%></td>
+    </tr>
+    <tr>
+      <th>NRC</th>
+      <td><%=proveedor.nrc%></td>
+    </tr>
+    <tr>
+      <th>Años proveedor</th>
+      <td><%=proveedor.anios%></td>
+    </tr>
+    <tr>
+      <th>Rubro proveedor</th>
+      <td><%=proveedor.rubro%></td>
+    </tr>
+    <tr>
+      <th>Logo proveedor</th>
+      <td class="align-center"><%= image_tag proveedor.logo , :size => "260x180" %></td>
+    </tr>
+    <tr>
+      <th>Escritura </th>
+      <td>
+        <% (0...@proveedor.escrituras.count).each do |escritura| %></td>
+      <%= image_tag(@proveedor.escrituras[escritura], style:'width:20% ; height:auto')%>
+      <% end %>
+      </td>
+    </tr>
+
+    <tr>
+      <th>Ubicacion de sucursales</th>
+      <td><%=proveedor.img_ubicacion_sucursales%></td>
+    </tr>
+
+    
+
+</table>
+
+</div>
