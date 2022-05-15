@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   get 'proveedors_user/:id/:usuario_id' , to: 'proveedors#show'
   # Defines the root path route ("/")
   # root "articles#index"
+  resources :cotizacions, only: [:index]
+  get 'cotizacions/:id', to: 'cotizacions#new'
 end
