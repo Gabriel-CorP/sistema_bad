@@ -14,6 +14,8 @@ class ProveedorsController < ApplicationController
     # GET /proveedors/new
     def new
       @proveedor = Proveedor.new
+      #2.times {@proveedor.ubicacions.build}
+      @proveedor.ubicacions.build
        #filtrando para que los proveedores que ya estan en la tabla proveedores no salgan en el combo box
       @usuario=Usuario.where(rol_id: 1).merge(Usuario.where.not(:id=>Proveedor.pluck(:usuario_id)))
       
@@ -73,7 +75,8 @@ class ProveedorsController < ApplicationController
   
       # Only allow a list of trusted parameters through.
       def proveedor_params
-        params.require(:proveedor).permit(:compania, :representante_legal, :direccion, :telefono, :fax, :celular, :nombre_contacto, :web_site, :nrc, :anios, :rubro, :logo, :escritura_constitucion , :img_ubicacion_sucursales, :usuario_id,escrituras:[])
+        params.require(:proveedor).permit(:compania, :representante_legal, :direccion, :telefono, :fax, :celular, :nombre_contacto, :web_site, :nrc, :anios, :rubro, :logo, :escritura_constitucion , :img_ubicacion_sucursales,:escritura, :usuario_id,ubicacions_attributes: [:nombre,:direccion,:local,:mapa])
+        #params.require(:proveedor).permit(:compania, :representante_legal, :direccion, :telefono, :fax, :celular, :nombre_contacto, :web_site, :nrc, :anios, :rubro, :logo, :escritura_constitucion , :img_ubicacion_sucursales,:escritura, :usuario_id,escrituras:[])
       end
   end
   

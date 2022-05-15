@@ -7,7 +7,7 @@
       <td><%=usuario.nombre%></td>
     </tr>
     <tr>
-      <th>Nombre compañia</th>
+      <th >Nombre compañia</th>
       <td><%=proveedor.compania%></td>
     </tr>
     <tr>
@@ -51,22 +51,43 @@
       <td><%=proveedor.rubro%></td>
     </tr>
     <tr>
-      <th>Logo proveedor</th>
+      <th>Logo del proveedor</th>
       <td class="align-center"><%= image_tag proveedor.logo , :size => "260x180" %></td>
     </tr>
     <tr>
-      <th>Escritura </th>
+      <th>Escritura constitucional</th>
       <td>
-        <% (0...@proveedor.escrituras.count).each do |escritura| %></td>
-      <%= image_tag(@proveedor.escrituras[escritura], style:'width:20% ; height:auto')%>
-      <% end %>
+        <%= link_to "Escritura constitucional",  proveedor.escritura, download: 'Escritura constitucional'  %>
+
       </td>
     </tr>
 
+    <% proveedor.ubicacions.each.with_index do |ubicacion,index|%>
     <tr>
-      <th>Ubicacion de sucursales</th>
-      <td><%=proveedor.img_ubicacion_sucursales%></td>
+      <th>Sucursal <%=index +1%></th>
+      <td>
+            <address>
+              <strong><%= ubicacion.nombre %></strong>    
+              <br>
+              <%= ubicacion.direccion %>
+            </address>
+
+      </td>
+        
     </tr>
+    <tr>
+      <th>Local <%=index +1%></th>
+      <td>  
+          <%= image_tag ubicacion.local,:size => "260x180" %>  
+      </td>
+    </tr>
+    <tr>
+      <th>Ubicacion en mapa <%=index +1%></th>
+      <td>  
+          <%= image_tag ubicacion.mapa ,:size => "260x180"%>  
+      </td>
+    </tr>
+    <% end %>
 
     
 
