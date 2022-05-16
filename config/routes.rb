@@ -8,4 +8,7 @@ Rails.application.routes.draw do
   # root "articles#index"
   resources :cotizacions, only: [:index]
   get 'cotizacions/:id', to: 'cotizacions#new'
+  post 'guardar_cotizacion/:id', to: 'cotizacions#create'
+  post 'guardar_linea_cotizacion', to: 'lineacotizacions#create'
+
 end

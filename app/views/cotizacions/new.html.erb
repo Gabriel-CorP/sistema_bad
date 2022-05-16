@@ -5,7 +5,7 @@
 <div class="card mt-s">
   <div class="card-header d-flex justify-content-between align-items-center">
     <h3 class="text text-secondary">Cotizar</h3>
-    <h3><%=  @reque.id %></h3>
+    <h3 id="requesicion" type="hidden"><%=  @reque.id %></h3>
   </div>
 
 <table class="table table-responsive table-bordered">
@@ -28,7 +28,12 @@
             <p class="cantidad"><%=  linea.cantidad %></p>
           </td>
           <td>
-            
+          <% @pros.each do |producto| %>
+          <% if linea.producto_id == producto.id %>
+          <p class="nombrepro"><%=  producto.nombre + " "+ producto.presentacion.to_s %></p>
+          <% end %>
+          
+           <% end %> 
           </td>
           <td>
             <input type="number" class="valor" min="0"  value="0" onchange="calcular('valor','cantidad','subtotal')">
@@ -43,7 +48,7 @@
 
         
       </tr>
-    <%end %>    
+    <% end %>    
   </tbody>
 </table>
 <div class="card mt-s">
@@ -58,6 +63,7 @@
 
   <div class="card-body ">
     <%= form_for @cotizacion do |form| %>
+    <%= csrf_meta_tag %>
       <% if @cotizacion.errors.any? %>
         <div style="color: red">
           <h2><%= pluralize(cotizacion.errors.count, "error") %> prohibited this cotizacion from being saved:</h2>
@@ -74,7 +80,7 @@
       
       <div class="form-group row"> 
        
-        <input class="form-control" value="<%= @provee[0].id %>" autocomplete="off" type="hidden" name="cotizacion[estado]" id="cotizacion_estado" />
+        <input class="form-control" value="<%= @provee[0].id %>" autocomplete="off" type="hidden" name="cotizacion[proveedor]" id="cotizacion_proveedor" />
         
         <div class="col-sm-4">
          
@@ -177,50 +183,116 @@
   </div>
  <script src='http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.js'></script>
  <script type = "text/javascript">
-         function calcular(valor,cant,sub){
-           
+        function calcular(valor,cant,sub){
+
           var txtPrecio=document.getElementsByClassName(valor);
           var txtCantidad=document.getElementsByClassName(cant);
           var lblSubtotal=document.getElementsByClassName(sub);
-          console.log(txtCantidad[0].innerHTML);
-          console.log(txtPrecio[0].value);
-          console.log(lblSubtotal.length);
-          
+         
+ 
           for(var i=0; i<txtCantidad.length;i++){
-            var precio=Number(txtPrecio[i].value);
+            var valores= Number(txtPrecio[i].value);
+            console.log( valores + " "+ typeof valores);
+            
             var cantidad=Number(txtCantidad[i].innerHTML);
-            var res=precio*cantidad;
+            console.log( cantidad + " "+ typeof cantidad)
+            let res=Number(valores*cantidad);
+            console.log( res + " "+ typeof res)
             lblSubtotal[i].value=res;
-            console.log(precio*cantidad);
+            
           }
+          
+
 
           }
          
 </script>
 <script type = "text/javascript">
  function total(subt){
-            document.getElementById("guardar").disabled=false;
+
+          var nullos=0;
+          var nulosSubtotales=0;
+          var txtboxes=document.getElementsByClassName('form-control');
             var txtTotal=document.getElementById("cotizacion_total");
             var lbSubtotal=document.getElementsByClassName(subt);
             var total=0;
-            console.log(lbSubtotal.length);
-            console.log(total);
+
+          for(var i=0; i<lbSubtotal.length;i++){
+            
+            if(lbSubtotal[i].value==""){
+              nulosSubtotales++;
+            }
+            console.log(nulosSubtotales);
+          }
+
+          for(var i=0; i<txtboxes.length;i++){
+            
+            if(txtboxes[i].value==""){
+              nullos++;
+            }
+            console.log(nullos);
+          }
+          if (nullos>2 || nulosSubtotales!=0){
+              console.log(nullos);
+              alert("No debe dejar campos en blanco");
+          }else{
+
             for(var j=0; j<lbSubtotal.length ; j++){
               total+=Number(lbSubtotal[j].value);
-              console.log(lbSubtotal[j].value);
+            
               
             }
-            console.log(total);
+            
             txtTotal.value=total;
+            document.getElementById("guardar").disabled=false;
+            guardarCotizacion();
+          }
+
+
+            
+           
           }
 </script>
 
 <script type="text/javascript">
-$(document).ready(function(){
- 
- $('#habilitar').click(function(){
-  $('#guardar').prop('disabled', false);
- }
- );
-});
+
+function guardarCotizacion() { 
+  let proveedor_id=document.getElementById('cotizacion_proveedor').value;
+  let descuento_efectivo=document.getElementById('cotizacion_descuento_efectivo').value;
+  let descuento_pronto_pago=document.getElementById('cotizacion_descuento_pronto_pago').value;
+  let descuento_volumen=document.getElementById('cotizacion_descuento_volumen').value;
+  let descuento_forma_pago=document.getElementById('cotizacion_descuento_forma_pago').value;
+  let envases_embalage=document.getElementById('cotizacion_envases_embalage').value;
+  let pago_transporte=document.getElementById('cotizacion_pago_transporte').value;
+  let recargo_aplazamiento=document.getElementById('cotizacion_recargo_aplazamiento').value;
+  let estado=document.getElementById('cotizacion_estado').value;
+  let fecha_entrega=document.getElementById('cotizacion_fecha_entrega').value;
+  let total=document.getElementById('cotizacion_total').value;
+  let reque=document.getElementById('requesicion').innerHTML;
+
+  let ajaxurl=getRootUrl()+'/guardar_cotizacion/'+reque; //se agrega la ruta en routes.rb
+  let info={ proveedorid: proveedor_id, descuentoefectivo: descuento_efectivo,
+             descuentoprontopago: descuento_pronto_pago, descuentovolumen: descuento_volumen,
+             descuentoformapago: descuento_forma_pago, envasesembalage: envases_embalage,
+             pagotransporte: pago_transporte, recargoaplazamiento: recargo_aplazamiento, estado1: estado,
+             fechaentrega: fecha_entrega, total1: total, id: reque
+           }
+   $.ajax({ 
+        url: ajaxurl, 
+        type: 'POST',
+        beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+        data: info,
+        success: function (result) { 
+              if(result!=null){
+                console.log(result.mensaje)
+              }
+              
+              }
+          }); 
+       
+  }
+
+function getRootUrl() {
+    return window.location.origin;
+}
 </script>
