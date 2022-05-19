@@ -31,18 +31,26 @@
             <strong><%=  requesicion.estado %></strong>
           </td>
           <td>
-            <div class="btn-toolbar" role="toolbar">
+        
+
+          <% @cotizaciones.each do |c| %>
+              <% if requesicion.estado=="Pendiente" && c.proveedor_id != @proveedor.id %>
+              <div class="btn-toolbar" role="toolbar">
               <div class="btn-group" role="group">
               <form class="button_to" method="get" action="/cotizacions/<%=  requesicion.id %>">
               <button  name="button" class='btn btn-primary' type="submit">
               <span>Cotizar</span>
               </button>
               </form>
-        
-      
-              
               </div>
-            </div>
+              </div>
+              <% else %>
+              <strong> Ya ha cotizado esta requesicion</strong>
+              <%end %>
+      
+          <%end %>
+       
+              
           </td>
 
         
