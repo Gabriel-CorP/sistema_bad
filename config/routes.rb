@@ -10,8 +10,9 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
   resources :cotizacions, only: [:index]
+  resources :linea_cotizacions, only: [:index]
   get 'cotizacions/:id', to: 'cotizacions#new'
   post 'guardar_cotizacion/:id', to: 'cotizacions#create'
-  post 'guardar_linea_cotizacion', to: 'lineacotizacions#create'
+  post 'guardar_linea_cotizacion', to: 'cotizacions#lineas_cotizacion'
 
 end

@@ -1,7 +1,17 @@
 class CotizacionsController < ApplicationController
   #  before_action :set_requesicion, only: [ :create ]
     def index
-        @requesicions=Requesicion.where(estado: 'Pendiente')
+        @proveedor=Proveedor.find(1)
+        @requesicions=Requesicion.where("estado= 'Pendiente' or estado= 'Cotizado'")
+
+        @cotizaciones=Cotizacion.new
+        @requesicions.each do |r|
+           if r.estado="Cotizado"              
+               @cotizaciones=Cotizacion.where(requesicion_id: r.id)
+        
+                           
+           end
+        end
       #  @reques=Requesicion.joins(:usuario).where(usuario_id:)
     end
 
@@ -33,6 +43,7 @@ class CotizacionsController < ApplicationController
         puts(params[:estado1])
         @requesicion=Requesicion.find(params[:id])
         @cotizacion= Cotizacion.new
+        @cotizacion.requesicion_id=params[:id].to_i
         @cotizacion.proveedor_id=params[:proveedorid].to_i
         @cotizacion.descuento_efectivo=params[:descuentoefectivo].to_f
         @cotizacion.descuento_pronto_pago=params[:descuentoprontopago].to_f
@@ -47,15 +58,17 @@ class CotizacionsController < ApplicationController
         @cotizacion.fecha_realizacion=Date.today
         @cotizacion.total=params[:total1].to_f
         puts(@cotizacion)
-        @requesicion.estado="Cotizado"
-        @requesicion.save!
-        @cotizacion.save!
+        
+        #@cotizacion.save!
         result= {
-            mensaje: @cotizacion.total
+            mensaje: "Cotizacion guardada"
         }
         respond_to do |format|
-            if @cotizacion != nil
+            if @cotizacion.save
                 format.json { render json: result }
+                @requesicion.estado="Cotizado"
+                @requesicion.save!
+                
             else
                 format.json { render json: @cotizacion.errors.full_messages, status: :unprocessable_entity }
             end
@@ -70,6 +83,29 @@ class CotizacionsController < ApplicationController
 
     end
     def destroy
+    end
+
+    def lineas_cotizacion
+        @coti=Cotizacion.last
+        @lineacotizacion=LineaCotizacion.new
+        @lineacotizacion.linea_requesicion_id=params[:id]
+        @lineacotizacion.cotizacion_id=@coti.id
+        @lineacotizacion.precio_unitario=params[:preci].to_f
+        @lineacotizacion.subtotal=params[:sub].to_f
+        @lineacotizacion.save!
+        puts(@lineacotizacion.subtotal)
+
+        result= {
+            mensaje: "Linea guardada"
+        }
+        respond_to do |format|
+            if @lineacotizacion != nil
+                format.json { render json: result }
+            else
+                format.json { render json: @lineacotizacion.errors.full_messages, status: :unprocessable_entity }
+            end
+        end
+
     end
  #   private
   #  def set_requesicion
