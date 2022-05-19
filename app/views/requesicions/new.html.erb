@@ -1,0 +1,9 @@
+<div class="card mt-s">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <h3 class="text text-secondary">Nueva requisicion</h3>
+  </div>
+  <% content_for :boton do %>
+   <%= link_to "Regresar", requesicions_path %>
+  <% end %>
+  <%= render "form", requesicion: @requesicion %>
+</div>

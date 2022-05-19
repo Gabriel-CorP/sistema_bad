@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   resources :ubicacions
+  resources :productos
+  resources :linea_requesicions
+  resources :requesicions
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   root to: 'home#index'
   resources :proveedors

@@ -1,0 +1,37 @@
+ <div class="container">
+  <%= form_with(model: producto) do |form| %>
+    <% if producto.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(producto.errors.count, "error") %> prohibited this producto from being saved:</h2>
+
+        <ul>
+          <% producto.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <%= form.label 'Tipo de producto:'%>
+    <%= form.collection_select :tipo_producto_id,@tipo_producto,"id","nombre",:selected => :id, class:'form-select' %>
+    <div>
+    <%= form.label 'Nombre del producto:'%>
+    <%= form.text_field :nombre, class: 'form-control' %>
+    <%= form.label 'Descripción:' %>
+    <%= form.text_field :descripcion, class: 'form-control' %>
+    <%= form.label 'Presentación:' %>
+    <%= form.text_field :presentacion, class: 'form-control' %>
+    <%= form.label 'Precio:' %>
+    <%= form.number_field :precio, value: '%.2f' % 0 , min: 0, step:0.01, class: 'form-control' %>
+    <%= form.label 'Existencias:' %>
+    <%= form.number_field :existencias, value: '%.2f' % 0, min: 0, step:0.01, class: 'form-control' %>
+    <%= form.label 'Imagen:' %>
+    <%= form.file_field :imagen, class: 'form-control' %>
+    </div>
+    <br>
+    <button type="submit" name="button" class='btn btn-primary'>
+      <span>Guardar</span>
+    </button>
+
+    <%= yield(:botonret) %>
+  <% end %>
+</div>

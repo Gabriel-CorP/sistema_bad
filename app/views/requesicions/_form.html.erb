@@ -1,0 +1,29 @@
+<%= form_with(model: requesicion) do |form| %>
+  <% if requesicion.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(requesicion.errors.count, "error") %> prohibited this requesicion from being saved:</h2>
+
+      <ul>
+        <% requesicion.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label 'Prioridad: ', class: 'col-sm-2'%>
+    <%= radio_button_tag(:prioridad, "Alta")%>
+    <%= label_tag(:prioridad_alta, "Alta")%>
+    <%= radio_button_tag(:prioridad, "Media")%>
+    <%= label_tag(:prioridad_media, "Media")%>
+    <%= radio_button_tag(:prioridad, "Baja")%>
+    <%= label_tag(:prioridad_baja, "Baja")%>
+  </div>
+
+
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

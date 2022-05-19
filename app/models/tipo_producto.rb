@@ -1,3 +1,3 @@
 class TipoProducto < ApplicationRecord
-    has_many :productos
+    has_many :producto
 end
