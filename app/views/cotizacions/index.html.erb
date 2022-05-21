@@ -31,18 +31,26 @@
             <strong><%=  requesicion.estado %></strong>
           </td>
           <td>
-            <div class="btn-toolbar" role="toolbar">
+        
+
+          <% @cotizaciones.each do |c| %>
+              <% if requesicion.estado=="Pendiente" && c.proveedor_id != @proveedor.id %>
+              <div class="btn-toolbar" role="toolbar">
               <div class="btn-group" role="group">
               <form class="button_to" method="get" action="/cotizacions/<%=  requesicion.id %>">
               <button  name="button" class='btn btn-primary' type="submit">
               <span>Cotizar</span>
               </button>
               </form>
-        
-      
-              
               </div>
-            </div>
+              </div>
+              <% else %>
+              <strong> Ya ha cotizado esta requesicion</strong>
+              <%end %>
+      
+          <%end %>
+       
+              
           </td>
 
         
@@ -55,17 +63,4 @@
 function prueba(){
     alert("Funciona ahi mismo");
 }
-</script>
-<input type='text' id='txt1' />
-<input type='button' id='button' value='Click me' />
-
-<!-- Script -->
-<script src='http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.js'></script>
-<script type="text/javascript">
-$(document).ready(function(){
- 
- $('#button').click(function(){
-   $('#txt1').val("Button clicked");
- });
-});
 </script>

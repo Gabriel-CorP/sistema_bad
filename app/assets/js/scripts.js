@@ -6,7 +6,6 @@
     // 
 // Scripts
 // 
-import "jquery"
 
 window.addEventListener('DOMContentLoaded', event => {
 
