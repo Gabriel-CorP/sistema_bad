@@ -1,0 +1,38 @@
+<p style="color: green"><%= notice %></p>
+<div class="card-header d-flex justify-content-between align-items-center">
+<h1>Cargos</h1>
+<%= link_to "Nuevo cargo" , new_cargo_path,  class:"btn btn-primary btn-sm  " %>
+</div>
+
+
+
+
+<table class="table table-responsive table-bordered">
+  <thead>
+    <tr>
+      <th>Nombre del cargo </th>
+      <th>Opciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @cargos.each do |cargo| %>
+      <tr>
+          <td>
+            <strong>-<%=  cargo.nombre %></strong>
+          </td>
+          <td>
+            <div class="btn-toolbar" role="toolbar">
+              <div class="btn-group" role="group">
+                <%= button_to image_tag("ojo",width:25,height:25), cargo,method: :get, :class=>"btn " ,id:"btn-ver" , :title=>"Ver" %>
+                <%= button_to image_tag("editar"), edit_cargo_path(cargo),:method=>:get, :class=>"btn " ,id:"btn-edit" ,:title=>"Editar"%>
+                <%= button_to image_tag("trash"), cargo, method: :delete ,:class=>"btn " ,id:"btn-ver" ,:title=>"Eliminar" %>
+              </div>
+            </div>
+          </td>
+
+        
+      </tr>
+    <%end %>
+      
+  </tbody>
+</table>

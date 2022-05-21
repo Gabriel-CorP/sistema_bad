@@ -1,0 +1,27 @@
+
+    <div class="form-group row  mb-3 ">
+    <%= f.label :"Nombre del Empleado", class:'col-sm-2', style: "display: block"   %>
+    <div class="col-sm-4">
+      <%= f.text_field :nombre_empleado , class:'form-control' %>
+    </div>
+
+  </div>
+
+
+
+<div class="form-group row mb-3">
+    <%= f.label 'Proveedor:', class:'col-sm-2 ' %>
+    <div class="col-sm-4">
+      <%= f.collection_select :proveedor_id,@proveedores,"id","compania",:selected => :id ,class:'form-select'   %>
+
+    </div>
+
+</div>
+
+<div class="form-group row mb-3">
+        <%= f.label 'Cargo:', class:'col-sm-2 ' %>
+        <div class="col-sm-4">
+          <%= f.collection_select :cargo_id,@cargos,"id","nombre",:selected => :id ,class:'form-select'   %>
+
+        </div>
+    </div>

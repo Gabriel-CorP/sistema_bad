@@ -1,0 +1,43 @@
+<p style="color: green"><%= notice %></p>
+<div class="card-header d-flex justify-content-between align-items-center">
+  <h1>Division administrativa</h1>
+  <%= link_to "Nueva division administrativa" , new_division_path,  class:"btn btn-primary btn-sm  " %>
+</div>
+
+
+<table class="table table-responsive table-bordered">
+  <thead>
+    <tr>
+      <th>Nombre empleado</th>
+      <th>Empleado de</th>
+      <th>Puesto</th>
+      <th>Opciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @divisions.each do |division| %>
+      <tr>
+          <td>
+            <strong><%=  division.nombre_empleado %></strong>
+          </td>
+          <td>
+            <strong><%=  buscarCompania(division.proveedor_id) %></strong>
+          </td>
+          <td>
+            <strong><%=  buscarPuesto(division.cargo_id) %></strong>
+          </td>
+          <td>
+            <div class="btn-toolbar" role="toolbar">
+              <div class="btn-group" role="group">
+                <%= button_to image_tag("editar"), edit_division_path(division),:method=>:get, :class=>"btn " ,id:"btn-edit" ,:title=>"Editar"%>
+                <%= button_to image_tag("trash"), division, method: :delete ,:class=>"btn " ,id:"btn-ver" ,:title=>"Eliminar" %>
+              </div>
+            </div>
+          </td>
+
+        
+      </tr>
+    <%end %>
+      
+  </tbody>
+</table>

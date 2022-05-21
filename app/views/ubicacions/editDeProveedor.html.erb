@@ -1,34 +1,29 @@
 <p style="color: green"><%= notice %></p>
 <div class="card-header d-flex justify-content-between align-items-center">
-  <h1>Ubicaciones</h1>
-  <%= link_to "Nueva ubicacion" , new_ubicacion_path,  class:"btn btn-primary btn-sm  " %>
+  <h3>Editando ubicaciones de <%= buscarNombreProveedor(@var)%></h3>
+<%= link_to "Nueva ubicacion" , new_ubicacion_path,  class:"btn btn-primary btn-sm  " %>
 </div>
-
-
-
-
 
 <table class="table table-responsive table-bordered">
   <thead>
     <tr>
-      <th>Nombre de ubicacion </th>
-      <th>Proveedor</th>
+      <th>Nombre de ubicacion</th>
+      <th>Direccion</th>
       <th>Opciones</th>
     </tr>
   </thead>
   <tbody>
-    <% @ubicacions.each do |ubicacion| %>
+    <% @ubicacionesDelProveedor.each do |ubicacion| %>
       <tr>
           <td>
             <strong><%=  ubicacion.nombre %></strong>
           </td>
           <td>
-            <strong><%=  buscarNombreProveedor(ubicacion.proveedor_id) %></strong>
+            <strong><%=  ubicacion.direccion %></strong>
           </td>
           <td>
             <div class="btn-toolbar" role="toolbar">
               <div class="btn-group" role="group">
-                <%= button_to image_tag("ojo",width:25,height:25), ubicacion,method: :get, :class=>"btn " ,id:"btn-ver" , :title=>"Ver" %>
                 <%= button_to image_tag("editar"), edit_ubicacion_path(ubicacion),:method=>:get, :class=>"btn " ,id:"btn-edit" ,:title=>"Editar"%>
                 <%= button_to image_tag("trash"), ubicacion, method: :delete ,:class=>"btn " ,id:"btn-ver" ,:title=>"Eliminar" %>
               </div>
@@ -41,3 +36,8 @@
       
   </tbody>
 </table>
+
+
+<div>
+  
+</div>

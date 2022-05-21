@@ -1,0 +1,12 @@
+<div class="card mt-s">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <h3 class="text text-secondary">Editando cargo</h3>
+  </div>
+<% content_for :boton do %>
+  <%= link_to  "Regresar", cargos_path ,class:'btn btn-primary btn-sm'%>
+<% end %>
+
+<%= render "form", cargo: @cargo %>
+
+
+

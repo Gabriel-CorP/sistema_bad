@@ -1,0 +1,28 @@
+<div id="<%= dom_id reference %>">
+
+  <table class=" table table-responsive table-bordered">
+    <tr>
+      <th>Nombre entidad</th>
+      <td><%=reference.nombre_entidad%></td>
+    </tr>
+    
+    <tr>
+      <th>Nombre contacto</th>
+      <td><%=reference.nombre_contacto%></td>
+    </tr>
+
+    <tr>
+      <th>Telefono</th>
+      <td><%=reference.telefono_contacto%></td>
+    </tr>
+
+    <tr>
+      <th>Proveedor</th>
+      <td><%=buscarCompania(reference.proveedor_id)%></td>
+    </tr>
+    
+    
+
+  </table>
+
+</div>

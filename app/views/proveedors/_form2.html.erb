@@ -147,7 +147,14 @@
     </div>
 
 
-    
+    <div class="field">
+      <!--Fomulario del modelo ubicaciones pero colocado como ubicacions ya que son varias a un solo proveedor -->
+
+      <%= form.fields_for :ubicacions do |builder|%>
+      <%= render 'ubicacions_fields2' , builder:builder %>
+      <%end%>
+      
+    </div>
 
   </div>
 

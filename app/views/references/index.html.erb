@@ -1,0 +1,40 @@
+<p style="color: green"><%= notice %></p>
+<div class="card-header d-flex justify-content-between align-items-center">
+  <h1>Referencias</h1>
+  <%= link_to "Nueva referencia" , new_reference_path,  class:"btn btn-primary btn-sm  " %>
+</div>
+
+
+<table class="table table-responsive table-bordered">
+  <thead>
+    <tr>
+      <th>Entidad compañia</th>
+      <th>Proveedor compañia</th>
+      <th>Opciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @references.each do |reference| %>
+      <tr>
+          <td>
+            <strong><%=  reference.nombre_entidad %></strong>
+          </td>
+          <td>
+            <strong><%=  buscarCompania(reference.proveedor_id) %></strong>
+          </td>
+          <td>
+            <div class="btn-toolbar" role="toolbar">
+              <div class="btn-group" role="group">
+                <%= button_to image_tag("ojo",width:25,height:25), reference,method: :get, :class=>"btn " ,id:"btn-ver" , :title=>"Ver" %>
+                <%= button_to image_tag("editar"), edit_reference_path(reference),:method=>:get, :class=>"btn " ,id:"btn-edit" ,:title=>"Editar"%>
+                <%= button_to image_tag("trash"), reference, method: :delete ,:class=>"btn " ,id:"btn-ver" ,:title=>"Eliminar" %>
+              </div>
+            </div>
+          </td>
+
+        
+      </tr>
+    <%end %>
+      
+  </tbody>
+</table>

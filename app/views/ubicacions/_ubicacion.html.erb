@@ -1,17 +1,32 @@
 <div id="<%= dom_id ubicacion %>">
-  <p>
-    <strong>Nombre:</strong>
-    <%= ubicacion.nombre %>
-  </p>
 
-  <p>
-    <strong>Direccion:</strong>
-    <%= ubicacion.direccion %>
-  </p>
+  <div class="card mt-s">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <h2 class="text text-secondary text-center ">Proveedor:<%=buscarNombreProveedor(ubicacion.proveedor_id)%></h2>
+          <%= image_tag buscarLogoProveedor(ubicacion.proveedor_id) , :size => "260x180" %></td>
+      </div>
 
-  <p>
-    <strong>Proveedor:</strong>
-    <%= ubicacion.proveedor_id %>
-  </p>
+
+  <table class=" table table-responsive table-bordered">
+    <tr>
+      <th>Nombre de la ubicacion</th>
+      <td><%=ubicacion.nombre%></td>
+    </tr>
+    <tr>
+      <th>Direccion de la ubicacion</th>
+      <td><%=ubicacion.direccion%></td>
+    </tr>
+    <tr>
+      <th>Imagen del local</th>
+      <td><%= image_tag ubicacion.local,:size => "260x180" %>  </td>
+    </tr>
+    <tr>
+      <th>Ubicacion en mapa</th>
+      <td><%= image_tag ubicacion.mapa,:size => "260x180" %>  </td>
+    </tr>
+    
+  </table>
+    
+
 
 </div>
