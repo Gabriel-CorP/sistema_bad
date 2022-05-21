@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Ubicacions</h1>
+
+<div id="ubicacions">
+  <% @ubicacions.each do |ubicacion| %>
+    <%= render ubicacion %>
+    <p>
+      <%= link_to "Show this ubicacion", ubicacion %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New ubicacion", new_ubicacion_path %>

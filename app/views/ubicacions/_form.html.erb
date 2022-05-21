@@ -1,0 +1,32 @@
+<%= form_with(model: ubicacion) do |form| %>
+  <% if ubicacion.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(ubicacion.errors.count, "error") %> prohibited this ubicacion from being saved:</h2>
+
+      <ul>
+        <% ubicacion.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :nombre, style: "display: block" %>
+    <%= form.text_field :nombre %>
+  </div>
+
+  <div>
+    <%= form.label :direccion, style: "display: block" %>
+    <%= form.text_field :direccion %>
+  </div>
+
+  <div>
+    <%= form.label :proveedor_id, style: "display: block" %>
+    <%= form.text_field :proveedor_id %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

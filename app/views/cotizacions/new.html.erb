@@ -1,0 +1,298 @@
+  <% content_for :boton do %>
+    <%= link_to  "Regresar", cotizacions_path ,class:'btn btn-primary'%>
+  <% end %> 
+
+<div class="card mt-s">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <h3 class="text text-secondary">Cotizar</h3>
+    <h3 id="requesicion" type="hidden"><%=  @reque.id %></h3>
+  </div>
+
+<table class="table table-responsive table-bordered">
+  <thead>
+    <tr>
+      <th>id producto</th>
+      <th>cantidad</th>
+      <th>Nombre</th>
+      <th>Precio Unitario Propuesto</th>
+      <th>SubTotal</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @lineas.each do |linea| %>
+      <tr>
+          <td>
+            <strong><%=  linea.producto_id %></strong>
+          </td>
+          <td>
+            <p class="cantidad"><%=  linea.cantidad %></p>
+          </td>
+          <td>
+          <% @pros.each do |producto| %>
+          <% if linea.producto_id == producto.id %>
+          <p class="nombrepro"><%=  producto.nombre + " "+ producto.presentacion.to_s %></p>
+          <% end %>
+          
+           <% end %> 
+          </td>
+          <td>
+            <input type="number" class="valor" min="0"  value="0" onchange="calcular('valor','cantidad','subtotal')">
+          </td>
+          
+          <td>
+            
+              
+          <input type="number" class="subtotal" disabled>
+              
+          </td>
+
+        
+      </tr>
+    <% end %>    
+  </tbody>
+</table>
+<div class="card mt-s">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <h3 class="text text-secondary">Nueva Cotizacion</h3>
+  
+
+</div>
+
+<div class="container ">
+
+
+  <div class="card-body ">
+    <%= form_for @cotizacion do |form| %>
+    <%= csrf_meta_tag %>
+      <% if @cotizacion.errors.any? %>
+        <div style="color: red">
+          <h2><%= pluralize(cotizacion.errors.count, "error") %> prohibited this cotizacion from being saved:</h2>
+    
+          <ul>
+            <% cotizacion.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+    
+      
+      
+      <div class="form-group row"> 
+       
+        <input class="form-control" value="<%= @provee[0].id %>" autocomplete="off" type="hidden" name="cotizacion[proveedor]" id="cotizacion_proveedor" />
+        
+        <div class="col-sm-4">
+         
+        </div>
+        
+      </div>
+    
+      <div class="form-group row">
+        <%= form.label :descuento_efectivo ,class:'col-sm-4', style: "display: block" %>
+        <div class="col-sm-4">
+          <%= form.number_field :descuento_efectivo , class:'form-control', step:"0.01", min:"0", max:"1" %>
+        </div>
+        
+      </div>
+    
+      <div class="form-group row">
+        <%= form.label :descuento_pronto_pago,class:'col-sm-4', style: "display: block" %>
+        <div class="col-sm-4">
+          <%= form.number_field :descuento_pronto_pago, class:'form-control', step:"0.01", min:"0", max:"1" %>
+        </div>
+        
+      </div>
+    
+      <div class="form-group row">
+        <%= form.label :descuento_volumen,class:'col-sm-4', style: "display: block" %>
+        <div class="col-sm-4">
+          <%= form.number_field :descuento_volumen, class:'form-control', step:"0.01", min:"0", max:"1" %>
+        </div>
+        
+      </div>
+    
+      <div class="form-group row">
+        <%= form.label :descuento_forma_pago,class:'col-sm-4', style: "display: block" %>
+          <div class="col-sm-4">
+          <%= form.number_field :descuento_forma_pago, class:'form-control', step:"0.01", min:"0", max:"1" %>
+        </div>
+          
+      </div>
+    
+      <div class="form-group row">
+        <%= form.label :envases_embalage,class:'col-sm-4', style: "display: block" %>
+          <div class="col-sm-4">
+          <%= form.number_field :envases_embalage, class:'form-control', step:"0.01", min:"0" %>
+        </div>
+        
+      </div>
+    
+      <div class="form-group row">
+        <%= form.label :pago_transporte,class:'col-sm-4', style: "display: block" %>
+          <div class="col-sm-4">
+          <%= form.number_field :pago_transporte, class:'form-control', step:"0.01", min:"0" %>
+        </div>
+        
+      </div>
+    
+      <div class="form-group row">
+        <%= form.label :recargo_aplazamiento,class:'col-sm-4', style: "display: block" %>
+        <div class="col-sm-4">
+          <%= form.number_field :recargo_aplazamiento, class:'form-control' , step:"0.01", min:"0", max:"1"  %>
+        </div>
+        
+      </div>
+    
+      <div class="form-group row">
+      
+          <div class="col-sm-4">
+          <%= form.hidden_field :estado, class:'form-control', value: 'Pendiente' %>
+        </div>
+        
+      </div>
+    
+      <div class="form-group row">
+        <%= form.label :fecha_entrega,class:'col-sm-4', style: "display: block" %>
+        <div class="col-sm-4">
+          <%= form.date_field :fecha_entrega, class:'form-control', required:"true" %>
+        </div>
+
+         <div class="form-group row">
+        <%= form.label :total,class:'col-sm-4', style: "display: block"  %>
+        <div class="col-sm-4">
+          <%= form.number_field :total, class:'form-control', step:"0.01", min:"0", disabled:"true" %>
+        </div>
+        
+      </div>
+        
+      </div>
+        <div class="btn-toolbar" role="toolbar">
+              <div class="btn-group" role="group">
+              
+              <input type="button" value="Calcular total" name="button" class='btn btn-primary' onclick="total('subtotal')">
+              
+              
+                          
+              </div>
+        </div>
+   <input type="submit" name="commit"  value="Crear Cotizacion" data-disable-with="Create Cotizacion" visibility="hide" disabled id="guardar" class='btn btn-primary'/>
+     
+
+    <% end %>
+  </div>
+ <script src='http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.js'></script>
+ <script type = "text/javascript">
+        function calcular(valor,cant,sub){
+
+          var txtPrecio=document.getElementsByClassName(valor);
+          var txtCantidad=document.getElementsByClassName(cant);
+          var lblSubtotal=document.getElementsByClassName(sub);
+         
+ 
+          for(var i=0; i<txtCantidad.length;i++){
+            var valores= Number(txtPrecio[i].value);
+            console.log( valores + " "+ typeof valores);
+            
+            var cantidad=Number(txtCantidad[i].innerHTML);
+            console.log( cantidad + " "+ typeof cantidad)
+            let res=Number(valores*cantidad);
+            console.log( res + " "+ typeof res)
+            lblSubtotal[i].value=res;
+            
+          }
+          
+
+
+          }
+         
+</script>
+<script type = "text/javascript">
+ function total(subt){
+
+          var nullos=0;
+          var nulosSubtotales=0;
+          var txtboxes=document.getElementsByClassName('form-control');
+            var txtTotal=document.getElementById("cotizacion_total");
+            var lbSubtotal=document.getElementsByClassName(subt);
+            var total=0;
+
+          for(var i=0; i<lbSubtotal.length;i++){
+            
+            if(lbSubtotal[i].value==""){
+              nulosSubtotales++;
+            }
+            console.log(nulosSubtotales);
+          }
+
+          for(var i=0; i<txtboxes.length;i++){
+            
+            if(txtboxes[i].value==""){
+              nullos++;
+            }
+            console.log(nullos);
+          }
+          if (nullos>2 || nulosSubtotales!=0){
+              console.log(nullos);
+              alert("No debe dejar campos en blanco");
+          }else{
+
+            for(var j=0; j<lbSubtotal.length ; j++){
+              total+=Number(lbSubtotal[j].value);
+            
+              
+            }
+            
+            txtTotal.value=total;
+            document.getElementById("guardar").disabled=false;
+            guardarCotizacion();
+          }
+
+
+            
+           
+          }
+</script>
+
+<script type="text/javascript">
+
+function guardarCotizacion() { 
+  let proveedor_id=document.getElementById('cotizacion_proveedor').value;
+  let descuento_efectivo=document.getElementById('cotizacion_descuento_efectivo').value;
+  let descuento_pronto_pago=document.getElementById('cotizacion_descuento_pronto_pago').value;
+  let descuento_volumen=document.getElementById('cotizacion_descuento_volumen').value;
+  let descuento_forma_pago=document.getElementById('cotizacion_descuento_forma_pago').value;
+  let envases_embalage=document.getElementById('cotizacion_envases_embalage').value;
+  let pago_transporte=document.getElementById('cotizacion_pago_transporte').value;
+  let recargo_aplazamiento=document.getElementById('cotizacion_recargo_aplazamiento').value;
+  let estado=document.getElementById('cotizacion_estado').value;
+  let fecha_entrega=document.getElementById('cotizacion_fecha_entrega').value;
+  let total=document.getElementById('cotizacion_total').value;
+  let reque=document.getElementById('requesicion').innerHTML;
+
+  let ajaxurl=getRootUrl()+'/guardar_cotizacion/'+reque; //se agrega la ruta en routes.rb
+  let info={ proveedorid: proveedor_id, descuentoefectivo: descuento_efectivo,
+             descuentoprontopago: descuento_pronto_pago, descuentovolumen: descuento_volumen,
+             descuentoformapago: descuento_forma_pago, envasesembalage: envases_embalage,
+             pagotransporte: pago_transporte, recargoaplazamiento: recargo_aplazamiento, estado1: estado,
+             fechaentrega: fecha_entrega, total1: total, id: reque
+           }
+   $.ajax({ 
+        url: ajaxurl, 
+        type: 'POST',
+        beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+        data: info,
+        success: function (result) { 
+              if(result!=null){
+                console.log(result.mensaje)
+              }
+              
+              }
+          }); 
+       
+  }
+
+function getRootUrl() {
+    return window.location.origin;
+}
+</script>

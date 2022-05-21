@@ -1,0 +1,58 @@
+
+<div class="card-header d-flex justify-content-between align-items-center">
+  <h1>requesiciones de compra nuevas</h1>
+  <button value="pruebame" name="button" class='btn btn-primary' onclick="prueba()">
+        
+      </button>
+</div>
+<table class="table table-responsive table-bordered">
+  <thead>
+    <tr>
+      <th>Fecha de solicitud</th>
+      <th>Fecha de entrega</th>
+      <th>Prioridad</th>
+      <th>Estado</th>
+      <th>Acciones disponibles</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @requesicions.each do |requesicion| %>
+      <tr>
+          <td>
+            <strong><%=  requesicion.fecha_solicitud %></strong>
+          </td>
+          <td>
+            <strong><%=  requesicion.fecha_entrega %></strong>
+          </td>
+          <td>
+            <strong><%=  requesicion.prioridad %></strong>
+          </td>
+          <td>
+            <strong><%=  requesicion.estado %></strong>
+          </td>
+          <td>
+            <div class="btn-toolbar" role="toolbar">
+              <div class="btn-group" role="group">
+              <form class="button_to" method="get" action="/cotizacions/<%=  requesicion.id %>">
+              <button  name="button" class='btn btn-primary' type="submit">
+              <span>Cotizar</span>
+              </button>
+              </form>
+        
+      
+              
+              </div>
+            </div>
+          </td>
+
+        
+      </tr>
+    <%end %>
+      
+  </tbody>
+</table>
+<script type = "text/javascript">
+function prueba(){
+    alert("Funciona ahi mismo");
+}
+</script>

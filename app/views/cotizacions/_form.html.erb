@@ -1,0 +1,150 @@
+<div class="container ">
+
+
+  <div class="card-body ">
+    <%= form_with(model: proveedor) do |form| %>
+      <% if proveedor.errors.any? %>
+        <div style="color: red">
+          <h2><%= pluralize(proveedor.errors.count, "error") %> prohibited this proveedor from being saved:</h2>
+    
+          <ul>
+            <% proveedor.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+    
+      
+      <div class="form-group row"> 
+          <%= form.label 'Usuario:', class:'col-sm-2' %>
+        <div class="col-sm-4">
+          <%= form.collection_select :usuario_id,@usuario,"id","nombre",:selected => :id ,class:'form-control '   %>
+          
+        </div>
+        
+      </div>
+    
+      <div class="form-group row"> 
+        <%= form.label :compania, class:'col-sm-2', style: "display: block" %>
+        <div class="col-sm-4">
+          <%= form.text_field :compania , class:'form-control' %>
+        </div>
+        
+      </div>
+    
+      <div class="form-group row">
+        <%= form.label :representante_legal,class:'col-sm-2', style: "display: block" %>
+        <div class="col-sm-4">
+          <%= form.text_field :representante_legal, class:'form-control' %>
+        </div>
+        
+      </div>
+    
+      <div class="form-group row">
+        <%= form.label :direccion,class:'col-sm-2', style: "display: block" %>
+        <div class="col-sm-4">
+          <%= form.text_field :direccion, class:'form-control' %>
+        </div>
+        
+      </div>
+    
+      <div class="form-group row">
+        <%= form.label :telefono,class:'col-sm-2', style: "display: block" %>
+        <div class="col-sm-4">
+          <%= form.text_field :telefono, class:'form-control' %>
+        </div>
+        
+      </div>
+    
+      <div class="form-group row">
+        <%= form.label :fax,class:'col-sm-2', style: "display: block" %>
+          <div class="col-sm-4">
+          <%= form.text_field :fax, class:'form-control' %>
+        </div>
+          
+      </div>
+    
+      <div class="form-group row">
+        <%= form.label :celular,class:'col-sm-2', style: "display: block" %>
+          <div class="col-sm-4">
+          <%= form.text_field :celular, class:'form-control' %>
+        </div>
+        
+      </div>
+    
+      <div class="form-group row">
+        <%= form.label :nombre_contacto,class:'col-sm-2', style: "display: block" %>
+          <div class="col-sm-4">
+          <%= form.text_field :nombre_contacto, class:'form-control' %>
+        </div>
+        
+      </div>
+    
+      <div class="form-group row">
+        <%= form.label :web_site,class:'col-sm-2', style: "display: block" %>
+        <div class="col-sm-4">
+          <%= form.text_field :web_site, class:'form-control' %>
+        </div>
+        
+      </div>
+    
+      <div class="form-group row">
+        <%= form.label :nrc,class:'col-sm-2', style: "display: block" %>
+          <div class="col-sm-4">
+          <%= form.text_field :nrc, class:'form-control' %>
+        </div>
+        
+      </div>
+    
+      <div class="form-group row">
+        <%= form.label :anios,class:'col-sm-2', style: "display: block" %>
+        <div class="col-sm-4">
+          <%= form.text_field :anios, class:'form-control' %>
+        </div>
+        
+      </div>
+    
+      <div class="form-group row">
+        <%= form.label :rubro,class:'col-sm-2', style: "display: block" %>
+        <div class="col-sm-4">
+          <%= form.text_field :rubro, class:'form-control' %>
+        </div>
+        
+      </div>
+    
+      <div class="form-group row">
+        <%= form.label :logo,class:'col-sm-2', style: "display: block" %>
+        <div class="col-sm-4">
+          <%= form.file_field :logo, class:'form-control' %>
+        </div>
+        
+      </div>
+    
+      <div class="form-group row">
+        <%= form.label :escritura_constitucion,class:'col-sm-2', style: "display: block" %>
+        <div class="col-sm-4">
+          <%= form.file_field :escrituras, multiple:true ,class:'form-control ' %>
+        </div>
+        
+      </div>
+    
+      <div class="form-group row">
+        <%= form.label :"Ubicaciones ",class:'col-sm-2', style: "display: block" %>
+        <div class="col-sm-4">
+          <%= form.text_field :img_ubicacion_sucursales, class:'form-control' %>
+        </div>
+        
+      </div>
+      <button type="submit" name="button" class='btn btn-primary'>
+        <span>Guardar</span>
+      </button>
+    
+      <%= yield(:boton) %>
+
+    <% end %>
+  </div>
+</div>
+
+
+

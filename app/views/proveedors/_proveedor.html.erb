@@ -1,0 +1,96 @@
+<div id="<%= dom_id proveedor %>">
+
+  <table class=" table table-responsive table-bordered">
+
+    <tr>
+      <th>Usuario</th>
+      <td><%=usuario.nombre%></td>
+    </tr>
+    <tr>
+      <th >Nombre compañia</th>
+      <td><%=proveedor.compania%></td>
+    </tr>
+    <tr>
+      <th>Representante legal</th>
+      <td><%=proveedor.representante_legal%></td>
+    </tr>
+    <tr>
+      <th> Direccion </th>
+      <td><%=proveedor.direccion%></td>
+    </tr>
+    <tr>
+      <th>Telefono </th>
+      <td><%=proveedor.telefono%></td>
+    </tr>
+    <tr>
+      <th>Fax</th>
+      <td><%=proveedor.fax%></td>
+    </tr>
+    <tr>
+      <th>Celular</th>
+      <td><%=proveedor.celular%></td>
+    </tr>
+    <tr>
+      <th>Nombre de contacto</th>
+      <td><%=proveedor.nombre_contacto%></td>
+    </tr>
+    <tr>
+      <th>Web site</th>
+      <td><%=proveedor.web_site%></td>
+    </tr>
+    <tr>
+      <th>NRC</th>
+      <td><%=proveedor.nrc%></td>
+    </tr>
+    <tr>
+      <th>Años proveedor</th>
+      <td><%=proveedor.anios%></td>
+    </tr>
+    <tr>
+      <th>Rubro proveedor</th>
+      <td><%=proveedor.rubro%></td>
+    </tr>
+    <tr>
+      <th>Logo del proveedor</th>
+      <td class="align-center"><%= image_tag proveedor.logo , :size => "260x180" %></td>
+    </tr>
+    <tr>
+      <th>Escritura constitucional</th>
+      <td>
+        <%= link_to "Escritura constitucional",  proveedor.escritura, download: 'Escritura constitucional'  %>
+
+      </td>
+    </tr>
+
+    <% proveedor.ubicacions.each.with_index do |ubicacion,index|%>
+    <tr>
+      <th>Sucursal <%=index +1%></th>
+      <td>
+            <address>
+              <strong><%= ubicacion.nombre %></strong>    
+              <br>
+              <%= ubicacion.direccion %>
+            </address>
+
+      </td>
+        
+    </tr>
+    <tr>
+      <th>Local <%=index +1%></th>
+      <td>  
+          <%= image_tag ubicacion.local,:size => "260x180" %>  
+      </td>
+    </tr>
+    <tr>
+      <th>Ubicacion en mapa <%=index +1%></th>
+      <td>  
+          <%= image_tag ubicacion.mapa ,:size => "260x180"%>  
+      </td>
+    </tr>
+    <% end %>
+
+    
+
+</table>
+
+</div>
