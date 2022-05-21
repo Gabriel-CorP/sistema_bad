@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_15_050116) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_18_162308) do
   create_table "active_storage_attachments", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -60,7 +60,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_15_050116) do
     t.date "fecha_entrega"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "requesicion_id", null: false
     t.index ["proveedor_id"], name: "index_cotizacions_on_proveedor_id"
+    t.index ["requesicion_id"], name: "index_cotizacions_on_requesicion_id"
   end
 
   create_table "divisions", charset: "utf8mb4", force: :cascade do |t|
@@ -212,6 +214,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_15_050116) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "cotizacions", "proveedors"
+  add_foreign_key "cotizacions", "requesicions"
   add_foreign_key "divisions", "cargos"
   add_foreign_key "divisions", "proveedors"
   add_foreign_key "evaluacions", "proveedors"

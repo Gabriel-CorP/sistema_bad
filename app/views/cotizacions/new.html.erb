@@ -22,7 +22,7 @@
     <% @lineas.each do |linea| %>
       <tr>
           <td>
-            <strong><%=  linea.producto_id %></strong>
+            <p class="linea"><%=  linea.id %></p>
           </td>
           <td>
             <p class="cantidad"><%=  linea.cantidad %></p>
@@ -176,7 +176,7 @@
                           
               </div>
         </div>
-   <input type="submit" name="commit"  value="Crear Cotizacion" data-disable-with="Create Cotizacion" visibility="hide" disabled id="guardar" class='btn btn-primary'/>
+   <input type="button" name="commit" onclick="guardarCotizacion()" value="Crear Cotizacion"  disabled id="guardar" class='btn btn-primary'/>
      
 
     <% end %>
@@ -245,17 +245,16 @@
             
             txtTotal.value=total;
             document.getElementById("guardar").disabled=false;
-            guardarCotizacion();
+            
           }
 
 
             
            
-          }
+      }
 </script>
 
-<script type="text/javascript">
-
+<script type = "text/javascript">
 function guardarCotizacion() { 
   let proveedor_id=document.getElementById('cotizacion_proveedor').value;
   let descuento_efectivo=document.getElementById('cotizacion_descuento_efectivo').value;
@@ -284,15 +283,57 @@ function guardarCotizacion() {
         data: info,
         success: function (result) { 
               if(result!=null){
-                console.log(result.mensaje)
+                console.log(result.mensaje);
+                guardarDetalles();
               }
               
               }
           }); 
        
+       
   }
-
+ 
 function getRootUrl() {
     return window.location.origin;
 }
 </script>
+<script type = "text/javascript"> 
+ function guardarDetalles(){
+          var txtPrecios=document.getElementsByClassName('valor');
+          var txtids=document.getElementsByClassName('linea');
+          var txtSubtotales=document.getElementsByClassName('subtotal');
+          let ajaxurl=getRootUrl()+'/guardar_linea_cotizacion/'; //se agrega la ruta en routes.rb
+          
+          for (var i =0; i< txtids.length; i++){
+              let inf={id: txtids[i].innerHTML, preci: txtPrecios[i].value, sub: txtSubtotales[i].value}
+                  $.ajax({ 
+                          url: ajaxurl, 
+                          type: 'POST',
+                          beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+                          data: inf,
+                  success: function (result) { 
+                          if(result!=null){
+                            console.log(result);
+                            
+                              final(i-1, txtids.length-1); 
+                            
+                          }
+
+                        }
+                    }); 
+
+
+          }
+
+
+  }
+  function final(j, fin)
+  {console.log("final " + j + " "+ fin);
+    if(j == fin){
+    
+    window.location=getRootUrl()+"/cotizacions";
+  }
+  }
+
+
+</script>  
