@@ -1,32 +1,66 @@
-<%= form_with(model: ubicacion) do |form| %>
-  <% if ubicacion.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(ubicacion.errors.count, "error") %> prohibited this ubicacion from being saved:</h2>
+<div class="container ">
+  <div class="card-body shadow-lg">
+    <%= form_with(model: ubicacion) do |form| %>
+      <div class="form-group row mb-3">
+      <% if ubicacion.errors.any? %>
+        <div style="color: red">
+          <h2><%= pluralize(ubicacion.errors.count, "error") %> prohibited this ubicacion from being saved:</h2>
 
-      <ul>
-        <% ubicacion.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+          <ul>
+            <% ubicacion.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
     </div>
+
+    <div class="form-group row mb-3">
+      <%= form.label 'Proveedor:', class:'col-sm-2 ' %>
+      <div class="col-sm-4">
+        <%= form.collection_select :proveedor_id,@proveedors,"id","compania",:selected => :id ,class:'form-select'   %>
+      </div>
+    </div>
+
+    <div class="form-group row  mb-3 ">
+      <%= form.label :nombre, class:'col-sm-2', style: "display: block"   %>
+      <div class="col-sm-4">
+        <%= form.text_field :nombre ,id:"compania" ,class:"form-control" %>
+        
+      </div>
+
+    </div>
+
+    <div class="form-group row  mb-3 ">
+      <%= form.label :direccion, class:'col-sm-2', style: "display: block"   %>
+      <div class="col-sm-4">
+        <%= form.text_field :direccion ,id:"compania" ,class:"form-control" %>
+        
+      </div>
+
+    </div>
+    
+    <div class="form-group row mb-3">
+      <%= form.label :local,class:'col-sm-2', style: "display: block" %>
+      <div class="col-sm-4">
+        <%= form.file_field :local, class:'form-control'  %>
+        <p></p>
+      </div>
+    </div>
+
+    <div class="form-group row mb-3">
+      <%= form.label :mapa,class:'col-sm-2', style: "display: block" %>
+      <div class="col-sm-4">
+        <%= form.file_field :mapa, class:'form-control'  %>
+        <p></p>
+      </div>
+
+    </div>
+
+    <button type="submit" name="button" class='btn btn-primary'>
+      <span>Guardar</span>
+    </button>
+
+    <%= yield(:boton) %>
   <% end %>
-
-  <div>
-    <%= form.label :nombre, style: "display: block" %>
-    <%= form.text_field :nombre %>
-  </div>
-
-  <div>
-    <%= form.label :direccion, style: "display: block" %>
-    <%= form.text_field :direccion %>
-  </div>
-
-  <div>
-    <%= form.label :proveedor_id, style: "display: block" %>
-    <%= form.text_field :proveedor_id %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

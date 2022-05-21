@@ -8,7 +8,7 @@
 
                  <%= builder.label :"nombre de la sucursal" ,class:'col-sm-2', style: "display: block"%>
                  <div class="col-sm-4">
-                     <%= builder.text_field :nombre ,class:'form-control'%>
+                     <%= builder.text_field :nombre ,class:'form-control' %>
                  </div>
              </div>
 
@@ -36,10 +36,12 @@
             </div>
             
             
-                <%= builder.hidden_field :_destroy %>
-                <%= link_to "Remover sucursal","#",class: "remove_fields"%> 
-            
+                
+
+                
         </div>
+                <%= builder.hidden_field :_destroy %>
+                <%= link_to "remove", '#', class: "remove_fields" %>
         
 
 </fieldset>

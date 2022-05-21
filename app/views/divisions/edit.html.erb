@@ -1,0 +1,12 @@
+<div class="card mt-s">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <h3 class="text text-secondary">Editando empleado <%=@division.nombre_empleado%> </h3>
+</div>
+<% content_for :boton do %>
+  <%= link_to  "Regresar", divisions_path ,class:'btn btn-primary'%>
+<% end %>
+
+<%= render "form", division: @division %>
+
+
+</div>

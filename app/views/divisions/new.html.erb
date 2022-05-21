@@ -1,0 +1,7 @@
+<h1>Nueva division administrativa</h1>
+<% content_for :boton do %>
+  <%= link_to  "Regresar", divisions_path ,class:'btn btn-primary'%>
+<% end %>
+<%= render "form", division: @division %>
+
+

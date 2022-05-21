@@ -1,0 +1,43 @@
+<p style="color: green"><%= notice %></p>
+<div class="card-header d-flex justify-content-between align-items-center">
+  <h3>Editando ubicaciones de <%= buscarNombreProveedor(@var)%></h3>
+<%= link_to "Nueva ubicacion" , new_ubicacion_path,  class:"btn btn-primary btn-sm  " %>
+</div>
+
+<table class="table table-responsive table-bordered">
+  <thead>
+    <tr>
+      <th>Nombre de ubicacion</th>
+      <th>Direccion</th>
+      <th>Opciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @ubicacionesDelProveedor.each do |ubicacion| %>
+      <tr>
+          <td>
+            <strong><%=  ubicacion.nombre %></strong>
+          </td>
+          <td>
+            <strong><%=  ubicacion.direccion %></strong>
+          </td>
+          <td>
+            <div class="btn-toolbar" role="toolbar">
+              <div class="btn-group" role="group">
+                <%= button_to image_tag("editar"), edit_ubicacion_path(ubicacion),:method=>:get, :class=>"btn " ,id:"btn-edit" ,:title=>"Editar"%>
+                <%= button_to image_tag("trash"), ubicacion, method: :delete ,:class=>"btn " ,id:"btn-ver" ,:title=>"Eliminar" %>
+              </div>
+            </div>
+          </td>
+
+        
+      </tr>
+    <%end %>
+      
+  </tbody>
+</table>
+
+
+<div>
+  
+</div>
