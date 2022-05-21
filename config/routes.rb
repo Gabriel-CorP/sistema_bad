@@ -9,7 +9,11 @@ Rails.application.routes.draw do
   resources :cotizacions, only: [:index]
   resources :linea_cotizacions, only: [:index]
   get 'cotizacions/:id', to: 'cotizacions#new'
+  get 'cotizaciones', to: 'cotizacions#evaluar'
+  get 'cotizaciones/:id', to: 'cotizacions#detalles'
   post 'guardar_cotizacion/:id', to: 'cotizacions#create'
   post 'guardar_linea_cotizacion', to: 'cotizacions#lineas_cotizacion'
+  
+
 
 end

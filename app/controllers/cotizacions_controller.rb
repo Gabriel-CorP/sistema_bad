@@ -107,6 +107,40 @@ class CotizacionsController < ApplicationController
         end
 
     end
+    def evaluar
+        @requesiciones=Requesicion.where("estado='Cotizado'")
+        
+    end
+    def detalles
+        sql="SELECT c.proveedor_id, c.descuento_efectivo,
+        c.descuento_pronto_pago, c.descuento_volumen,
+        c.descuento_forma_pago, c.envases_embalage, c.pago_transporte,
+        c.recargo_aplazamiento, c.fecha_entrega, c.total, 
+        pro.compania, c.id FROM cotizacions AS c INNER JOIN requesicions AS r
+        INNER JOIN proveedors AS pro
+        WHERE c.requesicion_id=" + params[:id] 
+        @array = ActiveRecord::Base.connection.execute(sql).to_a
+        @cotizaciones= Cotizacion.where(requesicion_id: params[:id] )
+        @requesicion=Requesicion.find(params[:id])
+        @productos=Array.new
+        @detallesCotizaciones=Array.new
+        @detallesRequesicion=LineaRequesicion.where(requesicion_id: params[:id])
+        @detallesRequesicion.each do |linea|
+            @pro=Producto.find(linea.producto_id)
+            @productos.push(@pro)
+        end
+        @pros=@productos.uniq #eliminando productos repetidos
+        @cotizaciones.each do |c| #buscando los detalles de las cotizaciones
+            @lineac= LineaCotizacion.where(cotizacion_id: c.id)
+            @lineac.each do |l|
+                @detallesCotizaciones.push(l)
+            end
+            
+        end
+        
+
+    end
+
  #   private
   #  def set_requesicion
    #     @requesicion = Requesicion.find(params[:id])
