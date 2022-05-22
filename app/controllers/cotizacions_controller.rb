@@ -140,6 +140,14 @@ class CotizacionsController < ApplicationController
         
 
     end
+    def aprobar
+        @usuario_logeado="gabrielcorena@gmail.com"
+        @cotizacion="smart watch 5 pulg 10 unidades \n smart TV 55 pulg 10 unidades "
+        #recibir todos los datos de la cotizacion y crear una cadena o algo así :v para enviarlo
+#creando el email
+        PostMailer.with(user: @usuario_logeado, contenido: @cotizacion).post_created.deliver_later
+
+    end 
 
  #   private
   #  def set_requesicion
