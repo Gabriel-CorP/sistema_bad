@@ -11,6 +11,6 @@ class PostMailer < ApplicationMailer
     @cotizacion= params[:cotizacion]
     @greeting = @cotizacion
 
-    mail from: "la.nueva.empresa.bad@gmail.com", to: @user, subject: "Cotización aprobada"
+    mail from: "la.nueva.empresa.bad@gmail.com", to: @user, subject: "Cotización aprobada", body: @cotizacion
   end
 end

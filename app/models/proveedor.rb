@@ -5,7 +5,7 @@ class Proveedor < ApplicationRecord
   has_many :references, :dependent =>:destroy
   has_many :cotizacions
   has_many :ubicacions , :dependent =>:destroy
-  belongs_to :TipoProducto
+  belongs_to :tipo_producto
   #accepts_nested_attributes_for :ubicacions ,:reject_if => lambda { |a| a[:nombre].blank? && a[:direccion].blank? }, :allow_destroy => true #OJO CON ESTO
 
   #para las imagenes

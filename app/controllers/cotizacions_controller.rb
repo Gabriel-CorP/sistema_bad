@@ -6,7 +6,7 @@ class CotizacionsController < ApplicationController
 
         @cotizaciones=Cotizacion.new
         @requesicions.each do |r|
-           if r.estado="Cotizado"              
+           if r.estado=="Cotizado"              
                @cotizaciones=Cotizacion.where(requesicion_id: r.id)
         
                            
