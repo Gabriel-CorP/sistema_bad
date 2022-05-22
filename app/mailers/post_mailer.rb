@@ -8,7 +8,7 @@ class PostMailer < ApplicationMailer
   def post_created
     
     @user= params[:user]
-    @cotizacion= params[:cotizacion]
+    @cotizacion= params[:contenido]
     @greeting = @cotizacion
 
     mail from: "la.nueva.empresa.bad@gmail.com", to: @user, subject: "Cotización aprobada", body: @cotizacion

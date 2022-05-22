@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get 'cotizaciones/:id', to: 'cotizacions#detalles'
   post 'guardar_cotizacion/:id', to: 'cotizacions#create'
   post 'guardar_linea_cotizacion', to: 'cotizacions#lineas_cotizacion'
+  post 'aprobar_cotizacion', to: 'cotizacions#aprobar'
   
 
 
