@@ -19,7 +19,7 @@
 
 
     <div class="form-group row mb-3">
-      <%= form.label 'Usuario:', class:'col-sm-2 ' %>
+      <%= form.label 'Usuario ', class:'col-sm-2 ' %>
       <div class="col-sm-4">
         <%= form.collection_select :usuario_id,@usuario,"id","nombre",:selected => :id ,class:'form-select'   %>
 
@@ -31,6 +31,15 @@
       <%= form.label :compania, class:'col-sm-2', style: "display: block"   %>
       <div class="col-sm-4">
         <%= form.text_field :compania ,id:"compania" ,class:"form-control" %>
+        <p></p>
+      </div>
+
+    </div>
+
+    <div class="form-group row  mb-3 ">
+      <%= form.label 'Tipo de producto que comercializa', class:'col-sm-2', style: "display: block"   %>
+      <div class="col-sm-4">
+        <%= form.collection_select :tipo_producto_id,@tiposProductos,"id","nombre",:selected => :id ,class:'form-select'   %>
         <p></p>
       </div>
 

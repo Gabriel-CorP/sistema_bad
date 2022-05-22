@@ -3,12 +3,12 @@
   <h1>Ubicaciones</h1>
   <%= link_to "Nueva ubicacion" , new_ubicacion_path,  class:"btn btn-primary btn-sm  " %>
 </div>
+<br>
 
 
 
 
-
-<table class="table table-responsive table-bordered">
+<table id="ubicacionesTable" class="table table-responsive table-bordered">
   <thead>
     <tr>
       <th>Nombre de ubicacion </th>
@@ -41,3 +41,39 @@
       
   </tbody>
 </table>
+
+<script
+  src="https://code.jquery.com/jquery-1.12.4.min.js"
+  integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+  crossorigin="anonymous"></script>
+
+  
+  <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js" type="text/javascript"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.0/css/jquery.dataTables.min.css" media="screen" />
+  <script src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js" type="text/javascript"></script>
+
+  
+  <script>
+  $(document).ready(function() {
+    var oTable = $("#ubicacionesTable").DataTable({
+      lengthMenu: [
+            [5,10, 25, 50, -1],
+            [5,10, 25, 50, 'All'],
+        ],
+      "language": {
+        "lengthMenu": "Mostrar _MENU_ registros",
+        "search": "Buscar:",
+        zeroRecords: 'No hay registros para mostrar.',
+        emptyTable: 'La tabla está vacia.',
+        info: "Mostrando _START_ de _END_ de _TOTAL_ Registros.",
+        paginate: {
+          first: 'Primero',
+          previous: 'Anterior',
+          next: 'Siguiente',
+          last: 'Último'
+          }
+      }
+    })
+    
+    });
+    </script>
