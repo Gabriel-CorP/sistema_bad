@@ -10,6 +10,7 @@
   <thead>
     <tr>
       <th>Nombre compañia</th>
+      <th>Tipo de producto</th>
       <th>Opciones</th>
     </tr>
   </thead>
@@ -18,6 +19,9 @@
       <tr>
           <td>
             <strong><%=  proveedor.compania %></strong>
+          </td>
+          <td>
+            <strong><%=  buscarTipoProducto(proveedor.tipo_producto_id) %></strong>
           </td>
           <td>
             <div class="btn-toolbar" role="toolbar">
@@ -51,7 +55,25 @@
   
   <script>
   $(document).ready(function() {
-    var oTable = $("#proveedoresTabla").DataTable({})
-      
+    var oTable = $("#proveedoresTabla").DataTable({
+      lengthMenu: [
+            [5,10, 25, 50, -1],
+            [5,10, 25, 50, 'All'],
+        ],
+      "language": {
+        "lengthMenu": "Mostrar _MENU_ registros",
+        "search": "Buscar:",
+        zeroRecords: 'No hay registros para mostrar.',
+        emptyTable: 'La tabla está vacia.',
+        info: "Mostrando _START_ de _END_ de _TOTAL_ Registros.",
+        paginate: {
+          first: 'Primero',
+          previous: 'Anterior',
+          next: 'Siguiente',
+          last: 'Último'
+          }
+      }
+    })
+    
     });
     </script>

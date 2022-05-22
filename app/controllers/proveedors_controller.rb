@@ -9,7 +9,7 @@ class ProveedorsController < ApplicationController
     # GET /proveedors/1 or /proveedors/1.json
     def show
         @usuario = Usuario.find(@proveedor.usuario_id)
-        
+        @TipoProducto=TipoProducto.find(@proveedor.tipo_producto_id)
     end
   
     # GET /proveedors/new
@@ -19,7 +19,7 @@ class ProveedorsController < ApplicationController
       #@proveedor.ubicacions.build
        #filtrando para que los proveedores que ya estan en la tabla proveedores no salgan en el combo box
       @usuario=Usuario.where(rol_id: 1).merge(Usuario.where.not(:id=>Proveedor.pluck(:usuario_id)))
-      
+      @tiposProductos=TipoProducto.all()
     end
   
     # GET /proveedors/1/edit
@@ -27,6 +27,7 @@ class ProveedorsController < ApplicationController
         #@usuario = Usuario.find(@proveedor.usuario_id)
         #@usuario=Usuario.where.not(rol_id: 1).or(Usuario.where(id:@proveedor.usuario_id))#mas adelante filtrar mas si se necesita distinguir q no tenga otro rol de momento 1 es proveedor
         @usuario=Usuario.where(rol_id: 1).merge(Usuario.where.not(:id=>Proveedor.pluck(:usuario_id))).merge(Usuario.where(id:@proveedor.usuario_id))
+        @tiposProductos=TipoProducto.all()
     end
 
     
@@ -35,6 +36,7 @@ class ProveedorsController < ApplicationController
     def create
       @proveedor = Proveedor.new(proveedor_params)
       @usuario=Usuario.where.not(rol_id: 1).or(Usuario.where(id:@proveedor.usuario_id))
+      
       respond_to do |format|
         if @proveedor.save
           format.html { redirect_to proveedor_url(@proveedor), notice: "El Proveedor a sido creado." }
@@ -78,7 +80,7 @@ class ProveedorsController < ApplicationController
   
       # Only allow a list of trusted parameters through.
       def proveedor_params
-        params.require(:proveedor).permit(:compania, :representante_legal, :direccion, :telefono, :fax, :celular, :nombre_contacto, :web_site, :nrc, :anios, :rubro, :logo, :escritura_constitucion , :img_ubicacion_sucursales,:escritura, :usuario_id,ubicacions_attributes: [:nombre,:direccion,:local,:mapa])
+        params.require(:proveedor).permit(:compania, :representante_legal, :direccion, :telefono, :fax, :celular, :nombre_contacto, :web_site, :nrc, :anios, :rubro, :logo, :escritura_constitucion , :img_ubicacion_sucursales,:escritura, :usuario_id,:tipo_producto_id,ubicacions_attributes: [:nombre,:direccion,:local,:mapa])
         #params.require(:proveedor).permit(:compania, :representante_legal, :direccion, :telefono, :fax, :celular, :nombre_contacto, :web_site, :nrc, :anios, :rubro, :logo, :escritura_constitucion , :img_ubicacion_sucursales,:escritura, :usuario_id,escrituras:[])
       end
   end

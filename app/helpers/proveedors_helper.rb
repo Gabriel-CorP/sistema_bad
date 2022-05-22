@@ -13,5 +13,8 @@ module ProveedorsHelper
         cargo=(Cargo.find(id)).nombre
     end
 
+    def buscarTipoProducto(id)
+        tipoProducto=(TipoProducto.find(id)).nombre
+    end
     
 end
