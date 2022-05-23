@@ -1,0 +1,2 @@
+class ReporgController < ApplicationController
+end
