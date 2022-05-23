@@ -1,0 +1,9 @@
+<div class="card mt-s">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <h1 class="text text-secondary">Detalles de requisición</h1>
+
+    <%= render "form", requesicion: @requesicion %>
+  </div>
+</div>
+<% @model = @requesicion %>
+<%= render 'buscador_producto', model: @model %>

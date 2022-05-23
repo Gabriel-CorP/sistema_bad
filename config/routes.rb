@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   resources :divisions
   resources :cargos
   resources :ubicacions
+  resources :productos
+  resources :linea_requesicions, only: [:index]
+  resources :requesicions
   get 'ubicacionProveedores/:proveedor_id' , to: 'ubicacions#edit2', :as => 'editUbicacionesProveedor'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   root to: 'home#index'
