@@ -3,6 +3,7 @@ class RequesicionsController < ApplicationController
 
   # GET /requesicions or /requesicions.json
   def index
+    # @requesicions = Requesicion.joins(:usuario).where(usuario_id:)
     @requesicions = Requesicion.all
   end
 
@@ -14,16 +15,24 @@ class RequesicionsController < ApplicationController
   # GET /requesicions/new
   def new
     @requesicion = Requesicion.new
-    @usuario = Usuario.where(usuario_id: usuario_id)
+    # @requesicion = Requesicion.create(usuario_id: 1)
+    # @usuario = Usuario.where(usuario_id: usuario_id)
+    # redirect_to edit_requesicion_path(@requesicion)
   end
 
   # GET /requesicions/1/edit
   def edit
+    @productos_requesicion = @requesicion.linea_requesicions
   end
 
   # POST /requesicions or /requesicions.json
   def create
-    @requesicion = Requesicion.new(requesicion_params)
+    @requesicion = Requesicion.new
+    @requesicion.fecha_entrega=params[:fechaentrega]
+    @requesicion.prioridad=params[:prioridad]
+    @requesicion.estado=params[:estado]
+    @requesicion.observacion=params[:observacion]
+    @requesicion.fecha_solicitud=Date.today
 
     respond_to do |format|
       if @requesicion.save
@@ -67,6 +76,6 @@ class RequesicionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def requesicion_params
-      params.require(:requesicion).permit(:fecha_entrega, :prioridad, :usuario_id)
+      params.require(:requesicion).permit(:fecha_entrega, :fecha_solicitud, :prioridad, :usuario_id, :estado, :observacion)
     end
 end

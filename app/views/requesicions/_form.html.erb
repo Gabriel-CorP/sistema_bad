@@ -1,29 +1,57 @@
-<%= form_with(model: requesicion) do |form| %>
-  <% if requesicion.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(requesicion.errors.count, "error") %> prohibited this requesicion from being saved:</h2>
+<div class="container">
+  <%= form_with(model: requesicion) do |form| %>
+    <% if requesicion.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(requesicion.errors.count, "error") %> prohibited this requisicion from being saved:</h2>
 
-      <ul>
-        <% requesicion.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+        <ul>
+          <% requesicion.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div>
+      
     </div>
+
+    <div>
+      <%= form.label 'Prioridad:'%>
+      <%= form.select :prioridad, ['Baja','Media','Alta'], class: "form-control" %> | 
+      <button type="button" class="btn btn-warning" data-toggle="modal" data-target="buscador-producto" >
+        Agregar Productos
+      </button>
+    </div>
+
+    <div>
+      <%= form.label 'Fecha de entrega:'%>
+      <%= form.date_field (:fecha_entrega), class: "form-control" %>
+    </div>
+
+    <br>
+
+    <div class="table-responsive">
+      <table class="table table-bordered" id="tabla-requesicion" width="90%" cellspacing="0">
+        <colgroup>
+          <col span="1" style="width: 80%;">
+          <col span="1" style="width: 20%;">
+        </colgroup>
+        <thead>
+          <th>Producto</th>
+          <th>Cantidad</th>
+        </thead>
+        <tbody>
+          
+          <tr>
+            <td colspan="2">No hay productos registrados</td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </div>
+
+    <br>
+    <%= link_to "Finalizar", requesicions_path, class: 'btn btn-success'%>
+    <%= link_to "Cancelar", @requesicion, method: :delete, data: { confirm: "¿Cancelar requisición?" }, class: "btn btn-danger"%>
   <% end %>
-
-  <div>
-    <%= form.label 'Prioridad: ', class: 'col-sm-2'%>
-    <%= radio_button_tag(:prioridad, "Alta")%>
-    <%= label_tag(:prioridad_alta, "Alta")%>
-    <%= radio_button_tag(:prioridad, "Media")%>
-    <%= label_tag(:prioridad_media, "Media")%>
-    <%= radio_button_tag(:prioridad, "Baja")%>
-    <%= label_tag(:prioridad_baja, "Baja")%>
-  </div>
-
-
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>
