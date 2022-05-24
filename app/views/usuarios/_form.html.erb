@@ -1,0 +1,83 @@
+<div class="container ">
+
+  <div class="card-body shadow-lg">
+    <%= form_with(model: usuario) do |form| %>
+      <div class="form-group row mb-3">
+        <% if usuario.errors.any? %>
+          <div style="color: red">
+            <h2><%= pluralize(usuario.errors.count, "error") %> prohibited this usuario from being saved:</h2>
+
+            <ul>
+              <% usuario.errors.each do |error| %>
+                <li><%= error.full_message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="form-group row mb-3">
+      <%= form.label 'User asignado ', class:'col-sm-2 ' %>
+      <div class="col-sm-4">
+        <%= form.collection_select :user_id,@users,"id","user",:selected => :id ,class:'form-select'   %>
+      </div>
+    </div>
+
+      <div class="form-group row mb-3">
+      <%= form.label 'Rol  ', class:'col-sm-2 ' %>
+      <div class="col-sm-4">
+        <%= form.collection_select :rol_id,@rols,"id","rol",:selected => :id ,class:'form-select'   %>
+      </div>
+    </div>
+
+    <div class="form-group row  mb-3 ">
+    <%= form.label 'Nombre ', class:'col-sm-2', style: "display: block"   %>
+    <div class="col-sm-4">
+      <%= form.text_field :nombre ,class:"form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group row  mb-3 ">
+    <%= form.label 'Apellido ', class:'col-sm-2', style: "display: block"   %>
+    <div class="col-sm-4">
+      <%= form.text_field :apellido ,class:"form-control" %>
+    </div>
+  </div>
+
+    <div class="form-group row  mb-3 ">
+      <%= form.label 'Edad', class:'col-sm-2', style: "display: block"   %>
+      <div class="col-sm-4">
+        <%= form.number_field :edad  ,class:"form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group row  mb-3 ">
+    <%= form.label 'Numero de DUI ', class:'col-sm-2', style: "display: block"   %>
+    <div class="col-sm-4">
+      <%= form.text_field :dui ,class:"form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group row  mb-3 ">
+    <%= form.label 'Numero de seguro social ', class:'col-sm-2', style: "display: block"   %>
+    <div class="col-sm-4">
+      <%= form.text_field :isss ,class:"form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group row  mb-3 ">
+    <%= form.label 'Numero de AFP ', class:'col-sm-2', style: "display: block"   %>
+    <div class="col-sm-4">
+      <%= form.text_field :afp ,class:"form-control" %>
+    </div>
+  </div>
+    
+
+  <button type="submit" name="button" class='btn btn-primary'>
+    <span>Guardar</span>
+  </button>
+
+    <%= yield(:boton) %>
+  <% end %>
+
+</div>

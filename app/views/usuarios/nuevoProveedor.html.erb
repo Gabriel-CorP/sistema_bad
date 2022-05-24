@@ -1,0 +1,10 @@
+<h1>El id es <%= @id%></h1>
+
+<div class="card mt-s">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <h3 class="text text-secondary"> <%=@usuarioNombre%>->Nuevo Proveedor </h3>
+  </div>
+  
+
+  <%= render "formNuevoProveedor", proveedor:@proveedor,tiposProductos:@tiposProductos %>
+</div>
