@@ -1,0 +1,36 @@
+<div class="modal fade" id="buscador_producto" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="buscador">Nombre de producto:</label>
+                    <input type="text" class="form-control" data-model="<%= model.try(:id) %>" id="buscador_productos" placeholder="Ingrese producto...">
+                </div>
+                <div class="form-group">
+                    <label for="buscador">Nombre de producto:</label>
+                    <input type="number" class="form-control" id="cantidad_producto" placeholder="Cantidad a solicitar..." value="1" min="0.01" step="0.01">
+                </div>
+                <table class="table table-dark" id="tabla_buscador">
+                    <colgroup>
+                        <col span="1" style="width: 70%;">
+                        <col span="1" style="width: 15%;">
+                        <col span="1" style="width: 15%;">
+                    </colgroup>
+                    <thead>
+                        <th>Producto</th>
+                        <th>Existencia</th>
+                        <th>Agregar</th>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
