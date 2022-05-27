@@ -109,7 +109,9 @@ class CotizacionsController < ApplicationController
         c.recargo_aplazamiento, c.fecha_entrega, c.total, 
         pro.compania, c.id FROM cotizacions AS c INNER JOIN requesicions AS r
         INNER JOIN proveedors AS pro
-        WHERE c.requesicion_id=" + params[:id] 
+        WHERE pro.id=c.proveedor_id 
+        AND  c.requesicion_id= r.id
+        AND c.requesicion_id=" + params[:id] 
         @array = ActiveRecord::Base.connection.execute(sql).to_a
         @cotizaciones= Cotizacion.where(requesicion_id: params[:id] )
         @requesicion=Requesicion.find(params[:id])
