@@ -26,7 +26,8 @@ class ProveedorsController < ApplicationController
     def edit
         #@usuario = Usuario.find(@proveedor.usuario_id)
         #@usuario=Usuario.where.not(rol_id: 1).or(Usuario.where(id:@proveedor.usuario_id))#mas adelante filtrar mas si se necesita distinguir q no tenga otro rol de momento 1 es proveedor
-        @usuario=Usuario.where(rol_id: 1).merge(Usuario.where.not(:id=>Proveedor.pluck(:usuario_id))).merge(Usuario.where(id:@proveedor.usuario_id))
+        @usuario=Usuario.where(rol_id: 1).merge(Usuario.where.not(:id=>Proveedor.pluck(:usuario_id))).or(Usuario.where(id:@proveedor.usuario_id))
+        puts(@usuario)
         @tiposProductos=TipoProducto.all()
     end
 
@@ -69,6 +70,10 @@ class ProveedorsController < ApplicationController
         format.html { redirect_to proveedors_url, notice: "Proveedor was successfully destroyed." }
         format.json { head :no_content }
       end
+    end
+
+    def nuevo
+      
     end
   
     private

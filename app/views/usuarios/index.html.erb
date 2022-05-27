@@ -1,34 +1,37 @@
 <p style="color: green"><%= notice %></p>
 <div class="card-header d-flex justify-content-between align-items-center">
-  <h1>Proveedores</h1>
-  <%= link_to "Nuevo proveedor" , new_proveedor_path,  class:"btn btn-primary btn-sm  " %>
+<h1>Usuarios</h1>
+  <%= link_to "Nuevo usuario" , new_usuario_path,  class:"btn btn-primary btn-sm  " %>
 </div>
 <br>
 
 
-<table id="proveedoresTabla" class="table table-striped table-responsive table-bordered table-sm">
+
+
+
+<table id="usuariosTabla" class="table table-striped table-responsive table-bordered table-sm">
   <thead>
     <tr>
-      <th>Nombre compañia</th>
-      <th>Tipo de producto</th>
+      <th>Nombre de usuario</th>
+      <th>Rol</th>
       <th>Opciones</th>
     </tr>
   </thead>
   <tbody>
-    <% @proveedors.each do |proveedor| %>
+    <% @usuarios.each do |usuario| %>
     <tr>
       <td>
-        <strong><%=  proveedor.compania %></strong>
+        <strong><%=  usuario.nombre %></strong>
       </td>
       <td>
-        <strong><%=  buscarTipoProducto(proveedor.tipo_producto_id) %></strong>
+        <strong><%=  buscarRol(usuario.rol_id) %></strong>
       </td>
       <td>
         <div class="btn-toolbar" role="toolbar">
           <div class="btn-group" role="group">
-            <%= button_to image_tag("ojo",width:25,height:25), proveedor,method: :get, :class=>"btn " ,id:"btn-ver" , :title=>"Ver" %>
-            <%= button_to image_tag("editar"), edit_proveedor_path(proveedor),:method=>:get, :class=>"btn " ,id:"btn-edit" ,:title=>"Editar"%>
-            <%= button_to image_tag("trash"), proveedor, method: :delete ,:class=>"btn " ,id:"btn-ver" ,:title=>"Eliminar" %>
+            <%= button_to image_tag("ojo",width:25,height:25), usuario,method: :get, :class=>"btn " ,id:"btn-ver" , :title=>"Ver" %>
+            <%= button_to image_tag("editar"), edit_usuario_path(usuario),:method=>:get, :class=>"btn " ,id:"btn-edit" ,:title=>"Editar"%>
+            <%= button_to image_tag("trash"), usuario, method: :delete ,:class=>"btn " ,id:"btn-ver" ,:title=>"Eliminar" %>
           </div>
         </div>
       </td>
@@ -54,7 +57,7 @@
 
 <script>
   $(document).ready(function () {
-    var oTable = $("#proveedoresTabla").DataTable({
+    var oTable = $("#usuariosTabla").DataTable({
       lengthMenu: [
         [5, 10, 25, 50, -1],
         [5, 10, 25, 50, 'All'],

@@ -1,0 +1,41 @@
+<div id="<%= dom_id usuario %>">
+
+  <table class=" table table-responsive table-bordered">
+    <tr>
+        <th>Rol de usuario</th>
+        <td><%=buscarRol(usuario.rol_id)%></td>
+      </tr>
+    <tr>
+      <th>User asignado</th>
+      <td><%=buscarUser(usuario.user_id)%></td>
+    </tr>
+    <tr>
+      <th>Nombre </th>
+      <td><%=usuario.nombre%></td>
+    </tr>
+    <tr>
+      <th>Apellido</th>
+      <td><%=usuario.apellido%></td>
+    </tr>
+    <tr>
+      <th>Edad</th>
+      <td><%=usuario.edad%></td>
+    </tr>
+    <tr>
+      <th>DUI</th>
+      <td><%=usuario.dui%></td>
+    </tr>
+    <tr>
+      <th>ISSS</th>
+      <td><%=usuario.isss%></td>
+    </tr>
+    <tr>
+      <th>AFP</th>
+      <td><%=usuario.afp%></td>
+    </tr>
+    
+  </table>
+  
+  
+
+</div>
