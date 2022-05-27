@@ -22,6 +22,7 @@ class UsuariosController < ApplicationController
   def edit
     @users=User.all
     @rols=Rol.all
+    
   end
 
   # POST /usuarios or /usuarios.json

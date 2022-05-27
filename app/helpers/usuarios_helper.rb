@@ -7,4 +7,11 @@ module UsuariosHelper
     def buscarUser(id)
         (User.find(id)).user
     end
+
+    def validarRol(id)
+        var = (Usuario.find(id)).rol_id
+        
+        
+    end 
+    
 end
