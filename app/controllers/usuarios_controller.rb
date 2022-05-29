@@ -20,7 +20,7 @@ class UsuariosController < ApplicationController
 
   # GET /usuarios/1/edit
   def edit
-    @users=User.all
+    @users=User.where.not(:id=>Usuario.pluck(:user_id)).or(User.where(id:@usuario.user_id))
     @rols=Rol.all
     
   end
@@ -28,6 +28,8 @@ class UsuariosController < ApplicationController
   # POST /usuarios or /usuarios.json
   def create
     @usuario = Usuario.new(usuario_params)
+    @users=User.where.not(:id=>Usuario.pluck(:user_id))
+    @rols=Rol.all
     @parametros=usuario_params
     puts(@parametros["rol_id"]=="1")
     #puts(@usuario[:id])
@@ -49,6 +51,8 @@ class UsuariosController < ApplicationController
 
   # PATCH/PUT /usuarios/1 or /usuarios/1.json
   def update
+    @users=User.where.not(:id=>Usuario.pluck(:user_id)).or(User.where(id:@usuario.user_id))
+    @rols=Rol.all
     respond_to do |format|
       if @usuario.update(usuario_params)
         format.html { redirect_to usuario_url(@usuario), notice: "Usuario was successfully updated." }
