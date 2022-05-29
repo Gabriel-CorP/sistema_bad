@@ -1,9 +1,14 @@
-<h1>New ubicacion</h1>
+<div class="card mt-s">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <h3 class="text text-secondary">Nueva ubicacion</h3>
+</div>
+<!-- dentro del archivo q renderise debera venir el card body-->
+  <% content_for :boton do %>
+    <%= link_to  "Regresar", ubicacions_path ,class:'btn btn-primary'%>
+  <% end %> 
 
 <%= render "form", ubicacion: @ubicacion %>
 
 <br>
 
-<div>
-  <%= link_to "Back to ubicacions", ubicacions_path %>
-</div>
+

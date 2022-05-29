@@ -6,7 +6,7 @@ class CotizacionsController < ApplicationController
 
         @cotizaciones=Cotizacion.new
         @requesicions.each do |r|
-           if r.estado="Cotizado"              
+           if r.estado=="Cotizado"              
                @cotizaciones=Cotizacion.where(requesicion_id: r.id)
         
                            
@@ -75,15 +75,6 @@ class CotizacionsController < ApplicationController
         end     
 
     end
-    def edit
-
-    end
-    
-    def update
-
-    end
-    def destroy
-    end
 
     def lineas_cotizacion
         @coti=Cotizacion.last
@@ -107,6 +98,102 @@ class CotizacionsController < ApplicationController
         end
 
     end
+    def evaluar
+        @requesiciones=Requesicion.where("estado='Cotizado'")
+        
+    end
+    def detalles
+        sql="SELECT c.proveedor_id, c.descuento_efectivo,
+        c.descuento_pronto_pago, c.descuento_volumen,
+        c.descuento_forma_pago, c.envases_embalage, c.pago_transporte,
+        c.recargo_aplazamiento, c.fecha_entrega, c.total, 
+        pro.compania, c.id FROM cotizacions AS c INNER JOIN requesicions AS r
+        INNER JOIN proveedors AS pro
+        WHERE pro.id=c.proveedor_id 
+        AND  c.requesicion_id= r.id
+        AND c.requesicion_id=" + params[:id] 
+        @array = ActiveRecord::Base.connection.execute(sql).to_a
+        @cotizaciones= Cotizacion.where(requesicion_id: params[:id] )
+        @requesicion=Requesicion.find(params[:id])
+        @productos=Array.new
+        @detallesCotizaciones=Array.new
+        @detallesRequesicion=LineaRequesicion.where(requesicion_id: params[:id])
+        @detallesRequesicion.each do |linea|
+            @pro=Producto.find(linea.producto_id)
+            @productos.push(@pro)
+        end
+        @pros=@productos.uniq #eliminando productos repetidos
+        @cotizaciones.each do |c| #buscando los detalles de las cotizaciones
+            @lineac= LineaCotizacion.where(cotizacion_id: c.id)
+            @lineac.each do |l|
+                @detallesCotizaciones.push(l)
+            end
+            
+        end
+        
+
+    end
+    def aprobar
+        @coti=Cotizacion.find(params[:id])
+        @reque=Requesicion.find(@coti.requesicion_id)
+        @productos=Array.new
+        @cotizacionText="Estimado proveedor hemos aprobado su cotización con los siguientes detalles:\n
+        Descuento por pago en efectivo (%)= #{@coti.descuento_efectivo.to_s}\n
+        Descuento por pronto pago (%)= #{@coti.descuento_pronto_pago.to_s} \n
+        Descuento por volumen de venta (%)= #{@coti.descuento_volumen.to_s} \n
+        Descuento por forma de pago (%)= #{@coti.descuento_forma_pago.to_s} \n
+        Pago por envases y embalage ($)= #{@coti.envases_embalage.to_s} \n
+        Pago de transporte ($)= #{@coti.pago_transporte.to_s} \n
+        recargo por aplazamiento de pago ($)= #{@coti.recargo_aplazamiento.to_s} \n
+        fecha de entrega = #{@coti.fecha_entrega.to_s} \n
+        Total ($)= #{@coti.total}\n"+"
+        Producto \t\tCantidad \t\tPrecio \t\tSubtotal\n"
+
+        @provee= Proveedor.find(@coti.proveedor_id)#aquí necesito el id del proveedor(usuario logeado)
+        @lineasR=LineaRequesicion.where(requesicion_id: @reque.id)
+        @lineasR.each do |linea|
+            @pro=Producto.find(linea.producto_id)
+            @productos.push(@pro)
+        end
+        @detalle=""
+        @lineasC=LineaCotizacion.where(cotizacion_id: @coti.id)
+        @lineasC.each do |lc|
+            @lineasR.each do |lr|
+                if lc.linea_requesicion_id == lr.id
+                    @pro=Producto.find(lr.producto_id)
+                    @detalle="\t#{@pro.nombre} #{@pro.presentacion} \t\t#{lr.cantidad.to_s} \t\t$ #{lc.precio_unitario.to_s} \t\t$ #{lc.subtotal.to_s}\n"
+                    @cotizacionText=@cotizacionText+@detalle
+                end
+            end
+
+        end
+
+
+
+        @usuario_logeado="gabrielcorena@gmail.com"
+        
+        #recibir todos los datos de la cotizacion y crear una cadena o algo así :v para enviarlo
+#creando el email
+        PostMailer.with(user: @usuario_logeado, contenido: @cotizacionText).post_created.deliver_now
+
+        result= {
+            mensaje: "Mensaje enviado"
+        }
+        respond_to do |format|
+            if @coti != nil
+                format.json { render json: result }
+                @coti.estado="Aprobado"
+                @reque.estado="Ordenado"
+                @coti.save
+                @reque.save
+            else
+                format.json { render json: @cotizacion.errors.full_messages, status: :unprocessable_entity }
+            end
+        end
+
+
+    end 
+
  #   private
   #  def set_requesicion
    #     @requesicion = Requesicion.find(params[:id])

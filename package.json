@@ -10,7 +10,7 @@
     "esbuild": "^0.14.36",
     "jquery": "^3.6.0",
     "popper.js": "^1.16.1",
-    "sass": "^1.51.0"
+    "sass": "^1.52.1"
   },
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds",

@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Linea requesicions</h1>
+
+<div id="linea_requesicions">
+  <% @linea_requesicions.each do |linea_requesicion| %>
+    <%= render linea_requesicion %>
+    <p>
+      <%= link_to "Show this linea requesicion", linea_requesicion %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New linea requesicion", new_linea_requesicion_path %>

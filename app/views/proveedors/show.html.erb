@@ -1,11 +1,8 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @proveedor, usuario:@usuario %>
+<%= render @proveedor, usuario:@usuario, tipoProducto:@TipoProducto %>
 
 <div>
-  <%= link_to "Edit this proveedor", edit_proveedor_path(@proveedor) %> |
-  <%= link_to "Back to proveedors", proveedors_path %>
-
-  <%= button_to "Destroy this proveedor", @proveedor, method: :delete %>
+<%= link_to  "Regresar", proveedors_path ,class:'btn btn-primary'%>
   
 </div>

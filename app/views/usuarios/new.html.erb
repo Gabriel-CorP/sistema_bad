@@ -1,0 +1,13 @@
+<div class="card mt-s">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <h3 class="text text-secondary">Nuevo Usuario</h3>
+  </div>
+
+  <!-- dentro del archivo q renderise debera venir el card body-->
+  <% content_for :boton do %>
+    <%= link_to  "Regresar", usuarios_path ,class:'btn btn-primary'%>
+  <% end %> 
+
+<%= render "form", usuario: @usuario , users:@users , rols:@rols %>
+
+

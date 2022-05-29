@@ -1,0 +1,192 @@
+<div class="container ">
+
+
+  <div class="card-body shadow-lg">
+    <%= form_with(model: @proveedor ,url: crearProveedor_path,id:"formulario")  do |form| %>
+    <div class="form-group row mb-3">
+      <% if proveedor.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(proveedor.errors.count, "error") %> No se puede continuar por los siguientes errores:</h2>
+
+        <ul>
+          <% proveedor.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+      <% end %>
+    </div>
+
+
+    <div class="form-group row mb-3" style="display:none">
+      <%= form.label 'Usuario ', class:'col-sm-2 ' %>
+      <div class="col-sm-4">
+      <%= form.text_field :usuario_id ,class:"form-control" ,:value =>  @id %>
+
+      </div>
+
+    </div>
+
+    <div class="form-group row  mb-3 ">
+      <%= form.label :compania, class:'col-sm-2', style: "display: block"   %>
+      <div class="col-sm-4">
+        <%= form.text_field :compania ,id:"compania" ,class:"form-control" %>
+        <p></p>
+      </div>
+
+    </div>
+
+    <div class="form-group row  mb-3 ">
+      <%= form.label 'Tipo de producto que comercializa', class:'col-sm-2', style: "display: block"   %>
+      <div class="col-sm-4">
+        <%= form.collection_select :tipo_producto_id,@tiposProductos,"id","nombre",:selected => :id ,class:'form-select'   %>
+        <p></p>
+      </div>
+
+    </div>
+
+
+
+    <div class="form-group row mb-3">
+      <%= form.label :representante_legal,class:'col-sm-2', style: "display: block" %>
+      <div class="col-sm-4">
+        <%= form.text_field :representante_legal, id:"representante", class:'form-control' %>
+        <p></p>
+      </div>
+
+    </div>
+
+    <div class="form-group row mb-3">
+      <%= form.label :direccion,class:'col-sm-2', style: "display: block" %>
+      <div class="col-sm-4">
+        <%= form.text_field :direccion, class:'form-control', id:"direccion" %>
+        <p></p>
+      </div>
+
+    </div>
+
+    <div class="form-group row mb-3">
+      <%= form.label :telefono,class:'col-sm-2', style: "display: block" %>
+      <div class="col-sm-4">
+        <%= form.text_field :telefono, class:'form-control' , id:"telefono" %>
+        <p></p>
+      </div>
+
+    </div>
+
+    <div class="form-group row mb-3">
+      <%= form.label :fax,class:'col-sm-2', style: "display: block" %>
+      <div class="col-sm-4">
+        <%= form.text_field :fax, class:'form-control' , id:"fax"%>
+        <p></p>
+      </div>
+
+    </div>
+
+    <div class="form-group row mb-3">
+      <%= form.label :celular,class:'col-sm-2', style: "display: block" %>
+      <div class="col-sm-4">
+        <%= form.text_field :celular, class:'form-control' , id:"celular" %>
+        <p></p>
+      </div>
+
+    </div>
+
+    <div class="form-group row mb-3">
+      <%= form.label :nombre_contacto,class:'col-sm-2', style: "display: block" %>
+      <div class="col-sm-4">
+        <%= form.text_field :nombre_contacto, class:'form-control', id:"nombre_contacto" %>
+        <p></p>
+      </div>
+
+    </div>
+
+    <div class="form-group row mb-3">
+      <%= form.label :web_site,class:'col-sm-2', style: "display: block" %>
+      <div class="col-sm-4">
+        <%= form.text_field :web_site, class:'form-control' , id:"webSite" %>
+        <p></p>
+      </div>
+
+    </div>
+
+    <div class="form-group row mb-3">
+      <%= form.label :nrc,class:'col-sm-2', style: "display: block" %>
+      <div class="col-sm-4">
+        <%= form.text_field :nrc, class:'form-control' , id:"nrc" %>
+        <p></p>
+      </div>
+
+    </div>
+
+    <div class="form-group row mb-3">
+      <%= form.label :anios,class:'col-sm-2', style: "display: block" %>
+      <div class="col-sm-4">
+        <%= form.text_field :anios, class:'form-control' , id:"anios"%>
+        <p></p>
+      </div>
+
+    </div>
+
+    <div class="form-group row mb-3">
+      <%= form.label :rubro,class:'col-sm-2', style: "display: block" %>
+      <div class="col-sm-4">
+        <%= form.text_field :rubro, class:'form-control', id:"rubro" %>
+        <p></p>
+      </div>
+
+    </div>
+
+    <div class="form-group row mb-3">
+      <%= form.label :logo,class:'col-sm-2', style: "display: block" %>
+      <div class="col-sm-4">
+        <%= form.file_field :logo, class:'form-control'  %>
+        <p></p>
+      </div>
+
+    </div>
+
+    <div class="form-group row mb-3">
+      <%= form.label :escritura_constitucion,class:'col-sm-2', style: "display: block" %>
+      <div class="col-sm-4">
+        <%= form.file_field :escritura, class:'form-control ' %>
+        <p></p>
+      </div>
+
+    </div>
+
+
+    
+
+  </div>
+
+  <button type="submit" name="button" class='btn btn-primary'>
+    <span>Guardar</span>
+  </button>
+
+  <%= yield(:boton) %>
+
+  <% end %>
+</div>
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+<script>
+  $('form').on('click', '.remove_fields', function (event) {
+    console.log('clicked')
+    $(this).prev('input[type=hidden]').val('1');
+    $(this).closest('fieldset').hide();
+    return event.preventDefault();
+  });
+
+
+  $('form').on('click', '.add_fields', function (event) {
+    console.log('click');
+    var regexp, time;
+    time = new Date().getTime();
+    regexp = new RegExp($(this).data('id'), 'g');
+    $(this).before($(this).data('fields').replace(regexp, time));
+    return event.preventDefault();
+  });
+</script>

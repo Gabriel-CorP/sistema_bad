@@ -13,4 +13,8 @@ module ApplicationHelper
         #aqui se para el link de los campos para el form
         link_to(name, '#',class: 'add_fields', data:{id: id , fields: fields.gsub("\n","")})
     end
+
+    
+    
+    
 end

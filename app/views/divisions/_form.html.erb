@@ -1,0 +1,35 @@
+<div class="container ">
+
+<div class="card-body shadow-lg">
+  <%= form_with(model: division) do |form| %>
+    <div class="form-group row mb-3">
+      <% if division.errors.any? %>
+        <div style="color: red">
+          <h2><%= pluralize(division.errors.count, "error") %> No se puede continuar por los siguientes errores:</h2>
+
+          <ul>
+            <% division.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+    </div>
+    
+    
+    <%= render 'personas', f:form%>
+    
+    
+    
+
+</div>
+    <button type="submit" name="button" class='btn btn-primary'>
+      <span>Guardar</span>
+    </button>
+
+    <%= yield(:boton) %>
+
+    
+  <% end %>
+ 
+</div>

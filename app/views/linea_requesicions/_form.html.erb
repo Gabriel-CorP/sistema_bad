@@ -1,0 +1,17 @@
+<%= form_with(model: linea_requesicion) do |form| %>
+  <% if linea_requesicion.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(linea_requesicion.errors.count, "error") %> prohibited this linea_requesicion from being saved:</h2>
+
+      <ul>
+        <% linea_requesicion.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
