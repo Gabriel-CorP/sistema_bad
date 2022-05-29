@@ -5,7 +5,7 @@
     <div class="form-group row mb-3">
       <% if division.errors.any? %>
         <div style="color: red">
-          <h2><%= pluralize(division.errors.count, "error") %> prohibited this division_administrativa from being saved:</h2>
+          <h2><%= pluralize(division.errors.count, "error") %> No se puede continuar por los siguientes errores:</h2>
 
           <ul>
             <% division.errors.each do |error| %>

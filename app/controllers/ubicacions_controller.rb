@@ -48,6 +48,7 @@ class UbicacionsController < ApplicationController
 
   # PATCH/PUT /ubicacions/1 or /ubicacions/1.json
   def update
+    @proveedors=Proveedor.all
     respond_to do |format|
       if @ubicacion.update(ubicacion_params)
         format.html { redirect_to ubicacion_url(@ubicacion), notice: "Ubicacion was successfully updated." }

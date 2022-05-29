@@ -24,7 +24,7 @@ class ReferencesController < ApplicationController
   # POST /referencia_proveedors or /referencia_proveedors.json
   def create
     @reference = Reference.new(reference_params)
-
+    @proveedors= Proveedor.all
     respond_to do |format|
       if @reference.save
         format.html { redirect_to reference_url(@reference), notice: "La referencia al proveedor a sido creada." }
@@ -38,6 +38,7 @@ class ReferencesController < ApplicationController
 
   # PATCH/PUT /referencia_proveedors/1 or /referencia_proveedors/1.json
   def update
+    @proveedors= Proveedor.all
     respond_to do |format|
       if @reference.update(reference_params)
         format.html { redirect_to reference_url(@reference), notice: "La referencia a sido actualizada." }

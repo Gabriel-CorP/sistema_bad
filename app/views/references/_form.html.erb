@@ -4,7 +4,7 @@
           <div class="form-group row mb-3">
             <% if reference.errors.any? %>
               <div style="color: red">
-                <h2><%= pluralize(reference.errors.count, "error") %> prohibited this referencia from being saved:</h2>
+                <h2><%= pluralize(reference.errors.count, "error") %> No se puede continuar por los siguientes errores:</h2>
 
                 <ul>
                   <% reference.errors.each do |error| %>

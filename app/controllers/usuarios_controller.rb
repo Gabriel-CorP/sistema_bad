@@ -1,6 +1,6 @@
 class UsuariosController < ApplicationController
     before_action :set_usuario, only: %i[ show edit update destroy ]
-
+    @ide=0
   # GET /usuarios or /usuarios.json
   def index
     @usuarios = Usuario.all
@@ -75,24 +75,30 @@ class UsuariosController < ApplicationController
   end
 
   def nuevoProveedor
+    @id=params[:usuario_id]
     @proveedor = Proveedor.new
     @tiposProductos=TipoProducto.all()
-    @id=params[:usuario_id]
+    
     @usuarioNombre=(Usuario.find(@id)).nombre
     render :nuevoProveedor
   end
 
   def crearProveedor
     @proveedor = Proveedor.new(proveedor_params)
-      @usuario=Usuario.where.not(rol_id: 1).or(Usuario.where(id:@proveedor.usuario_id))
+    #@usuario=Usuario.where(id: proveedor_params["usuario_id"])
+    #puts(proveedor_params["usuario_id"])
+    @id=proveedor_params["usuario_id"]
+    @usuarioNombre=(Usuario.find(@id)).nombre
+    @tiposProductos=TipoProducto.all()
+      
       
       respond_to do |format|
         if @proveedor.save
           format.html { redirect_to nuevaUbicacion_path(@proveedor), notice: "El Proveedor a sido creado." }
           #format.json { render :show, status: :created, location: @proveedor }
         else
-          format.html { render :new, status: :unprocessable_entity }
-          format.json { render json: @proveedor.errors, status: :unprocessable_entity }
+          format.html { render :nuevoProveedor, status: :unprocessable_entity,:locals => { :usuario => @usuario , :id => @id } }
+          #format.json { render json: @proveedor.errors, status: :unprocessable_entity }
         end
       end
   end
@@ -109,15 +115,17 @@ class UsuariosController < ApplicationController
     @parametros=ubicacion_params
     #@proveedors=Proveedor.all
     @proveedor=Proveedor.find(@parametros["proveedor_id"])
+    @id=ubicacion_params["proveedor_id"]
+    @proveedorNombre=(Proveedor.find(@id)).compania
     
 
     respond_to do |format|
       if @ubicacion.save
         format.html { redirect_to nuevaReferencia_path(@proveedor), notice: "Ubicacion was successfully created." }
-        format.json { render :show, status: :created, location: @ubicacion }
+        #format.json { render :show, status: :created, location: @ubicacion }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @ubicacion.errors, status: :unprocessable_entity }
+        format.html { render :nuevaUbicacion, status: :unprocessable_entity ,:locals => {  :id => @id }}
+        #format.json { render json: @ubicacion.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -125,7 +133,7 @@ class UsuariosController < ApplicationController
   def nuevaReferencia
     puts(params)
     @id=params[:proveedor_id]
-    @referencia=Reference.new
+    @reference=Reference.new
     @proveedorNombre=(Proveedor.find(@id)).compania
     render :nuevaReferencia
   end
@@ -135,13 +143,15 @@ class UsuariosController < ApplicationController
     @parametros=reference_params
     @proveedor=Proveedor.find(@parametros["proveedor_id"])
     @usuario=Usuario.find(@proveedor.usuario_id)
+    @id=reference_params["proveedor_id"]
+    @proveedorNombre=(Proveedor.find(@id)).compania
     respond_to do |format|
       if @reference.save
         format.html { redirect_to usuario_url(@usuario), notice: "Perfil de proveedor creado." }
         #format.json { render :show, status: :created, location: @reference }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @reference.errors, status: :unprocessable_entity }
+        format.html { render :nuevaReferencia, status: :unprocessable_entity,:locals => {  :id => @id } }
+        #format.json { render json: @reference.errors, status: :unprocessable_entity }
       end
     end
   end

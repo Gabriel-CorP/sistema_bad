@@ -31,7 +31,8 @@ class DivisionsController < ApplicationController
   # POST /division_administrativas or /division_administrativas.json
   def create
     @division = Division.new(division_params)
-
+    @proveedores=Proveedor.all
+    @cargos=Cargo.all
     respond_to do |format|
       if @division.save
         format.html { redirect_to division_url(@division), notice: "Division administrativa a sido creada." }
@@ -45,6 +46,8 @@ class DivisionsController < ApplicationController
 
   # PATCH/PUT /division_administrativas/1 or /division_administrativas/1.json
   def update
+    @proveedores=Proveedor.all
+    @cargos=Cargo.all
     respond_to do |format|
       if @division.update(division_params)
         format.html { redirect_to division_url(@division), notice: "Division administrativa a sido actualizada." }
