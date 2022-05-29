@@ -36,8 +36,8 @@ class ProveedorsController < ApplicationController
     # POST /proveedors or /proveedors.json
     def create
       @proveedor = Proveedor.new(proveedor_params)
-      @usuario=Usuario.where.not(rol_id: 1).or(Usuario.where(id:@proveedor.usuario_id))
-      
+      @usuario=Usuario.where(rol_id: 1).merge(Usuario.where.not(:id=>Proveedor.pluck(:usuario_id))).or(Usuario.where(id:@proveedor.usuario_id))
+      @tiposProductos=TipoProducto.all()
       respond_to do |format|
         if @proveedor.save
           format.html { redirect_to proveedor_url(@proveedor), notice: "El Proveedor a sido creado." }
@@ -51,6 +51,8 @@ class ProveedorsController < ApplicationController
   
     # PATCH/PUT /proveedors/1 or /proveedors/1.json
     def update
+      @usuario=Usuario.where(rol_id: 1).merge(Usuario.where.not(:id=>Proveedor.pluck(:usuario_id))).or(Usuario.where(id:@proveedor.usuario_id))
+      @tiposProductos=TipoProducto.all()
       respond_to do |format|
         if @proveedor.update(proveedor_params)
           format.html { redirect_to proveedor_url(@proveedor), notice: "Proveedor actualizado correctamente." }
