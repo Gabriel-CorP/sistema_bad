@@ -38,7 +38,8 @@ Rails.application.routes.draw do
   post 'guardar_cotizacion/:id', to: 'cotizacions#create'
   post 'guardar_linea_cotizacion', to: 'cotizacions#lineas_cotizacion'
   post 'aprobar_cotizacion', to: 'cotizacions#aprobar'
-  
+  get 'reporte/prod_ordenados', to: 'reporg#productos_ordenados'      #reporte por productos ordenados
+  get 'reporte/compras_categorias', to: 'reporg#compras_categorias'   #Reporte de montos de compra por categorias
 
 
 end

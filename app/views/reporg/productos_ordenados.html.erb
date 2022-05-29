@@ -1,0 +1,34 @@
+<div class="card-header d-flex justify-content-between align-items-center">
+  <h1>Reporte por productos ordenados</h1>
+  
+      
+</div>
+
+<table class="table table-responsive table-bordered">
+  <thead>
+    <tr>
+      <th>Producto</th>
+      <th>Cantidad Ordenado</th>
+      
+    </tr>
+  </thead>
+   <tbody>
+   
+    <% @array.each do |l| %>
+        
+        <tr>
+          <td>
+            <%=  l[1] + " " + l[2] %>
+          </td>
+          <td>
+            <%=  l[3] %>
+          </td>
+        
+            
+      </tr>
+        
+     
+    <%end %>
+      
+  </tbody>
+</table>

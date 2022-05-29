@@ -1,6 +1,6 @@
 class ReporgController < ApplicationController
     def productos_ordenados
-        sql="SELECT p.id, p.nombre, p.presentacion,lr.cantidad, SUM(lr.cantidad)
+        sql="SELECT p.id, p.nombre, p.presentacion, SUM(lr.cantidad)
         FROM cotizacions AS c INNER JOIN linea_cotizacions AS lc
         INNER JOIN linea_requesicions lr INNER JOIN productos p
         WHERE p.id =lr.producto_id AND lr.id=lc.linea_requesicion_id 
