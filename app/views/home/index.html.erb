@@ -1,3 +1,8 @@
-<h1>Prueba</h1>
-<p>Ay bicom so nom, ai quen fil yu der </p>
+<%if user_signed_in?%>
+    <h1>Bienvenido <%= current_user.email %> </h1>
+<%else%>
+    <h1>Prueba</h1>
+    <p>Ay bicom so nom, ai quen fil yu der </p>
+<%end%>
 
+ 

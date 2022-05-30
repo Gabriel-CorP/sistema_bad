@@ -138,6 +138,13 @@
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                             Tables
                         </a>
+                        <% if user_signed_in? %>
+                            <%= button_to "Cerrar Sesión", destroy_user_session_path, method: :delete,  
+                            class: "sb-nav-link-icon fas fa-table"%>
+                        <%else%>
+                        <%= button_to "Iniciar Sesión", new_user_session_path, 
+                            class: "sb-nav-link-icon fas fa-table"%>
+                        <%end%>
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
@@ -148,6 +155,10 @@
         </div>
         <div id="layoutSidenav_content">
             <main>
+                <p class="notice"><%= notice %></p>
+                <p class="alert"><%= alert %></p>
+
+                
 
                 <%= yield %>
             </main>
