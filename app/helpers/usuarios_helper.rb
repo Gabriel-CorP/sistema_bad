@@ -5,7 +5,7 @@ module UsuariosHelper
     end
 
     def buscarUser(id)
-        (User.find(id)).user
+        (User.find(id)).email
     end
 
     def validarRol(id)

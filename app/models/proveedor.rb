@@ -43,7 +43,7 @@ class Proveedor < ApplicationRecord
   validates :anios,numericality: { only_integer: true ,:message => "Solo se admiten numeros en los años"} 
   validates :anios ,numericality: { less_than: 130 ,:message => "Solo se admiten años menores a 130" }
   #validaciones para rubro
-  validates_presence_of :rubro, presence: true,:message => "->El rubro no puede estar vacio"
+  #validates_presence_of :rubro, presence: true,:message => "->El rubro no puede estar vacio"
   #validaciones para logo
   validates_presence_of :logo, presence: false,:message => "->El archivo de logo puede estar vacio"
   #validaciones para escritura

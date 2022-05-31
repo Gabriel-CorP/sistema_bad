@@ -19,7 +19,7 @@
       <div class="form-group row mb-3">
       <%= form.label 'User asignado ', class:'col-sm-2 ' %>
       <div class="col-sm-4">
-        <%= form.collection_select :user_id,@users,"id","user"   %>
+        <%= form.collection_select :user,@users,"id","email"   %>
       </div>
     </div>
 

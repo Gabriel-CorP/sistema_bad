@@ -14,13 +14,13 @@ class UsuariosController < ApplicationController
   # GET /usuarios/new
   def new
     @usuario = Usuario.new
-    @users=User.where.not(:id=>Usuario.pluck(:user_id))
+    @users=User.where.not(:id=>Usuario.pluck(:user))
     @rols=Rol.all
   end
 
   # GET /usuarios/1/edit
   def edit
-    @users=User.where.not(:id=>Usuario.pluck(:user_id)).or(User.where(id:@usuario.user_id))
+    @users=User.where.not(:id=>Usuario.pluck(:user)).or(User.where(id:@usuario.user))
     @rols=Rol.all
     
   end
@@ -28,7 +28,7 @@ class UsuariosController < ApplicationController
   # POST /usuarios or /usuarios.json
   def create
     @usuario = Usuario.new(usuario_params)
-    @users=User.where.not(:id=>Usuario.pluck(:user_id))
+    @users=User.where.not(:id=>Usuario.pluck(:user))
     @rols=Rol.all
     @parametros=usuario_params
     puts(@parametros["rol_id"]=="1")
@@ -51,7 +51,7 @@ class UsuariosController < ApplicationController
 
   # PATCH/PUT /usuarios/1 or /usuarios/1.json
   def update
-    @users=User.where.not(:id=>Usuario.pluck(:user_id)).or(User.where(id:@usuario.user_id))
+    @users=User.where.not(:id=>Usuario.pluck(:user)).or(User.where(id:@usuario.user))
     @rols=Rol.all
     respond_to do |format|
       if @usuario.update(usuario_params)
@@ -177,6 +177,6 @@ class UsuariosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def usuario_params
-      params.require(:usuario).permit( :nombre, :apellido, :edad, :dui, :isss, :afp, :user_id, :rol_id)
+      params.require(:usuario).permit( :nombre, :apellido, :edad, :dui, :isss, :afp, :user, :rol_id)
     end
 end

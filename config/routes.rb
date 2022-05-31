@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   post 'crearUbicacion' , to:'usuarios#crearUbicacion',:as =>'crearUbicacion'
   get 'referencia/:proveedor_id' , to:'usuarios#nuevaReferencia',:as =>'nuevaReferencia'
   post 'crearReferencia' , to:'usuarios#crearReferencia',:as =>'crearReferencia'
-
+  get 'proveedores/reporte' , to:'proveedors#reporte', :as => 'reporteProveedores'
 
 
 
