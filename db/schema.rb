@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_30_204337) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_29_204335) do
   create_table "active_storage_attachments", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -144,8 +144,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_30_204337) do
     t.string "img_ubicacion_sucursales"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "tipo_producto_id", null: false
-    t.index ["tipo_producto_id"], name: "index_proveedors_on_tipo_producto_id"
     t.index ["usuario_id"], name: "index_proveedors_on_usuario_id"
   end
 
@@ -244,7 +242,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_30_204337) do
   add_foreign_key "linea_requesicions", "requesicions"
   add_foreign_key "permisos", "rols"
   add_foreign_key "productos", "tipo_productos"
-  add_foreign_key "proveedors", "tipo_productos"
   add_foreign_key "proveedors", "usuarios"
   add_foreign_key "references", "proveedors"
   add_foreign_key "requesicions", "usuarios"
