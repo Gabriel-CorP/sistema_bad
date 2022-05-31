@@ -34,6 +34,7 @@ gem "jbuilder"
 # gem "redis", "~> 4.0"
 
 gem "devise"
+gem "cancan"
 
 gem "mini_magick", "~>4.8" #aunq instalo la 4.11.0
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]

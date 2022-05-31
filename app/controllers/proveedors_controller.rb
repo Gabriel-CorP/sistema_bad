@@ -14,12 +14,16 @@ class ProveedorsController < ApplicationController
   
     # GET /proveedors/new
     def new
-      @proveedor = Proveedor.new
+      if(can? :create, :all)
+        @proveedor = Proveedor.new
       #2.times {@proveedor.ubicacions.build}
       #@proveedor.ubicacions.build
        #filtrando para que los proveedores que ya estan en la tabla proveedores no salgan en el combo box
-      @usuario=Usuario.where(rol_id: 1).merge(Usuario.where.not(:id=>Proveedor.pluck(:usuario_id)))
-      @tiposProductos=TipoProducto.all()
+        @usuario=Usuario.where(rol_id: 1).merge(Usuario.where.not(:id=>Proveedor.pluck(:usuario_id)))
+        @tiposProductos=TipoProducto.all()
+      else
+        redirect_to "/ubicacions"
+      end
     end
   
     # GET /proveedors/1/edit

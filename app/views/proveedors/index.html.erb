@@ -1,7 +1,9 @@
 <p style="color: green"><%= notice %></p>
 <div class="card-header d-flex justify-content-between align-items-center">
   <h1>Proveedores</h1>
-  <%= link_to "Nuevo proveedor" , new_proveedor_path,  class:"btn btn-primary btn-sm  " %>
+  <%if can? :create, :all %>
+    <%= link_to "Nuevo proveedor" , new_proveedor_path,  class:"btn btn-primary btn-sm  " %>
+  <%end%>
 </div>
 <br>
 

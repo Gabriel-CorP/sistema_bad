@@ -1,5 +1,6 @@
 class CotizacionsController < ApplicationController
   #  before_action :set_requesicion, only: [ :create ]
+  before_action :authenticate_user!
     def index
         @proveedor=Proveedor.find(1)
         @requesicions=Requesicion.where("estado= 'Pendiente' or estado= 'Cotizado'")
@@ -12,6 +13,7 @@ class CotizacionsController < ApplicationController
                            
            end
         end
+        render :new
       #  @reques=Requesicion.joins(:usuario).where(usuario_id:)
     end
 
