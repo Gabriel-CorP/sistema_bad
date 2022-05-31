@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_29_204335) do
+ActiveRecord::Schema[7.0].define(version: 3022_05_03_170543) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_spanish_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -170,6 +170,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_29_204335) do
     t.index ["usuario_id"], name: "index_requesicions_on_usuario_id"
   end
 
+  create_table "rol_permisos", charset: "utf8mb4", collation: "utf8mb4_spanish_ci", force: :cascade do |t|
+    t.bigint "rol_id", null: false
+    t.bigint "permiso_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["permiso_id"], name: "index_rol_permisos_on_permiso_id"
+    t.index ["rol_id"], name: "index_rol_permisos_on_rol_id"
+  end
+
   create_table "rols", charset: "utf8mb4", collation: "utf8mb4_spanish_ci", force: :cascade do |t|
     t.string "rol"
     t.datetime "created_at", null: false
@@ -210,7 +219,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_29_204335) do
     t.string "dui"
     t.string "isss"
     t.string "afp"
-    t.bigint "user", null: false
+    t.bigint "user_id", null: false
     t.bigint "rol_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
