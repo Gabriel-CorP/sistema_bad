@@ -15,7 +15,7 @@ class RequesicionsController < ApplicationController
   # GET /requesicions/new
   def new
     @requesicion = Requesicion.new
-    # @requesicion = Requesicion.create(usuario_id: 1)
+    # @requesicion = Requesicion.create()
     # @usuario = Usuario.where(usuario_id: usuario_id)
     # redirect_to edit_requesicion_path(@requesicion)
   end

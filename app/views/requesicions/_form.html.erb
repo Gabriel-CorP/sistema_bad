@@ -11,45 +11,87 @@
         </ul>
       </div>
     <% end %>
-    <div>
-      
-    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <%= form.label 'Prioridad:'%>
+            <%= form.select :prioridad, ['Baja','Media','Alta'], class: "form-control" %>
+          </div>
+          <%= form.label 'Fecha de entrega:'%>
+          <%= form.date_field (:fecha_entrega), class: "form-control" %>
+        </div>
 
-    <div>
-      <%= form.label 'Prioridad:'%>
-      <%= form.select :prioridad, ['Baja','Media','Alta'], class: "form-control" %> | 
-      <button type="button" class="btn btn-warning" data-toggle="modal" data-target="buscador-producto" >
-        Agregar Productos
-      </button>
-    </div>
-
-    <div>
-      <%= form.label 'Fecha de entrega:'%>
-      <%= form.date_field (:fecha_entrega), class: "form-control" %>
-    </div>
-
-    <br>
-
-    <div class="table-responsive">
-      <table class="table table-bordered" id="tabla-requesicion" width="90%" cellspacing="0">
-        <colgroup>
-          <col span="1" style="width: 80%;">
-          <col span="1" style="width: 20%;">
-        </colgroup>
-        <thead>
-          <th>Producto</th>
-          <th>Cantidad</th>
-        </thead>
-        <tbody>
+        <div>
           
-          <tr>
-            <td colspan="2">No hay productos registrados</td>
-          </tr>
-          
-        </tbody>
-      </table>
-    </div>
+        </div>
 
+        <br>
+
+        <div class="table-responsive">
+          <table class="table table-bordered" id="tabla-requesicion" width="90%" cellspacing="0">
+            <colgroup>
+              <col span="1" style="width: 80%;">
+              <col span="1" style="width: 20%;">
+            </colgroup>
+            <thead>
+              <th>
+                Producto
+              </th>
+              <th>Cantidad</th>
+            </thead>
+            <tbody>
+
+              <tr>
+                <td colspan="2">No hay productos registrados</td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group d-flex justify-content-between align-items-center">
+          <label for="buscador">Nombre de producto:</label>
+          <input type="text" class="form-control" data-model="<%= @requesicion.id %>" id="buscador_productos" placeholder="Ingrese producto...">
+        </div>
+        <div class="form-group d-flex justify-content-between align-items-center">
+          <label for="buscador">Cantidad:</label>
+          <input type="number" class="form-control" id="cantidad_producto" style="width:200px;" placeholder="Cantidad a solicitar..." value="1" min="0.01" step="0.01">
+        </div>
+        <div style="overflow:hidden; overflow-y: scroll; height: 500px;">
+          <table class="table table-responsive" id="tabla_buscador">
+            <colgroup>
+              <col span="1" style="width: 70%;">
+              <col span="1" style="width: 15%;">
+              <col span="1" style="width: 15%;">
+            </colgroup>
+            <thead style="top: 0; z-index: 2; position: sticky;">
+              <th>Producto</th>
+              <th>Existencia</th>
+              <th>Agregar</th>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+      integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      $("#tabla_buscador tbody").empty();
+      $("#tabla_buscador tbody").append("<tr><td colspan='3'>Ingrese el nombre de producto a buscar... En proceso</td></tr>")
+      $("#buscador_productos").on('input change keyup paste', function() {
+        if ($(this).val().length > 0) {
+          $("#tabla_buscador tbody").empty();
+          $("#tabla_buscador tbody").append("<tr><td colspan='3'>Hola "+$(this).val()+"</td></tr>")
+        } else {
+          $("#tabla_buscador tbody").empty();
+          $("#tabla_buscador tbody").append("<tr><td colspan='3'>¿Cuál es el nombre?</td></tr>")
+        }
+      });
+    </script>
     <br>
     <%= link_to "Finalizar", requesicions_path, class: 'btn btn-success'%>
     <%= link_to "Cancelar", @requesicion, method: :delete, data: { confirm: "¿Cancelar requisición?" }, class: "btn btn-danger"%>
