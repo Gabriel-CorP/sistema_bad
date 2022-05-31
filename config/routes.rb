@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
   
 
-
+  resources :error404
 
   resources :usuarios
   resources :references  

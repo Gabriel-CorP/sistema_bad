@@ -1,0 +1,74 @@
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('1', 'Cargo_Create', 'Da acceso a CREATE a Cargo', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('2', 'Cargo_Read', 'Da acceso a READ a Cargo', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('3', 'Cargo_Update', 'Da acceso a UPDATE a Cargo', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('4', 'Cargo_Delete', 'Da acceso a DELETE a Cargo', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('11', 'Cotizacion_Create', 'Da acceso a CREATE a Cotizacion', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('12', 'Cotizacion_Read', 'Da acceso a READ a Cotizacion', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('13', 'Cotizacion_Update', 'Da acceso a UPDATE a Cotizacion', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('14', 'Cotizacion_Delete', 'Da acceso a DELETE a Cotizacion', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('21', 'Division_Create', 'Da acceso a CREATE a Division', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('22', 'Division_Read', 'Da acceso a READ a Division', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('23', 'Division_Update', 'Da acceso a UPDATE a Division', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('24', 'Division_Delete', 'Da acceso a DELETE a Division', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('31', 'Evaluacion_Create', 'Da acceso a CREATE a Evaluacion', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('32', 'Evaluacion_Read', 'Da acceso a READ a Evaluacion', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('33', 'Evaluacion_Update', 'Da acceso a UPDATE a Evaluacion', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('34', 'Evaluacion_Delete', 'Da acceso a DELETE a Evaluacion', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('41', 'Linea_Cotizacion_Create', 'Da acceso a CREATE a Linea_Cotizacion', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('42', 'Linea_Cotizacion_Read', 'Da acceso a READ a Linea_Cotizacion', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('43', 'Linea_Cotizacion_Update', 'Da acceso a UPDATE a Linea_Cotizacion', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('44', 'Linea_Cotizacion_Delete', 'Da acceso a DELETE a Linea_Cotizacion', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('51', 'Linea_Requesicion_Create', 'Da acceso a CREATE a Linea_Requesicion', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('52', 'Linea_Requesicion_Read', 'Da acceso a READ a Linea_Requesicion', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('53', 'Linea_Requesicion_Update', 'Da acceso a UPDATE a Linea_Requesicion', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('54', 'Linea_Requesicion_Delete', 'Da acceso a DELETE a Linea_Requesicion', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('61', 'Permiso_Create', 'Da acceso a CREATE a Permiso', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('62', 'Permiso_Read', 'Da acceso a READ a Permiso', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('63', 'Permiso_Update', 'Da acceso a UPDATE a Permiso', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('64', 'Permiso_Delete', 'Da acceso a DELETE a Permiso', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('71', 'Producto_Create', 'Da acceso a CREATE a Producto', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('72', 'Producto_Read', 'Da acceso a READ a Producto', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('73', 'Producto_Update', 'Da acceso a UPDATE a Producto', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('74', 'Producto_Delete', 'Da acceso a DELETE a Producto', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('81', 'Proveedor_Create', 'Da acceso a CREATE a Proveedor', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('82', 'Proveedor_Read', 'Da acceso a READ a Proveedor', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('83', 'Proveedor_Update', 'Da acceso a UPDATE a Proveedor', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('84', 'Proveedor_Delete', 'Da acceso a DELETE a Proveedor', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('91', 'Referencia_Create', 'Da acceso a CREATE a Referencia', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('92', 'Referencia_Read', 'Da acceso a READ a Referencia', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('93', 'Referencia_Update', 'Da acceso a UPDATE a Referencia', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('94', 'Referencia_Delete', 'Da acceso a DELETE a Referencia', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('101', 'Requisicion_Create', 'Da acceso a CREATE a Requisicion', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('102', 'Requisicion_Read', 'Da acceso a READ a Requisicion', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('103', 'Requisicion_Update', 'Da acceso a UPDATE a Requisicion', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('104', 'Requisicion_Delete', 'Da acceso a DELETE a Requisicion', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('111', 'Rol_Create', 'Da acceso a CREATE a Rol', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('112', 'Rol_Read', 'Da acceso a READ a Rol', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('113', 'Rol_Update', 'Da acceso a UPDATE a Rol', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('114', 'Rol_Delete', 'Da acceso a DELETE a Rol', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('121', 'Tipo_Producto_Create', 'Da acceso a CREATE a Tipo_Producto', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('122', 'Tipo_Producto_Read', 'Da acceso a READ a Tipo_Producto', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('123', 'Tipo_Producto_Update', 'Da acceso a UPDATE a Tipo_Producto', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('124', 'Tipo_Producto_Delete', 'Da acceso a DELETE a Tipo_Producto', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('131', 'Ubicacion_Create', 'Da acceso a CREATE a Ubicacion', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('132', 'Ubicacion_Read', 'Da acceso a READ a Ubicacion', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('133', 'Ubicacion_Update', 'Da acceso a UPDATE a Ubicacion', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('134', 'Ubicacion_Delete', 'Da acceso a DELETE a Ubicacion', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('141', 'Usuario_Create', 'Da acceso a CREATE a Usuario', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('142', 'Usuario_Read', 'Da acceso a READ a Usuario', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('143', 'Usuario_Update', 'Da acceso a UPDATE a Usuario', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');
+INSERT INTO `permisos` (`id`, `permiso`, `descripcion`, `created_at`, `updated_at`) VALUES ('144', 'Usuario_Delete', 'Da acceso a DELETE a Usuario', '2022-05-31 14:14:49.000000', '2022-05-31 14:14:49.000000');

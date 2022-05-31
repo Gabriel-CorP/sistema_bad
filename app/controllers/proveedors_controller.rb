@@ -22,7 +22,7 @@ class ProveedorsController < ApplicationController
         @usuario=Usuario.where(rol_id: 1).merge(Usuario.where.not(:id=>Proveedor.pluck(:usuario_id)))
         @tiposProductos=TipoProducto.all()
       else
-        redirect_to "/ubicacions"
+        redirect_to "/error404"
       end
     end
   

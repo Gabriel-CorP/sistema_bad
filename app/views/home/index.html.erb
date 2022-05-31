@@ -1,5 +1,15 @@
 <%if user_signed_in?%>
-    <h1>Bienvenido <%= current_user.email %> </h1>
+    <h1>Bienvenido <%= Usuario.find_by(user_id:current_user.id).nombre.split(' ')[0] %> <%= Usuario.find_by(user_id:current_user.id).apellido.split(' ')[0] %></h1>
+
+    <h3> Prueba de roles </h3>
+    <%if(Rol.find(Usuario.find_by(user_id:current_user.id).rol_id).rol == 'god_mode')%>
+    god mode
+    <%else%>
+    <%RolPermiso.where(rol_id: Rol.find(Usuario.find_by(user_id:current_user.id).rol_id)).find_each do |permiso|%>
+    <%=permiso.permiso_id%>
+    <%end%>
+    <%end%>
+
 <%else%>
     <h1>Prueba</h1>
     <p>Ay bicom so nom, ai quen fil yu der </p>

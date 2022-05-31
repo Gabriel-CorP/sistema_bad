@@ -1,6 +1,6 @@
 class Usuario < ApplicationRecord
   belongs_to :user
-  belongs_to :rol
+  belongs_to :lro
   has_one :proveedor , :dependent =>:destroy
   has_many :requesicions
 
