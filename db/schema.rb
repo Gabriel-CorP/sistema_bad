@@ -107,10 +107,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_29_204335) do
 
   create_table "permisos", charset: "utf8mb4", collation: "utf8mb4_spanish_ci", force: :cascade do |t|
     t.string "permiso"
-    t.bigint "rol_id", null: false
+    t.text "descripcion"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["rol_id"], name: "index_permisos_on_rol_id"
   end
 
   create_table "productos", charset: "utf8mb4", collation: "utf8mb4_spanish_ci", force: :cascade do |t|
@@ -241,12 +240,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_29_204335) do
   add_foreign_key "linea_cotizacions", "linea_requesicions"
   add_foreign_key "linea_requesicions", "productos"
   add_foreign_key "linea_requesicions", "requesicions"
-  add_foreign_key "permisos", "rols"
   add_foreign_key "productos", "tipo_productos"
   add_foreign_key "proveedors", "tipo_productos"
   add_foreign_key "proveedors", "usuarios"
   add_foreign_key "references", "proveedors"
   add_foreign_key "requesicions", "usuarios"
+  add_foreign_key "rol_permisos", "permisos"
+  add_foreign_key "rol_permisos", "rols"
   add_foreign_key "ubicacions", "proveedors"
   add_foreign_key "usuarios", "rols"
 end

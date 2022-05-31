@@ -1,7 +1,7 @@
 <p style="color: green"><%= notice %></p>
 <div class="card-header d-flex justify-content-between align-items-center">
 <h1>Usuarios</h1>
-<%if can? :create, :all %>
+<%if can? :create, Usuario %>
   <%= link_to "Nuevo usuario" , new_usuario_path,  class:"btn btn-primary btn-sm  " %>
 <%end%>
 </div>
