@@ -7,7 +7,7 @@ class CreateUsuarios < ActiveRecord::Migration[7.0]
         t.string :dui
         t.string :isss
         t.string :afp
-        t.bigint :user, null: false, foreign_key: true
+        t.bigint :user_id, null: false, foreign_key: true
         t.references :rol, null: false, foreign_key: true
   
         t.timestamps
