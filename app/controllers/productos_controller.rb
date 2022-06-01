@@ -6,6 +6,11 @@ class ProductosController < ApplicationController
     @productos = Producto.all
   end
 
+  def show_image
+    @imagen = Producto.find(params[:id])
+    send_data @imagen.image, :type => 'image/png',:disposition => 'inline'
+  end
+
   # GET /productos/1 or /productos/1.json
   def show
     @tipo_producto = TipoProducto.find(@producto.tipo_producto_id)
@@ -57,6 +62,20 @@ class ProductosController < ApplicationController
     respond_to do |format|
       format.html { redirect_to productos_url, notice: "Producto eliminado." }
       format.json { head :no_content }
+    end
+  end
+
+  def buscador
+    @resultados = Producto.buscador(params[:criterio]).map do |producto|
+      {
+        id: producto.id,
+        nombre: producto.nombre,
+        existencia: producto.existencias
+      }
+    end
+
+    respond_to do |format|
+      format.json { render :json => @resultados }
     end
   end
 
