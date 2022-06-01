@@ -31,11 +31,21 @@ class UsuariosController < ApplicationController
     @users=User.where.not(:id=>Usuario.pluck(:user_id))
     @rols=Rol.all
     @parametros=usuario_params
-    puts(@parametros["rol_id"]=="1")
+    #puts(@parametros["rol_id"]=="1")
     #puts(@usuario[:id])
+    #------------------------------------------
+    @id_del_rol_proveedor=Rol.select(:id).where(["rol=?","proveedor"])
+    @var=0
+    @id_del_rol_proveedor.each do |idProv|
+      @var=idProv.id
+    end
+    puts(@var)
+    #------------------------------------------
+    #puts(@id_del_rol_proveedor.to_s)
     respond_to do |format|
       if @usuario.save
-        if @parametros["rol_id"]=="1"
+        #if @parametros["rol_id"]=="1"
+        if @parametros["rol_id"]==@var.to_s
             format.html { redirect_to proveedorNuevo_path(@usuario), notice: "Usuario was successfully created." }
             format.json { render :nuevoProveedor, status: :created, location: @usuario }
         else

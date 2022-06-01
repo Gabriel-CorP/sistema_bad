@@ -104,13 +104,13 @@ class Ability
           can :delete, Proveedor
         #Referencia
         when 91
-          can :create, Referencia
+          can :create, Reference
         when 92
-          can :read, Referencia
+          can :read, Reference
         when 93
-          can :update, Referencia
+          can :update, Reference
         when 94
-          can :delete, Referencia
+          can :delete, Reference
         #Requisicion
         when 101
           can :create, Requisicion
