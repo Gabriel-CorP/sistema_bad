@@ -2,7 +2,8 @@ class CotizacionsController < ApplicationController
   #  before_action :set_requesicion, only: [ :create ]
   before_action :authenticate_user!
     def index
-        @proveedor=Proveedor.find(1)
+        @usuario=Usuario.where(user: current_user.id)
+        @proveedor=Proveedor.find(@usuario[0].id)
         @requesicions=Requesicion.where("estado= 'Pendiente' or estado= 'Cotizado'")
 
         @cotizaciones=Cotizacion.new
@@ -172,7 +173,7 @@ class CotizacionsController < ApplicationController
 
 
 
-        @usuario_logeado="gabrielcorena@gmail.com"
+        @usuario_logeado=current_user.email #email 
         
         #recibir todos los datos de la cotizacion y crear una cadena o algo así :v para enviarlo
 #creando el email
