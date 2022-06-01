@@ -14,7 +14,7 @@ class CotizacionsController < ApplicationController
                            
            end
         end
-        render :new
+        
       #  @reques=Requesicion.joins(:usuario).where(usuario_id:)
     end
 

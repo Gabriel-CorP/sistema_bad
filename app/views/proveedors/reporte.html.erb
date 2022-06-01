@@ -1,0 +1,42 @@
+<div class="card-header d-flex justify-content-between align-items-center">
+  <h1>Reporte de proveedores</h1>
+</div>
+<br>
+
+<div class="card">
+  <h5 class="card-header">Datos </h5>
+  <div class="card-body">
+    <h5 class="card-title">Cantidad de proveedores registrados : <%=@cantidad_proveedores%></h5>
+  </div>
+</div>
+
+
+<div class="card">
+  <h5 class="card-header">Informacion por años de relacion</h5>
+  <div class="card-body">
+    <%= column_chart @anios_count ,title: "Proveedores con mas años de relacion" ,  ymin: 1, xmax: 130 %>
+  </div>
+</div>
+<div class="card">
+  <h5 class="card-header">Informacion por tipo de producto que el proveedor comercializa</h5>
+  <div class="card-body">
+    <%= column_chart  @tiposProducto_count ,title: "Cantidad de proveedores por tipo de producto"  %>
+  </div>
+</div>
+<div class="card">
+  <h5 class="card-header">Informacion de proveedores con mayor cantidad de surcursales </h5>
+  <div class="card-body">
+    <%= column_chart  @ubicacionesProveedor_count ,title: "Cantidad de sucursales por proveedor"  %>    
+  </div>
+</div>
+<div class="card">
+  <h5 class="card-header">Informacion de proveedores con mayor cantidad cotizaciones </h5>
+  <div class="card-body">
+    <%= column_chart  @cotizaciones_proveedores_count ,title: "Cantidad de cotizaciones a proveedores"  %>    
+  </div>
+</div>
+
+
+
+
+

@@ -1,14 +1,45 @@
 <p style="color: green"><%= notice %></p>
-
-<h1>Productos</h1>
-
-<%= link_to "Agregar producto", new_producto_path, class:"btn btn-primary btn-sm" %>
-
-<div id="productos">
-  <% @productos.each do |producto| %>
-    <%= render producto %>
-    <p>
-      <%= link_to "Mostrar producto", producto %>
-    </p>
-  <% end %>
+<div class="card-header d-flex justify-content-between align-items-center">
+  <h1>Productos</h1>
+  <%= link_to "Agregar producto", new_producto_path, class:"btn btn-primary btn-sm" %>
 </div>
+
+<table id="productos_tabla" class="table table-striped table-responsive table-bordered table-sm">
+  <colgroup>
+    <col span="1" style="width: 8%;">
+    <col span="1" style="width: 50%;">
+    <col span="1" style="width: 15%;">
+    <col span="1" style="width: 15%;">
+    <col span="1" style="width: 12%;">
+  </colgroup>
+  <thead>
+    <th></th>
+    <th>Producto </th>
+    <th>Precio Unitario</th>
+    <th>Existencias</th>
+    <th>Opciones</th>
+  </thead>
+  <tbody>
+    <% @productos.each do |producto| %>
+      <tr>
+        <td style="text-align:center;"><img src="<%= (url_for(producto.imagen)) %>" style="width: 48px; height: 48px;"></td>
+        <td>
+          <strong title="<%= producto.descripcion %>"><%= producto.nombre %></strong>
+          <br>
+          <%= producto.presentacion %>
+        </td>
+        <td style="text-align:right;">$<%= producto.precio %></td>
+        <td style="text-align:right;"><%= producto.existencias %></td>
+        <td>
+          <div class="btn-toolbar" role="toolbar">
+            <div class="btn-group" role="group">
+              <%= button_to image_tag("ojo",width:25,height:25), producto,method: :get, :class=>"btn " ,id:"btn-ver" , :title=>"Ver" %>
+              <%= button_to image_tag("editar"), edit_producto_path(producto),:method=>:get, :class=>"btn " ,id:"btn-edit" ,:title=>"Editar"%>
+              <%= button_to image_tag("trash"), producto, method: :delete ,:class=>"btn " ,id:"btn-ver" ,:title=>"Eliminar" %>
+            </div>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

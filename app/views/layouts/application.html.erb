@@ -12,7 +12,7 @@
     <%= stylesheet_link_tag "styles" %>
     <%= javascript_include_tag "scripts", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "validarForm", "data-turbo-track": "reload" %>
-
+    <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
 
 
 
@@ -66,6 +66,7 @@
                         <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <%= link_to  "Perfil usuarios", usuarios_path ,class:'nav-link'%>
+                                    <%= link_to  "Roles", "/rol" ,class:'nav-link'%>
                                     
                                     <!--Menu de perfiles proveedor-->
                                     <a class="nav-link collapsed" id="linkNavProveedor"href="#" data-bs-toggle="collapse" data-bs-target="#collapseProveedores" aria-expanded="false" aria-controls="collapseProveedores">
@@ -80,7 +81,7 @@
                                             <%= link_to  "Referencias", references_path ,class:'nav-link'%>
                                             <%= link_to  "Division admin", divisions_path ,class:'nav-link'%>
                                             <%= link_to  "Cargos", cargos_path ,class:'nav-link'%>
-                                            
+                                            <%= link_to  "Reporte proveedores", reporteProveedores_path ,class:'nav-link'%>
                                         </nav>
                                     </div>
                                     <!--Fin menu-->

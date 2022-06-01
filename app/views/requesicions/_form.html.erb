@@ -11,45 +11,135 @@
         </ul>
       </div>
     <% end %>
-    <div>
-      
-    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <%= form.label 'Prioridad:'%>
+            <%= form.select :prioridad, ['Baja','Media','Alta'], class: "form-control" %>
+          </div>
+          <%= form.label 'Fecha de entrega:'%>
+          <%= form.date_field (:fecha_entrega), class: "form-control" %>
+        </div>
 
-    <div>
-      <%= form.label 'Prioridad:'%>
-      <%= form.select :prioridad, ['Baja','Media','Alta'], class: "form-control" %> | 
-      <button type="button" class="btn btn-warning" data-toggle="modal" data-target="buscador-producto" >
-        Agregar Productos
-      </button>
-    </div>
-
-    <div>
-      <%= form.label 'Fecha de entrega:'%>
-      <%= form.date_field (:fecha_entrega), class: "form-control" %>
-    </div>
-
-    <br>
-
-    <div class="table-responsive">
-      <table class="table table-bordered" id="tabla-requesicion" width="90%" cellspacing="0">
-        <colgroup>
-          <col span="1" style="width: 80%;">
-          <col span="1" style="width: 20%;">
-        </colgroup>
-        <thead>
-          <th>Producto</th>
-          <th>Cantidad</th>
-        </thead>
-        <tbody>
+        <div>
           
-          <tr>
-            <td colspan="2">No hay productos registrados</td>
-          </tr>
-          
-        </tbody>
-      </table>
-    </div>
+        </div>
 
+        <br>
+
+        <div class="table-responsive">
+          <table class="table table-bordered" id="tabla-requesicion" width="90%" cellspacing="0">
+            <colgroup>
+              <col span="1" style="width: 80%;">
+              <col span="1" style="width: 20%;">
+            </colgroup>
+            <thead>
+              <th>
+                Producto
+              </th>
+              <th>Cantidad</th>
+            </thead>
+            <tbody>
+
+              <tr>
+                <td colspan="2">No hay productos registrados</td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group d-flex justify-content-between align-items-center">
+          <label for="buscador">Nombre de producto:</label>
+          <input type="text" class="form-control" data-model="<%= @requesicion.id %>" id="buscador_productos" placeholder="Ingrese producto...">
+          <button type="button" onclick="document.getElementById('buscador_productos').value=''; cleared();" class="btn btn-danger">X</button>
+        </div>
+        <div class="form-group d-flex justify-content-between align-items-center">
+          <label for="buscador">Cantidad:</label>
+          <input type="number" class="form-control" id="cantidad_producto" style="width:200px;" placeholder="Cantidad a solicitar..." value="1" min="0.01" step="0.01">
+        </div>
+        <div style="overflow:hidden; overflow-y: scroll; height: 500px;">
+          <table class="table table-responsive" id="tabla_buscador">
+            <colgroup>
+              <col span="1" style="width: 70%;">
+              <col span="1" style="width: 15%;">
+              <col span="1" style="width: 15%;">
+            </colgroup>
+            <thead style="top: 0; z-index: 2; position: sticky;">
+              <th>Producto</th>
+              <th>Existencia</th>
+              <th>Agregar</th>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+      integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      $("#tabla_buscador tbody").empty();
+      $("#tabla_buscador tbody").append("<tr><td colspan='3'>Ingrese el nombre de producto a buscar... En proceso</td></tr>");
+      $("#buscador_productos").on('input keyup paste', throttle(function() {
+        let criterio = $("#buscador_productos").val();
+        if (criterio.length > 0) {
+          $("#tabla_buscador tbody").empty();
+          $("#tabla_buscador tbody").append("<tr><td colspan='3'>Buscando "+criterio+"...</td></tr>");
+          request_url = window.location.origin + "/buscador_productos/" + criterio;
+          $.get(request_url, function(data, status){
+            console.log(data.length);
+            if (data.length > 0) {
+              $("#tabla_buscador tbody").empty();
+              for (x in data) {
+                let nombre_producto = data[x].nombre;
+                let existencia = data[x].existencia;
+                let idproducto = data[x].id;
+                nuevaFila = "<tr><td>"+nombre_producto+"</td><td>"+existencia+"</td>"+
+                          "<td><button type='button' class='btn btn-primary' onclick='seleccionarProducto($(idproducto),$(id))'>+</button></td></tr>";
+                $("#tabla_buscador tbody").append(nuevaFila);
+              }
+            } else {
+              $("#tabla_buscador tbody").empty();
+              $("#tabla_buscador tbody").append("<tr><td colspan='3'>No hay productos de nombre '"+criterio+"' registrados.</td></tr>");
+            }
+          });
+        } else {
+          $("#tabla_buscador tbody").empty();
+          $("#tabla_buscador tbody").append("<tr><td colspan='3'>¿Qué producto quiere buscar?</td></tr>");
+        }
+      }, 1000));
+
+      function cleared(){
+        $("#tabla_buscador tbody").empty();
+        $("#tabla_buscador tbody").append("<tr><td colspan='3'>¿Qué producto quiere buscar?</td></tr>");
+      }
+
+      function throttle(fn, threshold, scope) {
+        threshold || (threshhold = 250);
+        var last,
+            deferTimer;
+        return function () {
+          var context = scope || this;
+
+          var now = +new Date,
+              args = arguments;
+          if (last && now < last + threshold) {
+            // hold on to it
+            clearTimeout(deferTimer);
+            deferTimer = setTimeout(function () {
+              last = now;
+              fn.apply(context, args);
+            }, threshold);
+          } else {
+            last = now;
+            fn.apply(context, args);
+          }
+        };
+      }
+    </script>
     <br>
     <%= link_to "Finalizar", requesicions_path, class: 'btn btn-success'%>
     <%= link_to "Cancelar", @requesicion, method: :delete, data: { confirm: "¿Cancelar requisición?" }, class: "btn btn-danger"%>

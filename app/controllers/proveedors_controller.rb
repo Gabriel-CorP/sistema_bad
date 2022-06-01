@@ -5,7 +5,20 @@ class ProveedorsController < ApplicationController
     def index
       @proveedors = Proveedor.all
     end
-  
+    def reporte
+      @cantidad_proveedores=Proveedor.count
+      #@proveedor_mas_longevo=Proveedor.maximum(:anios)
+      #proveedores por años de relacion
+      @anios_count = Proveedor.group(:compania).sum(:anios)
+      #proveedores por tipo de producto
+      @tiposProducto_count =Proveedor.joins(:tipo_producto).group(" tipo_productos.nombre").select("tipo_productos.*, count(proveedors.id) as cuenta_proveedores").collect{|x| [x.nombre, x.cuenta_proveedores]}
+      #Cantidad de hubiaciones por proveedor
+      @ubicacionesProveedor_count =Proveedor.joins(:ubicacions).group(" proveedors.compania").select("proveedors.*, count(ubicacions.id) as cuenta_ubicaciones").collect{|x| [x.compania, x.cuenta_ubicaciones]}
+      #cantidad de cotizaciones a proveedores
+      @cotizaciones_proveedores_count=Proveedor.joins(:cotizacions).group("proveedors.compania").select("cotizacions.*, count(proveedors.id) as cuenta_cotizaciones_proveedores").collect{|x| [x.compania, x.cuenta_cotizaciones_proveedores]}
+
+      render :reporte
+    end
     # GET /proveedors/1 or /proveedors/1.json
     def show
         @usuario = Usuario.find(@proveedor.usuario_id)
@@ -22,7 +35,7 @@ class ProveedorsController < ApplicationController
         @usuario=Usuario.where(rol_id: 1).merge(Usuario.where.not(:id=>Proveedor.pluck(:usuario_id)))
         @tiposProductos=TipoProducto.all()
       else
-        redirect_to "/ubicacions"
+        redirect_to "/error404"
       end
     end
   

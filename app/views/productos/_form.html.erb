@@ -21,11 +21,11 @@
     <%= form.label 'Presentación:' %>
     <%= form.text_field :presentacion, class: 'form-control' %>
     <%= form.label 'Precio:' %>
-    <%= form.number_field :precio, value: '%.2f' % 0 , min: 0, step:0.01, class: 'form-control' %>
+    <%= form.number_field :precio, value: @producto.precio ? number_with_precision(@producto.precio, precision: 2) : nil, min: 0, step:0.01, class: 'form-control' %>
     <%= form.label 'Existencias:' %>
-    <%= form.number_field :existencias, value: '%.2f' % 0, min: 0, step:0.01, class: 'form-control' %>
+    <%= form.number_field :existencias, value: @producto.existencias ? number_with_precision(@producto.existencias, precision: 2) : nil, min: 0, step:0.01, class: 'form-control' %>
     <%= form.label 'Imagen:' %>
-    <%= form.file_field :imagen, class: 'form-control' %>
+    <%= form.file_field :imagen, accept: 'image/png, image/jpeg', class: 'form-control' %>
     </div>
     <br>
     <button type="submit" name="button" class='btn btn-success'>

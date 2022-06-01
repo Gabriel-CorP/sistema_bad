@@ -1,0 +1,42 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Rol</h1>
+<%if can? :update, Rol %>
+  <%= link_to "Modificar datos", permiso_path(@rol) %>
+<%end%>
+<h3><%=@rol.rol%></h3>
+
+
+<%if @rol.id != 1%>
+<table id="permisos_rolTabla" class="table table-striped table-responsive table-bordered table-sm">
+  <thead>
+    <tr>
+      
+      <th>Permiso</th>
+      <th>Descripción</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%@permisos.each do |permiso_rol|%>
+    <tr>
+      <td>
+        <strong><%=  Permiso.find(permiso_rol.permiso_id).permiso %></strong>
+      </td>
+      <td>
+        <strong><%=  Permiso.find(permiso_rol.permiso_id).descripcion %></strong>
+      </td>
+
+    </tr>
+    <%end %>
+
+  </tbody>
+</table>
+
+
+<%end%>
+
+
+
+<div>
+<%= link_to  "Regresar", "/rol" ,class:'btn btn-primary'%> 
+</div>
