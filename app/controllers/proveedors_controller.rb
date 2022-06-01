@@ -32,7 +32,12 @@ class ProveedorsController < ApplicationController
       #2.times {@proveedor.ubicacions.build}
       #@proveedor.ubicacions.build
        #filtrando para que los proveedores que ya estan en la tabla proveedores no salgan en el combo box
-        @usuario=Usuario.where(rol_id: 1).merge(Usuario.where.not(:id=>Proveedor.pluck(:usuario_id)))
+        @id_del_rol_proveedor=Rol.select(:id).where(["rol=?","proveedor"])
+        
+        #@usuarioProveedor=Usuario.where(["rol=?","proveedor"])
+        #puts(@usuarioProveedor)
+        #@usuario=Usuario.where(rol_id: 1).merge(Usuario.where.not(:id=>Proveedor.pluck(:usuario_id)))
+        @usuario=Usuario.where(rol_id: @id_del_rol_proveedor).merge(Usuario.where.not(:id=>Proveedor.pluck(:usuario_id)))
         @tiposProductos=TipoProducto.all()
       else
         redirect_to "/error404"
@@ -43,8 +48,10 @@ class ProveedorsController < ApplicationController
     def edit
         #@usuario = Usuario.find(@proveedor.usuario_id)
         #@usuario=Usuario.where.not(rol_id: 1).or(Usuario.where(id:@proveedor.usuario_id))#mas adelante filtrar mas si se necesita distinguir q no tenga otro rol de momento 1 es proveedor
-        @usuario=Usuario.where(rol_id: 1).merge(Usuario.where.not(:id=>Proveedor.pluck(:usuario_id))).or(Usuario.where(id:@proveedor.usuario_id))
-        puts(@usuario)
+        #@usuario=Usuario.where(rol_id: 1).merge(Usuario.where.not(:id=>Proveedor.pluck(:usuario_id))).or(Usuario.where(id:@proveedor.usuario_id))
+        @id_del_rol_proveedor=Rol.select(:id).where(["rol=?","proveedor"])
+        @usuario=Usuario.where(rol_id: @id_del_rol_proveedor).merge(Usuario.where.not(:id=>Proveedor.pluck(:usuario_id))).or(Usuario.where(id:@proveedor.usuario_id))
+        #puts(@usuario)
         @tiposProductos=TipoProducto.all()
     end
 
@@ -53,7 +60,9 @@ class ProveedorsController < ApplicationController
     # POST /proveedors or /proveedors.json
     def create
       @proveedor = Proveedor.new(proveedor_params)
-      @usuario=Usuario.where(rol_id: 1).merge(Usuario.where.not(:id=>Proveedor.pluck(:usuario_id))).or(Usuario.where(id:@proveedor.usuario_id))
+      #@usuario=Usuario.where(rol_id: 1).merge(Usuario.where.not(:id=>Proveedor.pluck(:usuario_id))).or(Usuario.where(id:@proveedor.usuario_id))
+      @id_del_rol_proveedor=Rol.select(:id).where(["rol=?","proveedor"])
+      @usuario=Usuario.where(rol_id: @id_del_rol_proveedor).merge(Usuario.where.not(:id=>Proveedor.pluck(:usuario_id))).or(Usuario.where(id:@proveedor.usuario_id))
       @tiposProductos=TipoProducto.all()
       respond_to do |format|
         if @proveedor.save
@@ -68,7 +77,9 @@ class ProveedorsController < ApplicationController
   
     # PATCH/PUT /proveedors/1 or /proveedors/1.json
     def update
-      @usuario=Usuario.where(rol_id: 1).merge(Usuario.where.not(:id=>Proveedor.pluck(:usuario_id))).or(Usuario.where(id:@proveedor.usuario_id))
+      #@usuario=Usuario.where(rol_id: 1).merge(Usuario.where.not(:id=>Proveedor.pluck(:usuario_id))).or(Usuario.where(id:@proveedor.usuario_id))
+      @id_del_rol_proveedor=Rol.select(:id).where(["rol=?","proveedor"])
+      @usuario=Usuario.where(rol_id: @id_del_rol_proveedor).merge(Usuario.where.not(:id=>Proveedor.pluck(:usuario_id))).or(Usuario.where(id:@proveedor.usuario_id))
       @tiposProductos=TipoProducto.all()
       respond_to do |format|
         if @proveedor.update(proveedor_params)
