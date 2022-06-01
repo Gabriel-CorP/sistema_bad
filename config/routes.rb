@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
+  get 'permiso/index'
+  get 'rol/index'
+  
   devise_for :views
   devise_for :users
   
-
+  resources :permiso
+  resources :rol
   resources :error404
-
   resources :usuarios
   resources :references  
   resources :divisions

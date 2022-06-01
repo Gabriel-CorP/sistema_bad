@@ -1,0 +1,54 @@
+<h1>Modificar permisos</h1>
+<h3><%= @rol.rol%></h3>
+<br>
+
+
+
+<%=form_with url: "/permiso", method: :post do |f|%>
+
+<table id="permisosTabla" class="table table-striped table-responsive table-bordered table-sm">
+  <thead>
+    <tr>
+      <%=f.hidden_field :idRol, value: @rol.id%>
+      <th>Permiso</th>
+      <th>Descripción</th>
+      <th>Permitir</th>
+    </tr>
+  </thead>
+  <tbody>
+
+  <%cantidad = 0%>
+    <%@allPermisos.each do |permiso|%>
+
+    <tr>
+      <td>
+        <strong><%=  permiso.permiso %></strong>
+      </td>
+      <td>
+        <strong><%=  permiso.descripcion %></strong>
+      </td>
+      <td>
+      <center>
+
+    <%=f.check_box permiso.id, checked: ((RolPermiso.find_by rol_id: @rol.id, permiso_id: permiso.id) != nil) %>
+      
+    
+        
+        
+      </center>
+      </td>
+
+
+    </tr>
+    <%cantidad = cantidad + 1%>
+    <%end %>
+
+  </tbody>
+</table>
+
+<div>
+<%= f.submit  "Guardar", class:'btn btn-primary'%> 
+
+<%= link_to  "Regresar", :back ,class:'btn btn-primary'%> 
+</div>
+<%end%>
