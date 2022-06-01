@@ -54,6 +54,7 @@
         <div class="form-group d-flex justify-content-between align-items-center">
           <label for="buscador">Nombre de producto:</label>
           <input type="text" class="form-control" data-model="<%= @requesicion.id %>" id="buscador_productos" placeholder="Ingrese producto...">
+          <button type="button" onclick="document.getElementById('buscador_productos').value=''; cleared();" class="btn btn-danger">X</button>
         </div>
         <div class="form-group d-flex justify-content-between align-items-center">
           <label for="buscador">Cantidad:</label>
@@ -81,16 +82,63 @@
       integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
     <script type="text/javascript">
       $("#tabla_buscador tbody").empty();
-      $("#tabla_buscador tbody").append("<tr><td colspan='3'>Ingrese el nombre de producto a buscar... En proceso</td></tr>")
-      $("#buscador_productos").on('input change keyup paste', function() {
-        if ($(this).val().length > 0) {
+      $("#tabla_buscador tbody").append("<tr><td colspan='3'>Ingrese el nombre de producto a buscar... En proceso</td></tr>");
+      $("#buscador_productos").on('input keyup paste', throttle(function() {
+        let criterio = $("#buscador_productos").val();
+        if (criterio.length > 0) {
           $("#tabla_buscador tbody").empty();
-          $("#tabla_buscador tbody").append("<tr><td colspan='3'>Hola "+$(this).val()+"</td></tr>")
+          $("#tabla_buscador tbody").append("<tr><td colspan='3'>Buscando "+criterio+"...</td></tr>");
+          request_url = window.location.origin + "/buscador_productos/" + criterio;
+          $.get(request_url, function(data, status){
+            console.log(data.length);
+            if (data.length > 0) {
+              $("#tabla_buscador tbody").empty();
+              for (x in data) {
+                let nombre_producto = data[x].nombre;
+                let existencia = data[x].existencia;
+                let idproducto = data[x].id;
+                nuevaFila = "<tr><td>"+nombre_producto+"</td><td>"+existencia+"</td>"+
+                          "<td><button type='button' class='btn btn-primary' onclick='seleccionarProducto($(idproducto),$(id))'>+</button></td></tr>";
+                $("#tabla_buscador tbody").append(nuevaFila);
+              }
+            } else {
+              $("#tabla_buscador tbody").empty();
+              $("#tabla_buscador tbody").append("<tr><td colspan='3'>No hay productos de nombre '"+criterio+"' registrados.</td></tr>");
+            }
+          });
         } else {
           $("#tabla_buscador tbody").empty();
-          $("#tabla_buscador tbody").append("<tr><td colspan='3'>¿Cuál es el nombre?</td></tr>")
+          $("#tabla_buscador tbody").append("<tr><td colspan='3'>¿Qué producto quiere buscar?</td></tr>");
         }
-      });
+      }, 1000));
+
+      function cleared(){
+        $("#tabla_buscador tbody").empty();
+        $("#tabla_buscador tbody").append("<tr><td colspan='3'>¿Qué producto quiere buscar?</td></tr>");
+      }
+
+      function throttle(fn, threshold, scope) {
+        threshold || (threshhold = 250);
+        var last,
+            deferTimer;
+        return function () {
+          var context = scope || this;
+
+          var now = +new Date,
+              args = arguments;
+          if (last && now < last + threshold) {
+            // hold on to it
+            clearTimeout(deferTimer);
+            deferTimer = setTimeout(function () {
+              last = now;
+              fn.apply(context, args);
+            }, threshold);
+          } else {
+            last = now;
+            fn.apply(context, args);
+          }
+        };
+      }
     </script>
     <br>
     <%= link_to "Finalizar", requesicions_path, class: 'btn btn-success'%>

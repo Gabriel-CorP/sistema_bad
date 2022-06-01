@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   resources :productos
   resources :linea_requesicions, only: [:index]
   resources :requesicions
-  
+  get 'buscador_productos/:criterio', to: 'productos#buscador'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   root to: 'home#index'
   resources :proveedors

@@ -15,6 +15,6 @@ class Producto < ApplicationRecord
     format: { with: /\A\d{1,3}(\.\d{1,2})?\z/ }
 
     def self.buscador(criterio)
-        Producto.where("nombre LIKE ?", "%#{termino}%")
+        Producto.where("nombre LIKE ?", "%#{criterio}%")
     end
 end
