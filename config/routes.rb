@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   post 'crearUbicacion' , to:'usuarios#crearUbicacion',:as =>'crearUbicacion'
   get 'referencia/:proveedor_id' , to:'usuarios#nuevaReferencia',:as =>'nuevaReferencia'
   post 'crearReferencia' , to:'usuarios#crearReferencia',:as =>'crearReferencia'
-
+  get 'proveedores/reporte' , to:'proveedors#reporte', :as => 'reporteProveedores'
 
 
 
@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   resources :productos
   resources :linea_requesicions, only: [:index]
   resources :requesicions
-  
+  get 'buscador_productos/:criterio', to: 'productos#buscador'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   root to: 'home#index'
   resources :proveedors

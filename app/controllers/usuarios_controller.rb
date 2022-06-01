@@ -20,7 +20,7 @@ class UsuariosController < ApplicationController
 
   # GET /usuarios/1/edit
   def edit
-    @users=User.where.not(:id=>Usuario.pluck(:user_id)).or(User.where(id:@usuario.user_id))
+    @users=User.where.not(:id=>Usuario.pluck(:user_id)).or(User.where(id:@usuario.user))
     @rols=Rol.all
     
   end
