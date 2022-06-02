@@ -1,0 +1,2 @@
+module TipoProductoHelper
+end

@@ -1,0 +1,7 @@
+<h1>No hay un usuario asignado</h1>
+
+<h3>Aun no hay un usuario asignado para el correo <%= current_user.email%></h3>
+<br>
+<h3>Por favor, pongase en contacto con administración para que le cree y asigne un usuario</h3>
+<%= button_to "Regresar al Login", destroy_user_session_path, method: :delete, class: "sb-nav-link-icon fas fa-table"%>
+

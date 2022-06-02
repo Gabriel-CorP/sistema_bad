@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
+  get 'no_user/index'
+  get 'tipo_producto/index'
   get 'permiso/index'
   get 'rol/index'
   
   devise_for :views
-  devise_for :users
-  
+  devise_for :users, controllers: { sessions: "users/sessions" }
+  resources :no_user
+  resources :tipo_producto
   resources :permiso
   resources :rol
   resources :error404

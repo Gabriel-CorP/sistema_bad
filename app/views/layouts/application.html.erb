@@ -19,6 +19,7 @@
 </head>
 
 <body class="sb-nav-fixed">
+    <% if user_signed_in? and (Usuario.find_by(user_id: current_user.id) != nil)%>
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
         <a class="navbar-brand ps-3" href="/">Inicio</a>
@@ -50,6 +51,7 @@
             </li>
         </ul>
     </nav>
+    
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
@@ -142,10 +144,9 @@
                         <% if user_signed_in? %>
                             <%= button_to "Cerrar Sesión", destroy_user_session_path, method: :delete,  
                             class: "sb-nav-link-icon fas fa-table"%>
-                        <%else%>
-                        <%= button_to "Iniciar Sesión", new_user_session_path, 
-                            class: "sb-nav-link-icon fas fa-table"%>
-                        <%end%>
+                            <%end%>
+                        
+                        
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
@@ -167,7 +168,12 @@
         </div>
 
     </div>
+    <% else %>
 
+        <h1>Por favor, inicia sesión para ver esta pagina</h1>
+        <%= button_to "Regresar al Login", destroy_user_session_path, method: :delete, class: "sb-nav-link-icon fas fa-table"%>
+    
+    <% end %>
 
 
 

@@ -1,0 +1,44 @@
+<p style="color: green"><%= notice %></p>
+<div class="card-header d-flex justify-content-between align-items-center">
+<h1>Tipos de Productos</h1>
+<%if can? :create, TipoProducto %>
+  <%= link_to "Nuevo Tipo de Producto" ,new_tipo_producto_path,  class:"btn btn-primary btn-sm  " %>
+<%end%>
+</div>
+<br>
+
+
+
+<table id="rolesTabla" class="table table-striped table-responsive table-bordered table-sm">
+  <thead>
+    <tr>
+      
+      <th>Tipo de Producto</th>
+      <th>Opciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @allTipos.each do |tipo| %>
+    <tr>
+      <td>
+        <strong><%=  tipo.nombre %></strong>
+      </td>
+      <td>
+        <div class="btn-toolbar" role="toolbar">
+          <div class="btn-group" role="group">
+            <%if can? :update, TipoProducto %>
+                <%= button_to image_tag("ojo",width:25,height:25), tipo,method: :get, :class=>"btn " ,id:"btn-ver" , :title=>"Ver" %>
+            <%end%>
+            <%if can? :delete, TipoProducto %>
+                <%= button_to image_tag("trash"), tipo, method: :delete ,:class=>"btn " ,id:"btn-ver" ,:title=>"Eliminar" %>
+            <%end%>
+          </div>
+        </div>
+      </td>
+
+
+    </tr>
+    <%end %>
+
+  </tbody>
+</table>

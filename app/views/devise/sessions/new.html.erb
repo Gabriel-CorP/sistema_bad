@@ -1,26 +1,64 @@
-<h2>Iniciar Sesión</h2>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email, "Correo" %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+<head>
+<%= stylesheet_link_tag "signin.css"%>
+<%= stylesheet_link_tag "//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"%>
+<%= stylesheet_link_tag "https://use.fontawesome.com/releases/v5.6.1/css/all.css"%>
+<%= stylesheet_link_tag "https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"%>
 
-  <div class="field">
-    <%= f.label :password, "Contraseña" %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
 
-  <% if devise_mapping.rememberable? %>
+</head>
+<body>
+<div class="container h-100">
+		<div class="d-flex justify-content-center h-100">
+			<div class="user_card">
+      <div class="d-flex justify-content-center">
+					<div class="brand_logo_container">
+						<img src="/assets/logo_uganda_2-f7ed1c300abbffc18880d81423e00bfdf5fcf02ab40e959fe08ae79ed8f86e4b.png" class="brand_logo" alt="Logo">
+					</div>
+				</div>
+        <center>
+        <br>
+        <br>
+        <h4 styles="text-align: left;">¡Conocemos el camino...</h4>
+        <h4 styles="text-align: right;">...a los precios bajos!</h4>
+        </center>
+<center>
+
+<%= form_for(resource, as: resource_name, url: session_path(resource_name), :html => { :class => '' })  do |f|   %>
+            <div class="input-group mb-3 justify-content-center">
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="fas fa-user"></i></span>
+                <%= f.email_field :email, autofocus: true, autocomplete: "email"%>
+							</div>
+						</div>
+            
+            <div class="input-group mb-2 justify-content-center">
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="fas fa-key"></i></span>
+                <%= f.password_field :password, autocomplete: "current-password"%>
+							</div>
+						</div>
+
+
+  <% if devise_mapping.rememberable?%>
     <div class="field">
       <%= f.check_box :remember_me %>
       <%= f.label :remember_me %>
     </div>
   <% end %>
 
-  <div class="actions">
-    <%= f.submit "Ingresar" %>
-  </div>
+<div class="d-flex justify-content-center mt-3 login_container actions">
+				 	
+    <%= f.submit "Ingresar" , :html => { :class => ' btn login_btn' }%>
+  
+				   </div>
+  
 <% end %>
+
+</center>
+</div>
+</div>
+</div>
+</body>
 
 <%= render "devise/shared/links" %>

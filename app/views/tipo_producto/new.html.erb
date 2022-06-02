@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+<div class="card-header d-flex justify-content-between align-items-center">
+<h1>Tipos de Productos</h1>
+</div>
+<h3>Nuevo tipo de producto</h3>
+
+<%=form_with url: "/tipo_producto", method: :post do |f|%>
+
+<%=f.label :nombre, "Nombre del nuevo Tipo de producto:"%>
+<br>
+<%= f.text_field :nombre %>
+<br>
+<%=f.submit "Crear", class:'btn btn-primary'%>
+<%end%>
