@@ -1,7 +1,7 @@
 <p style="color: green"><%= notice %></p>
 <div class="card-header d-flex justify-content-between align-items-center">
   <h1>Division administrativa</h1>
-  <% if can? create, Division %>
+  <% if can? :create, Division %>
   <%= link_to "Nueva division administrativa" , new_division_path,  class:"btn btn-primary btn-sm  " %>
   <%end%>
 </div>
@@ -32,10 +32,10 @@
           <td>
             <div class="btn-toolbar" role="toolbar">
               <div class="btn-group" role="group">
-                <% if can? update, Division %>
+                <% if can? :update, Division %>
                 <%= button_to image_tag("editar"), edit_division_path(division),:method=>:get, :class=>"btn " ,id:"btn-edit" ,:title=>"Editar"%>
                 <%end%>
-                <% if can? destroy, Division %>
+                <% if can? :destroy, Division %>
                 <%= button_to image_tag("trash"), division, method: :delete ,:class=>"btn " ,id:"btn-ver" ,:title=>"Eliminar" %>
                 <%end%>
               </div>
