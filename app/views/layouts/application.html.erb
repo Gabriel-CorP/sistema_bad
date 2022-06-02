@@ -170,8 +170,10 @@
     </div>
     <% else %>
 
+        <div style = "text-align: center;">
         <h1>Por favor, inicia sesión para ver esta pagina</h1>
         <%= button_to "Regresar al Login", destroy_user_session_path, method: :delete, class: "sb-nav-link-icon fas fa-table"%>
+        </div>
     
     <% end %>
 
