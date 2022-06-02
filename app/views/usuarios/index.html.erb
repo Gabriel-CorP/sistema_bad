@@ -29,8 +29,12 @@
         <div class="btn-toolbar" role="toolbar">
           <div class="btn-group" role="group">
             <%= button_to image_tag("ojo",width:25,height:25), usuario,method: :get, :class=>"btn " ,id:"btn-ver" , :title=>"Ver" %>
+            <%if can? :update, Usuario %>
             <%= button_to image_tag("editar"), edit_usuario_path(usuario),:method=>:get, :class=>"btn " ,id:"btn-edit" ,:title=>"Editar"%>
+            <%end%>
+            <%if can? :destroy, Usuario %>
             <%= button_to image_tag("trash"), usuario, method: :delete ,:class=>"btn " ,id:"btn-ver" ,:title=>"Eliminar" %>
+            <%end%>
           </div>
         </div>
       </td>

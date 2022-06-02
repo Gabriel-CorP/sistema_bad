@@ -10,5 +10,6 @@
     </p>
   <% end %>
 </div>
-
+<% if can? :create, LineaRequesicion %>
 <%= link_to "New linea requesicion", new_linea_requesicion_path %>
+<%end%>

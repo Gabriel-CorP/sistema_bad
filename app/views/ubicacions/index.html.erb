@@ -1,7 +1,9 @@
 <p style="color: green"><%= notice %></p>
 <div class="card-header d-flex justify-content-between align-items-center">
   <h1>Ubicaciones</h1>
+  <%if can? :create, Ubicacion %>
   <%= link_to "Nueva ubicacion" , new_ubicacion_path,  class:"btn btn-primary btn-sm  " %>
+  <%end%>
 </div>
 <br>
 
@@ -29,8 +31,12 @@
             <div class="btn-toolbar" role="toolbar">
               <div class="btn-group" role="group">
                 <%= button_to image_tag("ojo",width:25,height:25), ubicacion,method: :get, :class=>"btn " ,id:"btn-ver" , :title=>"Ver" %>
+                <%if can? :update, Ubicacion %>
                 <%= button_to image_tag("editar"), edit_ubicacion_path(ubicacion),:method=>:get, :class=>"btn " ,id:"btn-edit" ,:title=>"Editar"%>
+                <%end%>
+                <%if can? :destroy, Ubicacion %>
                 <%= button_to image_tag("trash"), ubicacion, method: :delete ,:class=>"btn " ,id:"btn-ver" ,:title=>"Eliminar" %>
+                <%end%>
               </div>
             </div>
           </td>

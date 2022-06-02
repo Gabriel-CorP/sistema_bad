@@ -19,6 +19,8 @@
         <center>
         <br>
         <br>
+        <br>
+        <br>
         <h4 styles="text-align: left;">¡Conocemos el camino...</h4>
         <h4 styles="text-align: right;">...a los precios bajos!</h4>
         </center>
@@ -52,13 +54,16 @@
     <%= f.submit "Ingresar" , :html => { :class => ' btn login_btn' }%>
   
 				   </div>
-  
+  <div>
+  <%= render "devise/shared/links" %>
+  </div>
 <% end %>
 
 </center>
 </div>
 </div>
 </div>
+
 </body>
 
-<%= render "devise/shared/links" %>
+

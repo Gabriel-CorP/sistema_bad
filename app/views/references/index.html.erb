@@ -1,7 +1,9 @@
 <p style="color: green"><%= notice %></p>
 <div class="card-header d-flex justify-content-between align-items-center">
   <h1>Referencias</h1>
+  <%if can? :create, Reference %>
   <%= link_to "Nueva referencia" , new_reference_path,  class:"btn btn-primary btn-sm  " %>
+  <%end%>
 </div>
 <br>
 
@@ -26,8 +28,12 @@
             <div class="btn-toolbar" role="toolbar">
               <div class="btn-group" role="group">
                 <%= button_to image_tag("ojo",width:25,height:25), reference,method: :get, :class=>"btn " ,id:"btn-ver" , :title=>"Ver" %>
+                <%if can? :update, Reference %>
                 <%= button_to image_tag("editar"), edit_reference_path(reference),:method=>:get, :class=>"btn " ,id:"btn-edit" ,:title=>"Editar"%>
+                <%end%>
+                <%if can? :destroy, Reference %>
                 <%= button_to image_tag("trash"), reference, method: :delete ,:class=>"btn " ,id:"btn-ver" ,:title=>"Eliminar" %>
+                <%end%>
               </div>
             </div>
           </td>

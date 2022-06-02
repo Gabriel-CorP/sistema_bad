@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get 'rol/index'
   
   devise_for :views
-  devise_for :users, controllers: { sessions: "users/sessions" }
+  devise_for :users, controllers: { sessions: "users/sessions", registrations: "users/registrations" }
   resources :no_user
   resources :tipo_producto
   resources :permiso

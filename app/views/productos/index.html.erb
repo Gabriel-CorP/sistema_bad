@@ -1,7 +1,9 @@
 <p style="color: green"><%= notice %></p>
 <div class="card-header d-flex justify-content-between align-items-center">
   <h1>Productos</h1>
+  <% if can? :create, Producto %>
   <%= link_to "Agregar producto", new_producto_path, class:"btn btn-primary btn-sm" %>
+  <%end%>
 </div>
 
 <table id="productos_tabla" class="table table-striped table-responsive table-bordered table-sm">
@@ -34,8 +36,12 @@
           <div class="btn-toolbar" role="toolbar">
             <div class="btn-group" role="group">
               <%= button_to image_tag("ojo",width:25,height:25), producto,method: :get, :class=>"btn " ,id:"btn-ver" , :title=>"Ver" %>
+              <% if can? :update, Producto %>
               <%= button_to image_tag("editar"), edit_producto_path(producto),:method=>:get, :class=>"btn " ,id:"btn-edit" ,:title=>"Editar"%>
+              <%end%>
+              <% if can? :destroy, Producto %>
               <%= button_to image_tag("trash"), producto, method: :delete ,:class=>"btn " ,id:"btn-ver" ,:title=>"Eliminar" %>
+              <%end%>
             </div>
           </div>
         </td>
