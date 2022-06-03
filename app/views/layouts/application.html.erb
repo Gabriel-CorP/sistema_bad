@@ -105,6 +105,9 @@
                         <%if can? :read, Evaluacion%> 
                             <%= link_to  "Evaluaciones", "/evaluaciones" ,class:'nav-link'%><!--Falta-->
                         <%end%>
+                        <%if can? :read, Requesicion%> 
+                            <%= link_to  "Requisiciones", requesicions_path ,class:'nav-link'%><!--Falta-->
+                        <%end%>
 
 
                         <!--Fin menu-->
@@ -116,7 +119,7 @@
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
-                    <div class="small">Logged in as: <%= Usuario.find_by(user_id:current_user.id).nombre.split(' ')[0] %> <%= Usuario.find_by(user_id:current_user.id).apellido.split(' ')[0] %></div>
+                    <div class="small">Registrado como: <%= Usuario.find_by(user_id:current_user.id).nombre.split(' ')[0] %> <%= Usuario.find_by(user_id:current_user.id).apellido.split(' ')[0] %></div>
                     <% if user_signed_in? %>
                             <%= button_to "Cerrar Sesión", destroy_user_session_path, method: :delete,  
                             class:'nav-link'%>
