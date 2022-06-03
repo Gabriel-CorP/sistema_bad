@@ -31,7 +31,10 @@ class CotizacionsController < ApplicationController
         @reque=Requesicion.find(params[:id])
         @productos=Array.new
         @pros=Array.new
-        @provee= Proveedor.where(usuario_id:@reque.usuario_id)#aquí necesito el id del proveedor(usuario logeado)
+        @usuario=Usuario.find_by(user_id: current_user.id)
+        puts(@usuario.id.to_s + "usuario")
+        @proveedor=Proveedor.where(usuario_id: @usuario.id)#aquí necesito el id del proveedor(usuario logeado)
+        puts(@proveedor[0].id)
         @lineas=LineaRequesicion.joins(:producto).where(requesicion_id: params[:id])
         @lineas.each do |linea|
             @pro=Producto.find(linea.producto_id)
@@ -70,7 +73,7 @@ class CotizacionsController < ApplicationController
             if @cotizacion.save
                 format.json { render json: result }
                 @requesicion.estado="Cotizado"
-                @requesicion.save!
+                @requesicion.save
                 
             else
                 format.json { render json: @cotizacion.errors.full_messages, status: :unprocessable_entity }
@@ -87,7 +90,7 @@ class CotizacionsController < ApplicationController
         @lineacotizacion.cotizacion_id=@coti.id
         @lineacotizacion.precio_unitario=params[:preci].to_f
         @lineacotizacion.subtotal=params[:sub].to_f
-        @lineacotizacion.save!
+        @lineacotizacion.save
         puts(@lineacotizacion.subtotal)
 
         result= {
@@ -177,12 +180,12 @@ class CotizacionsController < ApplicationController
         end
 
 
-
-        @usuario_logeado=current_user.email #email 
+        @usuario=Usuario.find(@provee.usuario_id)
+        @user_proveedor=User.find(@usuario.user_id).email #email 
         
         #recibir todos los datos de la cotizacion y crear una cadena o algo así :v para enviarlo
 #creando el email
-        PostMailer.with(user: @usuario_logeado, contenido: @cotizacionText).post_created.deliver_now
+        PostMailer.with(user: @user_proveedor, contenido: @cotizacionText).post_created.deliver_now
 
         result= {
             mensaje: "Mensaje enviado"

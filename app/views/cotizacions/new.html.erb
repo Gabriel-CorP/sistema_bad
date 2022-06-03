@@ -58,27 +58,14 @@
 
 <div class="container ">
 
-
-  <div class="card-body ">
-    <%= form_for @cotizacion do |form| %>
+<div class="card-body ">
+    <form class="new_cotizacion" id="new_cotizacion" action="/cotizacions" accept-charset="UTF-8" method="post"><input type="hidden" name="authenticity_token" value="vTbJGddAKMvxYYueqLEe43AvsbH9LX8Qc7TpNSz1NEaiLZO81uMkB2U7IVuuQmIBNMoFVgjd63KcxD7vPZ8NhA" autocomplete="off" />
     <%= csrf_meta_tag %>
-      <% if @cotizacion.errors.any? %>
-        <div style="color: red">
-          <h2><%= pluralize(cotizacion.errors.count, "error") %> prohibited this cotizacion from being saved:</h2>
-    
-          <ul>
-            <% cotizacion.errors.each do |error| %>
-              <li><%= error.full_message %></li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
-    
       
       
       <div class="form-group row"> 
        
-        <input class="form-control" value="<%= @provee[0].id %>" autocomplete="off" type="hidden" name="cotizacion[proveedor]" id="cotizacion_proveedor" />
+        <input class="form-control" value="<%= @proveedor[0].id %>" autocomplete="off" type="hidden" name="cotizacion[proveedor]" id="cotizacion_proveedor" />
         
         <div class="col-sm-4">
          
@@ -87,57 +74,57 @@
       </div>
     
       <div class="form-group row">
-        <%= form.label :descuento_efectivo ,class:'col-sm-4', style: "display: block" %>
+        <label class="col-sm-4" style="display: block" for="cotizacion_descuento_efectivo">Descuento efectivo</label>
         <div class="col-sm-4">
-          <%= form.number_field :descuento_efectivo , class:'form-control', step:"0.01", min:"0", max:"1" %>
+          <input class="form-control" step="0.01" min="0" max="1" type="number" name="cotizacion[descuento_efectivo]" id="cotizacion_descuento_efectivo" />
         </div>
         
       </div>
     
       <div class="form-group row">
-        <%= form.label :descuento_pronto_pago,class:'col-sm-4', style: "display: block" %>
+        <label class="col-sm-4" style="display: block" for="cotizacion_descuento_pronto_pago">Descuento pronto pago</label>
         <div class="col-sm-4">
-          <%= form.number_field :descuento_pronto_pago, class:'form-control', step:"0.01", min:"0", max:"1" %>
+          <input class="form-control" step="0.01" min="0" max="1" type="number" name="cotizacion[descuento_pronto_pago]" id="cotizacion_descuento_pronto_pago" />
         </div>
         
       </div>
     
       <div class="form-group row">
-        <%= form.label :descuento_volumen,class:'col-sm-4', style: "display: block" %>
+        <label class="col-sm-4" style="display: block" for="cotizacion_descuento_volumen">Descuento volumen</label>
         <div class="col-sm-4">
-          <%= form.number_field :descuento_volumen, class:'form-control', step:"0.01", min:"0", max:"1" %>
+          <input class="form-control" step="0.01" min="0" max="1" type="number" name="cotizacion[descuento_volumen]" id="cotizacion_descuento_volumen" />
         </div>
         
       </div>
     
       <div class="form-group row">
-        <%= form.label :descuento_forma_pago,class:'col-sm-4', style: "display: block" %>
+        <label class="col-sm-4" style="display: block" for="cotizacion_descuento_forma_pago">Descuento forma pago</label>
           <div class="col-sm-4">
-          <%= form.number_field :descuento_forma_pago, class:'form-control', step:"0.01", min:"0", max:"1" %>
+          <input class="form-control" step="0.01" min="0" max="1" type="number" name="cotizacion[descuento_forma_pago]" id="cotizacion_descuento_forma_pago" />
         </div>
           
       </div>
     
       <div class="form-group row">
-        <%= form.label :envases_embalage,class:'col-sm-4', style: "display: block" %>
+        <label class="col-sm-4" style="display: block" for="cotizacion_envases_embalage">Envases embalage</label>
           <div class="col-sm-4">
-          <%= form.number_field :envases_embalage, class:'form-control', step:"0.01", min:"0" %>
+          <input class="form-control" step="0.01" min="0" type="number" name="cotizacion[envases_embalage]" id="cotizacion_envases_embalage" />
         </div>
         
       </div>
     
       <div class="form-group row">
-        <%= form.label :pago_transporte,class:'col-sm-4', style: "display: block" %>
+        <label class="col-sm-4" style="display: block" for="cotizacion_pago_transporte">Pago transporte</label>
           <div class="col-sm-4">
-          <%= form.number_field :pago_transporte, class:'form-control', step:"0.01", min:"0" %>
+          <input class="form-control" step="0.01" min="0" type="number" name="cotizacion[pago_transporte]" id="cotizacion_pago_transporte" />
         </div>
         
       </div>
     
       <div class="form-group row">
-        <%= form.label :recargo_aplazamiento,class:'col-sm-4', style: "display: block" %>
+        <label class="col-sm-4" style="display: block" for="cotizacion_recargo_aplazamiento">Recargo aplazamiento</label>
         <div class="col-sm-4">
-          <%= form.number_field :recargo_aplazamiento, class:'form-control' , step:"0.01", min:"0", max:"1"  %>
+          <input class="form-control" step="0.01" min="0" max="1" type="number" name="cotizacion[recargo_aplazamiento]" id="cotizacion_recargo_aplazamiento" />
         </div>
         
       </div>
@@ -145,21 +132,21 @@
       <div class="form-group row">
       
           <div class="col-sm-4">
-          <%= form.hidden_field :estado, class:'form-control', value: 'Pendiente' %>
+          <input class="form-control" value="Pendiente" autocomplete="off" type="hidden" name="cotizacion[estado]" id="cotizacion_estado" />
         </div>
         
       </div>
     
       <div class="form-group row">
-        <%= form.label :fecha_entrega,class:'col-sm-4', style: "display: block" %>
+        <label class="col-sm-4" style="display: block" for="cotizacion_fecha_entrega">Fecha entrega</label>
         <div class="col-sm-4">
-          <%= form.date_field :fecha_entrega, class:'form-control', required:"true" %>
+          <input class="form-control" required="required" type="date" name="cotizacion[fecha_entrega]" id="cotizacion_fecha_entrega" />
         </div>
 
          <div class="form-group row">
-        <%= form.label :total,class:'col-sm-4', style: "display: block"  %>
+        <label class="col-sm-4" style="display: block" for="cotizacion_total">Total</label>
         <div class="col-sm-4">
-          <%= form.number_field :total, class:'form-control', step:"0.01", min:"0", disabled:"true" %>
+          <input class="form-control" step="0.01" min="0" disabled="disabled" type="number" name="cotizacion[total]" id="cotizacion_total" />
         </div>
         
       </div>
@@ -177,8 +164,11 @@
    <input type="button" name="commit" onclick="guardarCotizacion()" value="Crear Cotizacion"  disabled id="guardar" class='btn btn-primary'/>
      
 
-    <% end %>
-  </div>
+</form>  </div>
+
+
+
+</div>
  <script src='http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.js'></script>
  <script type = "text/javascript">
         function calcular(valor,cant,sub){
@@ -329,7 +319,7 @@ function getRootUrl() {
   {console.log("final " + j + " "+ fin);
     if(j == fin){
     
-    window.location=getRootUrl()+"/cotizacions";
+    window.location=getRootUrl()+"/cotizaciones_proveedor";
   }
   }
 
