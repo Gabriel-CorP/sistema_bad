@@ -71,7 +71,7 @@ class RequesicionsController < ApplicationController
   end
 
   def agregar_producto
-    producto = Producto.find(params[:id])
+    producto = Producto.find(params[:producto_id])
     cantidad = params[:cantidad].nil? ? 1 : params[:cantidad].to_i
     @linea_requesicion = @requesicion.linea_requesicions.build(producto_id: producto.id, cantidad: cantidad)
     result = {

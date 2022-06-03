@@ -52,11 +52,10 @@ Rails.application.routes.draw do
 
   get 'reporte/prod_ordenados', to: 'reporg#productos_ordenados'      #reporte por productos ordenados  Gerente
   get 'reporte/compras_categorias', to: 'reporg#compras_categorias'   #Reporte de montos de compra por categorias Gerente
-  
+  get 'reporte/stock_productos', to: 'productos#reporte_stock'
   get 'evaluaciones', to: 'evaluacions#index'
   get 'evaluacions/new/:id', to: 'evaluacions#new'
   post 'evaluacions/create', to: 'evaluacions#create'
-
   resources :login
   get 'login/index', to: 'login#index'
 

@@ -1,9 +1,17 @@
 <p style="color: green"><%= notice %></p>
 <div class="card-header d-flex justify-content-between align-items-center">
   <h1>Productos</h1>
-  <% if can? :create, Producto %>
-  <%= link_to "Agregar producto", new_producto_path, class:"btn btn-primary btn-sm" %>
-  <%end%>
+  <div class="btn-toolbar" role="toolbar">
+    <div class="btn-group" role="group">
+      <% if can? :create, Producto %>
+      <%= link_to "Agregar producto", new_producto_path, class:"btn btn-primary btn-sm" %>
+      <% end %>
+      <br>
+      <% if can? :reporte_stock, Producto%>
+      <%= link_to "Reporte de Stock","reporte/stock_productos", class:"btn btn-info btn-sm" %>
+      <% end %>
+    </div>
+  </div>
 </div>
 
 <table id="productos_tabla" class="table table-striped table-responsive table-bordered table-sm">

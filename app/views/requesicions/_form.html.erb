@@ -127,7 +127,7 @@
       function seleccionarProducto(idproducto, id){
         let cantidad_i = $("#cantidad_producto").val();
         let request_url = window.location.origin + "/agregar_producto_requesicion/";
-        info = { producto_id: idproducto, id: id, cantidad: cantidad_i }
+        info = { id: id, producto_id: idproducto, cantidad: cantidad_i }
         $.ajax({
           url: request_url,
           type: 'POST',
@@ -203,6 +203,5 @@
     </script>
     <br>
     <%= link_to "Finalizar", requesicions_path, class: 'btn btn-success'%>
-    <%= link_to "Cancelar", requesicion, method: :delete, data: { confirm: "¿Cancelar requisición?" }, class: "btn btn-danger"%>
   <% end %>
 </div>

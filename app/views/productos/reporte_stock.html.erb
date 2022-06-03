@@ -1,0 +1,23 @@
+<div class="card-header d-flex justify-content-between align-items-center">
+  <%= link_to "Regresar", productos_path, class:"btn btn-primary btn-sm"%>
+  <h1>Reporte de Stock</h1>
+</div>
+
+<table class="table table-responsive table-bordered">
+    <thead>
+        <th>#</th>
+        <th>Producto</th>
+        <th>Presentación</th>
+        <th>Existencias</th>
+    </thead>
+    <tbody>
+        <% @productos.each do |producto| %>
+            <tr>
+                <td><%= producto.id %></td>
+                <td><%= producto.nombre %></td>
+                <td><%= producto.presentacion %></td>
+                <td><%= producto.existencias %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>

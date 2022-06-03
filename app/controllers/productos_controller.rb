@@ -6,6 +6,10 @@ class ProductosController < ApplicationController
     @productos = Producto.all
   end
 
+  def reporte_stock
+    @productos = Producto.all
+  end
+
   def show_image
     @imagen = Producto.find(params[:id])
     send_data @imagen.image, :type => 'image/png',:disposition => 'inline'
