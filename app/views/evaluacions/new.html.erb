@@ -1,0 +1,139 @@
+<div class="container" >
+  <div class="card-body" style= "display: inline;">
+    <h3 class='col-sm-5'>Proveedor: <%= @proveedor.compania%></h3>
+  
+  </div>
+  <%= csrf_meta_tag %>
+  <div class="btn-group" role="group" style= "display: inline;">
+              <form class="button_to" method="get" action="/evaluacions/">
+              <button  name="button" class='btn btn-primary' type="submit">
+              <span>Regresar</span>
+              </button>
+              </form>
+ </div>
+</div>
+<div class="form-group row"> 
+       
+        <input value="<%= @proveedor.id %>" autocomplete="off" type="hidden" id="id_p" />
+        
+        
+      </div>
+<div class="container">
+  <div class="card-body">
+    <div class="form-group row"> 
+       <strong class='col-sm-4', style= "display: block"> Nivel de servicio postventa:</strong>
+        
+        <div class="col-sm-4">
+         <input class="form-control" value="0" min="0" max="10" step="0.01" type="number" name="eva" id="0" />
+        
+        </div>
+        
+      </div>
+    <div class="form-group row"> 
+       <strong class='col-sm-4', style= "display: block"> Periodos de garantía:</strong>
+        
+        <div class="col-sm-4">
+         <input class="form-control" value="0" min="0" max="10" step="0.01" type="number" name="eva" id="1" />
+        
+        </div>
+        
+      </div>
+    <div class="form-group row"> 
+       <strong class='col-sm-4', style= "display: block"> Localización:</strong>
+        
+        <div class="col-sm-4">
+         <input class="form-control" value="0" min="0" max="10" step="0.01" type="number" name="eva" id="2" />
+        
+        </div>
+        
+      </div>
+    <div class="form-group row"> 
+       <strong class='col-sm-4', style= "display: block"> Existencia de servicios de  Atención al cliente:</strong>
+        
+        <div class="col-sm-4">
+         <input class="form-control" value="0" min="0" max="10" step="0.01" type="number" name="eva" id="3" />
+        
+        </div>
+        
+      </div>
+    <div class="form-group row"> 
+       <strong class='col-sm-4', style= "display: block"> Instalaciones:</strong>
+        
+        <div class="col-sm-4">
+        <input class="form-control" value="0" min="0" max="10" step="0.01" type="number" name="eva" id="4" />
+         
+        </div>
+        
+      </div>
+    
+</div>
+<input type="button" name="commit" onclick="guardar()" value="Guardar Evaluación"  id="guardar" class='btn btn-primary'/>
+<script src='http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.js'></script>
+<script type = "text/javascript">
+ function guardar(){
+
+          var nullos=0;
+          var txtboxes=document.getElementsByClassName('form-control');
+            
+          for(var i=0; i<txtboxes.length;i++){
+            
+            if(txtboxes[i].value==""){
+              nullos++;
+            }
+            console.log(nullos);
+          }
+          if (nullos>1){
+              console.log(nullos);
+              alert("No debe dejar campos en blanco");
+          }else{
+
+            
+            enviar();
+            
+          }           
+      }
+
+function enviar(){
+    let uno=document.getElementById('0').value;
+    let dos=document.getElementById('1').value;
+    let tres=document.getElementById('2').value;
+    let cuatro=document.getElementById('3').value;
+    let cinco=document.getElementById('4').value;
+   // let seis=document.getElementById('6').value;
+   // let siete=document.getElementById('7').value;
+    //let ocho=document.getElementById('8').value;
+    let id_pro= document.getElementById('id_p').value;
+
+    var txtboxes=document.getElementsByClassName('form-control');
+    let ajaxurl=getRootUrl()+'/evaluacions/create'; //se agrega la ruta en routes.rb
+    console.log(ajaxurl);
+    for(var i=0; i<txtboxes.length; i++){
+    let info={ id:id_pro, pre: txtboxes[i].id, cali: txtboxes[i].value }
+   $.ajax({ 
+        url: ajaxurl, 
+        type: 'POST',
+        beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+        data: info,
+        success: function (result) { 
+              if(result!=null){
+                console.log(result.mensaje);
+                 final(i-1, txtboxes.length-1); 
+              }
+              
+              }
+          }); 
+       
+ }
+  }
+ function final(j, fin)
+  {console.log("final " + j + " "+ fin);
+    if(j == fin){
+    
+    window.location=getRootUrl()+"/evaluacions";
+  }
+  }
+function getRootUrl() {
+    return window.location.origin;
+}
+
+</script>

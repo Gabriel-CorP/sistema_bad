@@ -1,0 +1,68 @@
+<div class="card-header d-flex justify-content-between align-items-center">
+  <h1>Evaluar proveedores</h1>
+</div>
+<table class="table table-responsive table-bordered">
+  <thead>
+    <tr>
+      <th>Compania</th>
+      <th>Web Site</th>
+      <th>Telefono</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    <% @proveedores.each do |pro| %>
+      <tr>
+          <td>
+            <strong><%=  pro.compania %></strong>
+          </td>
+          <td>
+            <strong><%=  pro.web_site %></strong>
+          </td>
+          <td>
+            <strong><%=  pro.telefono %></strong>
+          </td>
+          
+          <td>
+        
+      <% if @evaluaciones[0]==nil %>
+          <div class="btn-toolbar" role="toolbar">
+              <div class="btn-group" role="group">
+              <form class="button_to" method="get" action="/evaluacions/new/<%=  pro.id %>">
+              <button  name="button" class='btn btn-primary' type="submit">
+              <span>Evaluar</span>
+              </button>
+              </form>
+              </div>
+          </div>
+      
+          
+          <% else %>
+
+          <% @evaluaciones.each do |c| %>
+              <% if c.proveedor_id == pro.id %>
+              <div class="btn-toolbar" role="toolbar">
+              <div class="btn-group" role="group">
+              <form class="button_to" method="get" action="/evaluacions/<%=  pro.id %>/edit">
+              <button  name="button" class='btn btn-primary' type="submit">
+              <span>RE-Evaluar</span>
+              </button>
+              </form>
+              </div>
+              </div>
+              
+              <% break if c.id == pro.id %>
+              
+              <%end %>
+          <%end %>
+        <%end %>
+       
+              
+          </td>
+
+        
+      </tr>
+    <%end %>
+      
+  </tbody>
+</table>
