@@ -24,7 +24,7 @@
        <strong class='col-sm-4', style= "display: block"> Nivel de servicio postventa:</strong>
         
         <div class="col-sm-4">
-         <input class="form-control" value="0" min="0" max="10" step="0.01" type="number" name="eva" id="0" />
+         <input class="form-control1" value="0" min="0" max="10" step="0.01" type="number" name="eva" id="0" />
         
         </div>
         
@@ -33,7 +33,7 @@
        <strong class='col-sm-4', style= "display: block"> Periodos de garantía:</strong>
         
         <div class="col-sm-4">
-         <input class="form-control" value="0" min="0" max="10" step="0.01" type="number" name="eva" id="1" />
+         <input class="form-control1" value="0" min="0" max="10" step="0.01" type="number" name="eva" id="1" />
         
         </div>
         
@@ -42,7 +42,7 @@
        <strong class='col-sm-4', style= "display: block"> Localización:</strong>
         
         <div class="col-sm-4">
-         <input class="form-control" value="0" min="0" max="10" step="0.01" type="number" name="eva" id="2" />
+         <input class="form-control1" value="0" min="0" max="10" step="0.01" type="number" name="eva" id="2" />
         
         </div>
         
@@ -51,7 +51,7 @@
        <strong class='col-sm-4', style= "display: block"> Existencia de servicios de  Atención al cliente:</strong>
         
         <div class="col-sm-4">
-         <input class="form-control" value="0" min="0" max="10" step="0.01" type="number" name="eva" id="3" />
+         <input class="form-control1" value="0" min="0" max="10" step="0.01" type="number" name="eva" id="3" />
         
         </div>
         
@@ -60,7 +60,7 @@
        <strong class='col-sm-4', style= "display: block"> Instalaciones:</strong>
         
         <div class="col-sm-4">
-        <input class="form-control" value="0" min="0" max="10" step="0.01" type="number" name="eva" id="4" />
+        <input class="form-control1" value="0" min="0" max="10" step="0.01" type="number" name="eva" id="4" />
          
         </div>
         
@@ -73,7 +73,7 @@
  function guardar(){
 
           var nullos=0;
-          var txtboxes=document.getElementsByClassName('form-control');
+          var txtboxes=document.getElementsByClassName('form-control1');
             
           for(var i=0; i<txtboxes.length;i++){
             
@@ -82,7 +82,7 @@
             }
             console.log(nullos);
           }
-          if (nullos>1){
+          if (nullos>0){
               console.log(nullos);
               alert("No debe dejar campos en blanco");
           }else{
@@ -104,10 +104,10 @@ function enviar(){
     //let ocho=document.getElementById('8').value;
     let id_pro= document.getElementById('id_p').value;
 
-    var txtboxes=document.getElementsByClassName('form-control');
+    var txtboxes=document.getElementsByClassName('form-control1');
     let ajaxurl=getRootUrl()+'/evaluacions/create'; //se agrega la ruta en routes.rb
     console.log(ajaxurl);
-    for(var i=0; i<txtboxes.length; i++){
+    for(var i=0; i<5; i++){
     let info={ id:id_pro, pre: txtboxes[i].id, cali: txtboxes[i].value }
    $.ajax({ 
         url: ajaxurl, 
@@ -129,7 +129,7 @@ function enviar(){
   {console.log("final " + j + " "+ fin);
     if(j == fin){
     
-    window.location=getRootUrl()+"/evaluacions";
+    window.location=getRootUrl()+"/evaluaciones";
   }
   }
 function getRootUrl() {
