@@ -41,12 +41,14 @@ Rails.application.routes.draw do
   # root "articles#index"
   resources :cotizacions, only: [:index]
   resources :linea_cotizacions, only: [:index]
-  get 'cotizacions/:id', to: 'cotizacions#new'
+  get 'cotizaciones/:id', to: 'cotizacions#new'
   get 'cotizaciones', to: 'cotizacions#evaluar'
+  get 'cotizaciones_proveeedor', to: 'cotizacions#index'
   get 'cotizaciones/:id', to: 'cotizacions#detalles'
   post 'guardar_cotizacion/:id', to: 'cotizacions#create'
   post 'guardar_linea_cotizacion', to: 'cotizacions#lineas_cotizacion'
   post 'aprobar_cotizacion', to: 'cotizacions#aprobar'
+  
   get 'reporte/prod_ordenados', to: 'reporg#productos_ordenados'      #reporte por productos ordenados
   get 'reporte/compras_categorias', to: 'reporg#compras_categorias'   #Reporte de montos de compra por categorias
 

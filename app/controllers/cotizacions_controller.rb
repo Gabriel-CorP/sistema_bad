@@ -2,18 +2,23 @@ class CotizacionsController < ApplicationController
   #  before_action :set_requesicion, only: [ :create ]
   before_action :authenticate_user!
     def index
-        @usuario=Usuario.where(user: current_user.id)
-        @proveedor=Proveedor.find(@usuario[0].id)
-        @requesicions=Requesicion.where("estado= 'Pendiente' or estado= 'Cotizado'")
-
-        @cotizaciones=Cotizacion.new
-        @requesicions.each do |r|
-           if r.estado=="Cotizado"              
-               @cotizaciones=Cotizacion.where(requesicion_id: r.id)
         
-                           
-           end
-        end
+        
+            
+            
+            @usuario=Usuario.find_by(user: current_user.id)
+            @proveedor=Proveedor.find_by(usuario_id: @usuario.id)
+            @requesicions=Requesicion.where("estado= 'Pendiente' or estado= 'Cotizado'")
+    
+            @cotizaciones=Cotizacion.new
+            @requesicions.each do |r|
+               if r.estado=="Cotizado"              
+                   @cotizaciones=Cotizacion.where(requesicion_id: r.id)
+            
+                               
+               end
+            end
+        
         
       #  @reques=Requesicion.joins(:usuario).where(usuario_id:)
     end
@@ -80,6 +85,7 @@ class CotizacionsController < ApplicationController
     end
 
     def lineas_cotizacion
+        
         @coti=Cotizacion.last
         @lineacotizacion=LineaCotizacion.new
         @lineacotizacion.linea_requesicion_id=params[:id]
@@ -102,7 +108,11 @@ class CotizacionsController < ApplicationController
 
     end
     def evaluar
+        if (can? :update, Cotizacion)
         @requesiciones=Requesicion.where("estado='Cotizado'")
+        else
+            redirect_to action: :index
+        end
         
     end
     def detalles
