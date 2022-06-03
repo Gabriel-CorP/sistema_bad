@@ -35,7 +35,7 @@
       <% if @cotizaciones[0]==nil %>
           <div class="btn-toolbar" role="toolbar">
               <div class="btn-group" role="group">
-              <form class="button_to" method="get" action="/cotizacions/<%=  requesicion.id %>">
+              <form class="button_to" method="get" action="/cotizaciones_proveedor/<%=  requesicion.id %>">
               <button  name="button" class='btn btn-primary' type="submit">
               <span>Cotizar</span>
               </button>
@@ -50,7 +50,7 @@
               <% if requesicion.estado=="Pendiente" && c.proveedor_id == @proveedor.id %>
               <div class="btn-toolbar" role="toolbar">
               <div class="btn-group" role="group">
-              <form class="button_to" method="get" action="/cotizacions/<%=  requesicion.id %>">
+              <form class="button_to" method="get" action="/cotizaciones_proveedor/<%=  requesicion.id %>">
               <button  name="button" class='btn btn-primary' type="submit">
               <span>Cotizar</span>
               </button>
@@ -61,7 +61,7 @@
               
               <div class="btn-toolbar" role="toolbar">
               <div class="btn-group" role="group">
-              <form class="button_to" method="get" action="/cotizacions/<%=  requesicion.id %>">
+              <form class="button_to" method="get" action="/cotizaciones_proveedor/<%=  requesicion.id %>">
               <button  name="button" class='btn btn-primary' type="submit">
               <span>Cotizar</span>
               </button>

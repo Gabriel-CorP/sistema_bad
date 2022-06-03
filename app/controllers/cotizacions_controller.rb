@@ -2,8 +2,8 @@ class CotizacionsController < ApplicationController
   #  before_action :set_requesicion, only: [ :create ]
   before_action :authenticate_user!
     def index
-        @usuario=Usuario.where(user_id: current_user.id)
-        @proveedor=Proveedor.find(@usuario[0].id)
+        @usuario=Usuario.find_by(user_id: current_user.id)
+        @proveedor=Proveedor.find_by(usuario_id: @usuario.id)
         @requesicions=Requesicion.where("estado= 'Pendiente' or estado= 'Cotizado'")
 
         @cotizaciones=Cotizacion.new
