@@ -13,6 +13,7 @@ class Producto < ApplicationRecord
     format: { with: /\A\d{1,3}(\.\d{1,2})?\z/ }
     validates :existencias, numericality: { greater_than_or_equal_to: 0, less_than: BigDecimal(10**6) },
     format: { with: /\A\d{1,3}(\.\d{1,2})?\z/ }
+    validates_presence_of :imagen, presence: true, :message => "El producto debe tener una imagen"
 
     def self.buscador(criterio)
         Producto.where("nombre LIKE ?", "%#{criterio}%")

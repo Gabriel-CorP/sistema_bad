@@ -1,23 +1,26 @@
 class RequesicionsController < ApplicationController
-  before_action :set_requesicion, only: %i[ show edit update destroy ]
+  before_action :set_requesicion, only: %i[ edit update destroy agregar_producto ]
+  before_action :authenticate_user!
+  protect_from_forgery unless: -> { request.format.json? }
 
   # GET /requesicions or /requesicions.json
   def index
-    # @requesicions = Requesicion.joins(:usuario).where(usuario_id:)
-    @requesicions = Requesicion.all
+    @usuario = Usuario.find_by(user_id:current_user)
+    @requesicions = Requesicion.joins(:usuario).where(usuario_id:@usuario)
+    #@requesicions = Requesicion.all
   end
 
   # GET /requesicions/1 or /requesicions/1.json
   def show
-    @usuario = Usuario.find(@requesicion.usuario_id)
+    @usuario = Usuario.find_by(user_id:current_user)
   end
 
   # GET /requesicions/new
   def new
-    @requesicion = Requesicion.new
-    # @requesicion = Requesicion.create()
-    # @usuario = Usuario.where(usuario_id: usuario_id)
-    # redirect_to edit_requesicion_path(@requesicion)
+    # @requesicion = Requesicion.new
+    @usuario = Usuario.find_by(user_id:current_user)
+    @requesicion = Requesicion.create(usuario_id:@usuario.id, prioridad:'Media', estado:'Pendiente', fecha_solicitud:Date.current, fecha_entrega:Date.current+10.days)
+    redirect_to edit_requesicion_path(@requesicion)
   end
 
   # GET /requesicions/1/edit
@@ -28,12 +31,11 @@ class RequesicionsController < ApplicationController
   # POST /requesicions or /requesicions.json
   def create
     @requesicion = Requesicion.new
-    @requesicion.fecha_entrega=params[:fechaentrega]
+    @requesicion.fecha_entrega=params[:fecha_entrega]
     @requesicion.prioridad=params[:prioridad]
     @requesicion.estado=params[:estado]
     @requesicion.observacion=params[:observacion]
-    @requesicion.fecha_solicitud=Date.today
-
+    
     respond_to do |format|
       if @requesicion.save
         format.html { redirect_to requesicion_url(@requesicion), notice: "Requisicion creada." }
@@ -68,6 +70,25 @@ class RequesicionsController < ApplicationController
     end
   end
 
+  def agregar_producto
+    producto = Producto.find(params[:id])
+    cantidad = params[:cantidad].nil? ? 1 : params[:cantidad].to_i
+    @linea_requesicion = @requesicion.linea_requesicions.build(producto_id: producto.id, cantidad: cantidad)
+    result = {
+      producto_id: @linea_requesicion.producto_id,
+      nombre_producto: @linea_requesicion.producto.try(:nombre),
+      cantidad: @linea_requesicion.cantidad
+    }
+
+    respond_to do |format|
+      if @requesicion.save && producto.save
+        format.json{ render json: result }
+      else
+        format.json{ render json: @requesicion.errors.full_messages, status: :unprocessable_entitys }
+      end
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_requesicion
@@ -76,6 +97,6 @@ class RequesicionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def requesicion_params
-      params.require(:requesicion).permit(:fecha_entrega, :fecha_solicitud, :prioridad, :usuario_id, :estado, :observacion)
+      params.require(:requesicion).permit(:fecha_entrega, :fecha_solicitud, :prioridad, :usuario_id, :estado, :observacion, :linea_requesicions)
     end
 end

@@ -1,16 +1,39 @@
 <p style="color: green"><%= notice %></p>
 <div class="card-header d-flex justify-content-between align-items-center">
   <h1>Requisiciones</h1>
-  <%if can? :create, Requisicion %>
+  <%if can? :create, @requesicions %>
   <%= link_to "Nueva requisicion", new_requesicion_path, class:"btn btn-primary btn-sm" %>
   <%end%>
 </div>
 
-<div id="requesicions">
-  <% @requesicions.each do |requesicion| %>
-    <%= render requesicion %>
-    <p>
-      <%= link_to "Show this requisicion", requesicion %>
-    </p>
-  <% end %>
-</div>
+<table id="tabla_requesicions" class="table table-responsive">
+  <thead>
+    <th>Requisición #</th>
+    <th>Fecha de solicitud</th>
+    <th>Fecha de entrega</th>
+    <th>Prioridad</th>
+    <th>Opciones</th>
+  </thead>
+  <tbody>
+    <% @requesicions.each do |requesicion| %>
+      <tr>
+        <td><%= requesicion.id %></td>
+        <td><%= requesicion.fecha_solicitud %></td>
+        <td><%= requesicion.fecha_entrega %></td>
+        <td><%= requesicion.prioridad %></td>
+        <td>
+          <div class="btn-toolbar" role="toolbar">
+            <div class="btn-group" role="group">
+              <% if can? :update, Producto %>
+                <%= button_to image_tag("editar"), edit_requesicion_path(requesicion),:method=>:get, :class=>"btn " ,id:"btn-edit" ,:title=>"Editar"%>
+              <% end %>
+              <% if can? :destroy, Requesicion %>
+                <%= button_to image_tag("trash"), requesicion, method: :delete ,:class=>"btn " ,id:"btn-ver" ,:title=>"Eliminar" %>
+              <% end %>
+            </div>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

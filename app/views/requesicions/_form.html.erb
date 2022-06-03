@@ -15,11 +15,15 @@
       <div class="col-md-6">
         <div class="d-flex justify-content-between align-items-center">
           <div>
-            <%= form.label 'Prioridad:'%>
-            <%= form.select :prioridad, ['Baja','Media','Alta'], class: "form-control" %>
+            <label for="requesicion_prioridad:">Prioridad:</label>
+            <select name="requesicion[prioridad]" data-model="<%= @requesicion.id %>" id="requesicion_prioridad" onchange="update(event)">
+              <option value="Baja">Baja</option>
+              <option selected="selected" value="Media">Media</option>
+              <option value="Alta">Alta</option>
+            </select>
           </div>
-          <%= form.label 'Fecha de entrega:'%>
-          <%= form.date_field (:fecha_entrega), class: "form-control" %>
+          <label for="requesicion_Fecha de entrega:">Fecha de entrega:</label>
+          <input class="form-control" data-model="<%= @requesicion.id %>" onchange="update(event)" type="date" name="requesicion[fecha_entrega]" id="requesicion_fecha_entrega"/>
         </div>
 
         <div>
@@ -41,11 +45,18 @@
               <th>Cantidad</th>
             </thead>
             <tbody>
-
+            <% if @productos_requesicion.empty? %>
               <tr>
                 <td colspan="2">No hay productos registrados</td>
               </tr>
-
+            <% else %>
+              <% @productos_requesicion.each do |linreq| %>
+                <tr>
+                  <td><%= linreq.producto.try(:nombre) %></td>
+                  <td><%= linreq.cantidad %></td>
+                </tr>
+              <% end %>
+            <% end %>
             </tbody>
           </table>
         </div>
@@ -54,7 +65,7 @@
         <div class="form-group d-flex justify-content-between align-items-center">
           <label for="buscador">Nombre de producto:</label>
           <input type="text" class="form-control" data-model="<%= @requesicion.id %>" id="buscador_productos" placeholder="Ingrese producto...">
-          <button type="button" onclick="document.getElementById('buscador_productos').value=''; cleared();" class="btn btn-danger">X</button>
+          <button type="button" onclick="cleared();" class="btn btn-danger">X</button>
         </div>
         <div class="form-group d-flex justify-content-between align-items-center">
           <label for="buscador">Cantidad:</label>
@@ -82,9 +93,10 @@
       integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
     <script type="text/javascript">
       $("#tabla_buscador tbody").empty();
-      $("#tabla_buscador tbody").append("<tr><td colspan='3'>Ingrese el nombre de producto a buscar... En proceso</td></tr>");
+      $("#tabla_buscador tbody").append("<tr><td colspan='3'>Ingrese el nombre de producto a buscar...</td></tr>");
       $("#buscador_productos").on('input keyup paste', throttle(function() {
         let criterio = $("#buscador_productos").val();
+        let requeid = $("#buscador_productos").data("model");
         if (criterio.length > 0) {
           $("#tabla_buscador tbody").empty();
           $("#tabla_buscador tbody").append("<tr><td colspan='3'>Buscando "+criterio+"...</td></tr>");
@@ -98,7 +110,7 @@
                 let existencia = data[x].existencia;
                 let idproducto = data[x].id;
                 nuevaFila = "<tr><td>"+nombre_producto+"</td><td>"+existencia+"</td>"+
-                          "<td><button type='button' class='btn btn-primary' onclick='seleccionarProducto($(idproducto),$(id))'>+</button></td></tr>";
+                          '<td><button type="button" class="btn btn-primary" onclick="seleccionarProducto('+idproducto+','+requeid+')">+</button></td></tr>';
                 $("#tabla_buscador tbody").append(nuevaFila);
               }
             } else {
@@ -112,9 +124,59 @@
         }
       }, 1000));
 
+      function seleccionarProducto(idproducto, id){
+        let cantidad_i = $("#cantidad_producto").val();
+        let request_url = window.location.origin + "/agregar_producto_requesicion/";
+        info = { producto_id: idproducto, id: id, cantidad: cantidad_i }
+        $.ajax({
+          url: request_url,
+          type: 'POST',
+          data: JSON.stringify(info),
+          contentType: 'application/json; charset=utf-8',
+          success: function(result){
+            if (result != null ){
+              let cantidad = result.cantidad;
+              let nombre_p = result.nombre_producto;
+              let id_p = result.producto_id;
+              let nuevaFila = "<tr><td>"+nombre_p+"</td><td>"+cantidad+"</td></tr>";
+              $("#tabla_requesicion tbody").append(nuevaFila);
+              cleared();
+            }
+          }
+        });
+      }
+
       function cleared(){
+        document.getElementById('buscador_productos').value='';
         $("#tabla_buscador tbody").empty();
         $("#tabla_buscador tbody").append("<tr><td colspan='3'>¿Qué producto quiere buscar?</td></tr>");
+      }
+
+      function update(event){
+        console.log(event.target.id + ": " + event.target.value)
+        if (event.target.value != ''){
+          let requeid = $("#requesicion_prioridad").data("model");
+          if (event.target.id == "requesicion_prioridad") {
+            info = { prioridad: event.target.value }
+          }
+          if (event.target.id == "requesicion_fecha_entrega") {
+            let requeid = $("#requesicion_fecha_entrega").data("model");
+            info = { fecha_entrega: event.target.value }
+          }
+          data = JSON.stringify(info);
+          let request_url = window.location.origin + "/requesicions/" + requeid
+          var xhtr = new XMLHttpRequest();
+          xhtr.open("PATCH", request_url);
+          xhtr.setRequestHeader("Accept", "application/json");
+          xhtr.setRequestHeader("Content-Type", "application/json");
+
+          xhtr.onreadystatechange = function () {
+            if (xhtr.readyState === 4) {
+              console.log(xhtr.status);
+              console.log(xhtr.responseText);
+          }};
+          xhtr.send(data);
+        }
       }
 
       function throttle(fn, threshold, scope) {
@@ -127,7 +189,6 @@
           var now = +new Date,
               args = arguments;
           if (last && now < last + threshold) {
-            // hold on to it
             clearTimeout(deferTimer);
             deferTimer = setTimeout(function () {
               last = now;
@@ -142,6 +203,6 @@
     </script>
     <br>
     <%= link_to "Finalizar", requesicions_path, class: 'btn btn-success'%>
-    <%= link_to "Cancelar", @requesicion, method: :delete, data: { confirm: "¿Cancelar requisición?" }, class: "btn btn-danger"%>
+    <%= link_to "Cancelar", requesicion, method: :delete, data: { confirm: "¿Cancelar requisición?" }, class: "btn btn-danger"%>
   <% end %>
 </div>
