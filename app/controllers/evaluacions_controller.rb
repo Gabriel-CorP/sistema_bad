@@ -2,7 +2,16 @@ class EvaluacionsController < ApplicationController
     before_action :authenticate_user!
     def index
         @proveedores=Proveedor.all()
-        @evaluaciones=Evaluacion.all()
+        @provees=Array.new
+        @proveedores.each do |pro|
+            @evaluacion=Evaluacion.find_by(proveedor_id: pro.id)
+            if @evaluacion ==nil
+                @provees.push(pro)
+            end
+        end
+        
+
+
     end
     def new
         @proveedor=Proveedor.find(params[:id])
