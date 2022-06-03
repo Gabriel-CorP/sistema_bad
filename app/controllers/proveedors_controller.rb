@@ -15,7 +15,7 @@ class ProveedorsController < ApplicationController
       #Cantidad de hubiaciones por proveedor
       @ubicacionesProveedor_count =Proveedor.joins(:ubicacions).group(" proveedors.compania").select("proveedors.*, count(ubicacions.id) as cuenta_ubicaciones").collect{|x| [x.compania, x.cuenta_ubicaciones]}
       #cantidad de cotizaciones a proveedores
-      @cotizaciones_proveedores_count=Proveedor.joins(:cotizacions).group("proveedors.compania").select("cotizacions.*, count(proveedors.id) as cuenta_cotizaciones_proveedores").collect{|x| [x.compania, x.cuenta_cotizaciones_proveedores]}
+    #  @cotizaciones_proveedores_count=Proveedor.joins(:cotizacions).group("proveedors.compania").select("cotizacions.*, count(proveedors.id) as cuenta_cotizaciones_proveedores").collect{|x| [x.compania, x.cuenta_cotizaciones_proveedores]}
 
       render :reporte
     end

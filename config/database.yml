@@ -52,7 +52,7 @@ test:
 #
 production:
   <<: *default
-  url: mysql2://unq4vlh3m19jsupv:qognExE74KmIVzIh1UL5@b1l7ikiapfpvvdbpl4m3-mysql.services.clever-cloud.com:3306/b1l7ikiapfpvvdbpl4m3
-  database: b1l7ikiapfpvvdbpl4m3
-  username: unq4vlh3m19jsupv
-  password: qognExE74KmIVzIh1UL5
+  url: mysql2://u0h5dz8nrn4wgjow:MWgiQQn42DyzRlorsktB@bgpnbosn01jazeyl4bzf-mysql.services.clever-cloud.com:3306/bgpnbosn01jazeyl4bzf
+  database: bgpnbosn01jazeyl4bzf
+  username: u0h5dz8nrn4wgjow
+  password: MWgiQQn42DyzRlorsktB
