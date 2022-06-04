@@ -1,5 +1,5 @@
 class RequesicionsController < ApplicationController
-  before_action :set_requesicion, only: %i[ edit update destroy agregar_producto ]
+  before_action :set_requesicion, only: %i[ show edit update destroy agregar_producto ]
   before_action :authenticate_user!
   protect_from_forgery unless: -> { request.format.json? }
 
@@ -13,6 +13,7 @@ class RequesicionsController < ApplicationController
   # GET /requesicions/1 or /requesicions/1.json
   def show
     @usuario = Usuario.find_by(user_id:current_user)
+    @productos_requesicion = @requesicion.linea_requesicions
   end
 
   # GET /requesicions/new

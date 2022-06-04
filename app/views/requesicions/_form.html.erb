@@ -27,13 +27,14 @@
         </div>
 
         <div>
-          
+          Solicitado el:
+          <label id="fecha_solicitud"><%= requesicion.fecha_solicitud %></label>
         </div>
 
         <br>
 
         <div class="table-responsive">
-          <table class="table table-bordered" id="tabla-requesicion" width="90%" cellspacing="0">
+          <table class="table table-responsive table-bordered" id="tabla_requesicion" width="90%" cellspacing="0">
             <colgroup>
               <col span="1" style="width: 80%;">
               <col span="1" style="width: 20%;">
@@ -153,30 +154,41 @@
       }
 
       function update(event){
-        console.log(event.target.id + ": " + event.target.value)
+        let reqid = $("#requesicion_prioridad").data("model");
         if (event.target.value != ''){
-          let requeid = $("#requesicion_prioridad").data("model");
           if (event.target.id == "requesicion_prioridad") {
             info = { prioridad: event.target.value }
+            enviar(info, reqid);
           }
           if (event.target.id == "requesicion_fecha_entrega") {
-            let requeid = $("#requesicion_fecha_entrega").data("model");
-            info = { fecha_entrega: event.target.value }
+            let fecha_select = new Date(event.target.value)
+            var ms = new Date(document.getElementById("fecha_solicitud").innerHTML).getTime() + 864000000;
+            let fecha_sol = new Date(ms)
+            reqid = $("#requesicion_fecha_entrega").data("model");
+            if (fecha_sol < fecha_select) {
+              info = { fecha_entrega: event.target.value }
+              enviar(info, reqid);
+            } else {
+              window.alert("La fecha seleccionada no es válida");
+            }
           }
-          data = JSON.stringify(info);
-          let request_url = window.location.origin + "/requesicions/" + requeid
-          var xhtr = new XMLHttpRequest();
-          xhtr.open("PATCH", request_url);
-          xhtr.setRequestHeader("Accept", "application/json");
-          xhtr.setRequestHeader("Content-Type", "application/json");
-
-          xhtr.onreadystatechange = function () {
-            if (xhtr.readyState === 4) {
-              console.log(xhtr.status);
-              console.log(xhtr.responseText);
-          }};
-          xhtr.send(data);
         }
+      }
+
+      function enviar(datos, requeid){
+        data = JSON.stringify(datos);
+        let request_url = window.location.origin + "/requesicions/" + requeid
+        var xhtr = new XMLHttpRequest();
+        xhtr.open("PATCH", request_url);
+        xhtr.setRequestHeader("Accept", "application/json");
+        xhtr.setRequestHeader("Content-Type", "application/json");
+
+        xhtr.onreadystatechange = function () {
+          if (xhtr.readyState === 4) {
+            console.log(xhtr.status);
+            console.log(xhtr.responseText);
+        }};
+        xhtr.send(data);
       }
 
       function throttle(fn, threshold, scope) {

@@ -3,8 +3,13 @@
 <%= render @requesicion %>
 
 <div>
-  <%= link_to "Edit this requesicion", edit_requesicion_path(@requesicion) %> |
-  <%= link_to "Back to requesicions", requesicions_path %>
-
-  <%= button_to "Destroy this requesicion", @requesicion, method: :delete %>
+  <%= link_to "Regresar", requesicions_path, class: "btn btn-secondary" %>
+  <% if @requesicion.estado == 'Pendiente' %>
+    <% if can? :update, Requesicion %>
+      <%= link_to "Editar requisición", edit_requesicion_path(@requesicion), class: "btn btn-success" %>
+    <% end %>
+    <% if can? :destroy, Requesicion %>
+      <%= link_to "Cancelar requisición", @requesicion, method: :delete, class: "btn btn-danger" %>
+    <% end %>
+  <% end %>
 </div>

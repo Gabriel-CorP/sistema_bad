@@ -24,11 +24,14 @@
         <td>
           <div class="btn-toolbar" role="toolbar">
             <div class="btn-group" role="group">
-              <% if can? :update, Producto %>
-                <%= button_to image_tag("editar"), edit_requesicion_path(requesicion),:method=>:get, :class=>"btn " ,id:"btn-edit" ,:title=>"Editar"%>
-              <% end %>
-              <% if can? :destroy, Requesicion %>
-                <%= button_to image_tag("trash"), requesicion, method: :delete ,:class=>"btn " ,id:"btn-ver" ,:title=>"Eliminar" %>
+              <%= button_to image_tag("ojo",width:25,height:25), requesicion,method: :get, :class=>"btn " ,id:"btn-ver" , :title=>"Ver" %>
+              <% if requesicion.estado == 'Pendiente' %>
+                <% if can? :update, Requesicion %>
+                  <%= button_to image_tag("editar"), edit_requesicion_path(requesicion),:method=>:get, :class=>"btn " ,id:"btn-edit" ,:title=>"Editar"%>
+                <% end %>
+                <% if can? :destroy, Requesicion %>
+                  <%= button_to image_tag("trash"), requesicion, method: :delete ,:class=>"btn " ,id:"btn-ver" ,:title=>"Eliminar" %>
+                <% end %>
               <% end %>
             </div>
           </div>
