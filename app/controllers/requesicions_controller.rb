@@ -10,6 +10,11 @@ class RequesicionsController < ApplicationController
     #@requesicions = Requesicion.all
   end
 
+  def observacion
+    @requesicion=Requesicion.find(params[:id])
+    @productos_requesicion = @requesicion.linea_requesicions
+  end
+
   # GET /requesicions/1 or /requesicions/1.json
   def show
     @usuario = Usuario.find_by(user_id:current_user)

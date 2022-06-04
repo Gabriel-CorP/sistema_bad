@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   resources :requesicions
   get 'buscador_productos/:criterio', to: 'productos#buscador'
   post 'agregar_producto_requesicion', to: 'requesicions#agregar_producto'
+  get 'requesicions/:id/observacion', to: 'requesicions#observacion'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   root to: 'home#index'
   resources :proveedors

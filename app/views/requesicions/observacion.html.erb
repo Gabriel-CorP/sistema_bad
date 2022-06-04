@@ -1,0 +1,24 @@
+<div class="card mt-s">
+    <%= form_with(model: @requesicion) do |form| %>
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h1>Documentar Observación</h1>
+        </div>
+            <div>
+                <%= form.label 'Observación:' %>
+                <%= form.text_area :observacion, class: "form-control" %>
+            </div>
+            <div class='disable_input'>
+                <%= form.hidden_field :estado, value: 'Denegado' %>
+            </div>
+            <button type="submit" name="button" class='btn btn-danger'>
+                <span>Denegar</span>
+            </button>
+            <%= link_to "Regresar", requesicions_path, class: "btn btn-secondary" %>
+    <% end %>
+        <div>
+            <%= render @requesicion %>
+        </div>
+    <script>
+        $('.disable_input :input').prop('disabled', true);
+    </script>
+</div>
