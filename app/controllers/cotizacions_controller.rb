@@ -185,7 +185,7 @@ class CotizacionsController < ApplicationController
         
         #recibir todos los datos de la cotizacion y crear una cadena o algo así :v para enviarlo
 #creando el email
-        PostMailer.with(user: @user_proveedor, contenido: @cotizacionText).post_created.deliver_now
+        #PostMailer.with(user: @user_proveedor, contenido: @cotizacionText).post_created.deliver_now
 
         result= {
             mensaje: "Mensaje enviado"
