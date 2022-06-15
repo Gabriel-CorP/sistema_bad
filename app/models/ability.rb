@@ -12,7 +12,7 @@ class Ability
     rol = Rol.find(usuario.rol_id)
     
     
-    if rol.rol == 'god_mode'
+    if rol.rol == 'administrador'
       can :manage, :all
     else
  
