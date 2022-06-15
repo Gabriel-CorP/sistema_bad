@@ -74,39 +74,39 @@
       </div>
     
       <div class="form-group row">
-        <label class="col-sm-4" style="display: block" for="cotizacion_descuento_efectivo">Descuento efectivo</label>
+        <label class="col-sm-4" style="display: block" for="cotizacion_descuento_efectivo">Descuento por pago en efectivo (%)</label>
         <div class="col-sm-4">
-          <input class="form-control" step="0.01" min="0" max="1" type="number" name="cotizacion[descuento_efectivo]" id="cotizacion_descuento_efectivo" />
+          <input class="form-control" step="0.01" min="0" max="100" type="number" name="cotizacion[descuento_efectivo]" id="cotizacion_descuento_efectivo" />
         </div>
         
       </div>
     
       <div class="form-group row">
-        <label class="col-sm-4" style="display: block" for="cotizacion_descuento_pronto_pago">Descuento pronto pago</label>
+        <label class="col-sm-4" style="display: block" for="cotizacion_descuento_pronto_pago">Descuento por pronto pago (%)</label>
         <div class="col-sm-4">
-          <input class="form-control" step="0.01" min="0" max="1" type="number" name="cotizacion[descuento_pronto_pago]" id="cotizacion_descuento_pronto_pago" />
+          <input class="form-control" step="0.01" min="0" max="100" type="number" name="cotizacion[descuento_pronto_pago]" id="cotizacion_descuento_pronto_pago" />
         </div>
         
       </div>
     
       <div class="form-group row">
-        <label class="col-sm-4" style="display: block" for="cotizacion_descuento_volumen">Descuento volumen</label>
+        <label class="col-sm-4" style="display: block" for="cotizacion_descuento_volumen">Descuento por volumen de venta  (%)</label>
         <div class="col-sm-4">
-          <input class="form-control" step="0.01" min="0" max="1" type="number" name="cotizacion[descuento_volumen]" id="cotizacion_descuento_volumen" />
+          <input class="form-control" step="0.01" min="0" max="100" type="number" name="cotizacion[descuento_volumen]" id="cotizacion_descuento_volumen" />
         </div>
         
       </div>
     
       <div class="form-group row">
-        <label class="col-sm-4" style="display: block" for="cotizacion_descuento_forma_pago">Descuento forma pago</label>
+        <label class="col-sm-4" style="display: block" for="cotizacion_descuento_forma_pago">Descuento por forma de pago (%)</label>
           <div class="col-sm-4">
-          <input class="form-control" step="0.01" min="0" max="1" type="number" name="cotizacion[descuento_forma_pago]" id="cotizacion_descuento_forma_pago" />
+          <input class="form-control" step="0.01" min="0" max="100" type="number" name="cotizacion[descuento_forma_pago]" id="cotizacion_descuento_forma_pago" />
         </div>
           
       </div>
     
       <div class="form-group row">
-        <label class="col-sm-4" style="display: block" for="cotizacion_envases_embalage">Envases embalage</label>
+        <label class="col-sm-4" style="display: block" for="cotizacion_envases_embalage">Pago por envases y embalage ($)</label>
           <div class="col-sm-4">
           <input class="form-control" step="0.01" min="0" type="number" name="cotizacion[envases_embalage]" id="cotizacion_envases_embalage" />
         </div>
@@ -114,7 +114,7 @@
       </div>
     
       <div class="form-group row">
-        <label class="col-sm-4" style="display: block" for="cotizacion_pago_transporte">Pago transporte</label>
+        <label class="col-sm-4" style="display: block" for="cotizacion_pago_transporte">Pago de transporte ($)</label>
           <div class="col-sm-4">
           <input class="form-control" step="0.01" min="0" type="number" name="cotizacion[pago_transporte]" id="cotizacion_pago_transporte" />
         </div>
@@ -122,9 +122,9 @@
       </div>
     
       <div class="form-group row">
-        <label class="col-sm-4" style="display: block" for="cotizacion_recargo_aplazamiento">Recargo aplazamiento</label>
+        <label class="col-sm-4" style="display: block" for="cotizacion_recargo_aplazamiento">Recargo por aplazamiento de pago ($)</label>
         <div class="col-sm-4">
-          <input class="form-control" step="0.01" min="0" max="1" type="number" name="cotizacion[recargo_aplazamiento]" id="cotizacion_recargo_aplazamiento" />
+          <input class="form-control" step="0.01" min="0" type="number" name="cotizacion[recargo_aplazamiento]" id="cotizacion_recargo_aplazamiento" />
         </div>
         
       </div>
@@ -260,7 +260,7 @@ function guardarCotizacion() {
              pagotransporte: pago_transporte, recargoaplazamiento: recargo_aplazamiento, estado1: estado,
              fechaentrega: fecha_entrega, total1: total, id: reque
            }
-           
+
    $.ajax({ 
         url: ajaxurl, 
         type: 'POST',
