@@ -142,16 +142,16 @@ class Ability
           can :read, Reference
         #Requisicion
         when 101
-          can :create, Requisicion
-          can :read, Requisicion
+          can :create, Requesicion
+          can :read, Requesicion
         when 102
-          can :read, Requisicion
+          can :read, Requesicion
         when 103
-          can :update, Requisicion
-          can :read, Requisicion
+          can :update, Requesicion
+          can :read, Requesicion
         when 104
-          can :delete, Requisicion
-          can :read, Requisicion
+          can :delete, Requesicion
+          can :read, Requesicion
         #Rol
         when 111
           can :create, Rol
